@@ -1,0 +1,7 @@
+class GestionUsuarioRepository{
+    public constructor()
+    {
+
+    }
+    
+}
