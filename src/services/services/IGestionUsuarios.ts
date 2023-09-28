@@ -1,5 +1,5 @@
 import UsuarioRolDTO from '../DTO/UsuarioRolDTO';
-interface IGestionUsuarios
+export default interface IGestionUsuarios
 {
     //200
     //201 -> Crear
@@ -40,18 +40,18 @@ interface IGestionUsuarios
      * @param {number} id ID del usuario a buscar
      * @returns {UsuarioRolDTO} Usuario recuperado con el Id
      */
-    consultarUsuario(id:number):UsuarioRolDTO;
+    consultarUsuarioPorId(id:number):UsuarioRolDTO;
     /**
      * Obtiene usuarios por rol
      * @route GET /api/usuarios/rol/{id}
      * @param {number} rolId Id del rol que tiene el usuario
      * @returns {UsuarioRolDTO[]} Lista de los usuarios que tienen ese rol
      */
-    consultarUsuarios(rolId:number):UsuarioRolDTO[];
+    consultarUsuariosPorRol(rolId:number):UsuarioRolDTO[];
     /**
      * Obtiene usuarios por login
      * @router GET /api/usuarios/login/{login}
      * @param {string} login Nombre de usuario para el inicio de sesión
      */
-    consultarUsuarios(login:string):UsuarioRolDTO[];
+    consultarUsuariosPorLogin(login:string):UsuarioRolDTO[];
 }

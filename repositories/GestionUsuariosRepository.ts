@@ -1,7 +1,0 @@
-class GestionUsuarioRepository{
-    public constructor()
-    {
-
-    }
-    
-}
