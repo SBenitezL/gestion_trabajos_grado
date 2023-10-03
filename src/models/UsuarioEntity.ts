@@ -1,5 +1,5 @@
 export default class UsuarioEntity{
-    public constructor(private _usr_codigo:number, private _usr_login:string, private _usr_password:string,private _usr_correo:string)
+    public constructor(private _usr_codigo:number, private _usr_nombre:string,private _usr_login:string, private _usr_password:string,private _usr_correo:string)
     {
     }
     public get usr_codigo():number
@@ -18,6 +18,10 @@ export default class UsuarioEntity{
     {
         return this._usr_correo;
     }
+    public get usr_nombre():string
+    {
+        return this._usr_nombre;
+    }
     public set usr_codigo(usr_codigo:number)
     {
         this._usr_codigo = usr_codigo;
@@ -33,5 +37,9 @@ export default class UsuarioEntity{
     public set usr_correo(usr_correo:string)
     {
         this._usr_correo = usr_correo;
+    }
+    public set usr_nombre(usr_nombre:string)
+    {
+        this._usr_nombre = usr_nombre;
     }
 }

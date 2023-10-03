@@ -6,10 +6,11 @@ export default class UsuarioRolEntity
     private _usr_password: string;
     private _rol_id: number;
     private _rol_nombre:string;
+    private _usr_correo:string;
 
     
     public constructor(usr_codigo:number, usr_nombre:string, usr_login:string, 
-        usr_password:string, rol_id:number, rol_nombre:string)
+        usr_password:string, rol_id:number, rol_nombre:string, usr_correo:string)
     {
         this._usr_codigo = usr_codigo;
         this._usr_nombre = usr_nombre;
@@ -17,6 +18,7 @@ export default class UsuarioRolEntity
         this._usr_password = usr_password;
         this._rol_id = rol_id;
         this._rol_nombre = rol_nombre;
+        this._usr_correo = usr_correo;
     }
     public get usr_codigo():number{
         return this._usr_codigo;
@@ -35,6 +37,10 @@ export default class UsuarioRolEntity
     }
     public get rol_nombre():string{
         return this._rol_nombre;
+    }
+    public get usr_correo():string
+    {
+        return this._usr_correo;
     }
 
     public set usr_codigo(usr_codigo:number){
@@ -55,5 +61,9 @@ export default class UsuarioRolEntity
     public set rol_nombre(rol_nombre:string)
     {
         this._rol_nombre = rol_nombre;
+    }
+    public set usr_correo(usr_correo:string)
+    {
+        this._usr_correo = usr_correo;
     }
 }
