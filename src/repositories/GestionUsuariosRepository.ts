@@ -59,8 +59,18 @@ export default class GestionUsuarioRepository{
         }
         return res;
     }
-    eliminarUsuario(id: number): Promise<boolean> {
-        throw new Error('Method not implemented.');
+    public async eliminarUsuario(id: number): Promise<boolean> {
+        const query = "DELETE FROM usuariorol WHERE usr_codigo = ?";
+        const query2 = "DELETE FROM usuario WHERE usr_codigo = ?";
+        try{
+            await db.query(query,[id]);
+            await db.query(query2,[id]);
+            return true;
+        }catch(error)
+        {
+            console.error("Error al eliminar usuario:", error);
+            return false;
+        }
     }
     async consultarUsuarios(): Promise<UsuarioRolEntity[]> {
         const query1 = "select Usuario.usr_codigo, usr_nombre, usr_login, usr_password, Rol.rol_id, rol_nombre, usr_correo from (UsuarioRol inner join Usuario on UsuarioRol.usr_codigo = Usuario.usr_codigo) a inner join Rol on a.rol_id, Rol.rol_id";
