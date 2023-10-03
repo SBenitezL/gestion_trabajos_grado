@@ -1,3 +1,4 @@
+import UsuarioRolEntity from '../../models/UsuarioRolEntity';
 import GestionUsuariosRepository from '../../repositories/GestionUsuariosRepository';
 import UsuarioRolDTO from '../DTO/UsuarioRolDTO';
 import UsuarioRolMapper from '../Maping/UserRolMapper';
@@ -9,9 +10,11 @@ export default class GestionUsuariosImpl implements IGestionUsuarios{
         this.accesoPersistencia = new GestionUsuariosRepository();
         this.mapper = new UsuarioRolMapper();
     }
-    crearUsuario(usuario: UsuarioRolDTO): UsuarioRolDTO {
-        var usuarioEntity = this.mapper.dtoToEntity(usuario);
-        throw new Error('Method not implemented.');
+    async crearUsuario(usuario: UsuarioRolDTO): Promise<UsuarioRolDTO> {
+        const usuarioEntity:UsuarioRolEntity[] = this.mapper.dtoToEntity(usuario);
+        const res = await this.accesoPersistencia.crearUsuarioRol(usuarioEntity);
+        return this.mapper.entityToDTO(res);
+        
     }
     actualizarUsuario(id: number, usuario: UsuarioRolDTO): UsuarioRolDTO {
         throw new Error('Method not implemented.');

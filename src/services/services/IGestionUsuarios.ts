@@ -12,7 +12,7 @@ export default interface IGestionUsuarios
      * @param {UsuarioRolDTO} usuario Usuario a ser ingresado en la base de datos.
      * @returns {UsuarioRolDTO} Usuario creado en la base de datos.
      */
-    crearUsuario(usuario:UsuarioRolDTO):UsuarioRolDTO;
+    crearUsuario(usuario:UsuarioRolDTO):Promise<UsuarioRolDTO>;
     /**
      * Actualizar un usuario existente
      * @route PUT /api/usuarios/{rolId}

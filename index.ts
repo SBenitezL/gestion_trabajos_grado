@@ -26,7 +26,7 @@ async function prueba(id:number, texto:string){
     try{
         //const query = 'INSERT INTO mi_tabla (id, texto) VALUES (?, ?)';
         //const [result] = await db.query(query, [id, null]);
-        const query2 = "select * from mi_tabla";
+        const query2 = "select * from mi_tabla where id = 20";
         const [result2]:MiTabla|any = await db.query(query2);
         const lista:MiTabla[] = [];
         result2.map((row:MiTabla)=>{

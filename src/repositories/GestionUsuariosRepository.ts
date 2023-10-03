@@ -9,13 +9,13 @@ export default class GestionUsuarioRepository{
     public constructor()
     {
     }
-    public async crearUsuarioRol(usuario: UsuarioRolEntity[]): Promise<UsuarioEntity[]>{
+    public async crearUsuarioRol(usuario: UsuarioRolEntity[]): Promise<UsuarioRolEntity[]>{
         //TODO: Refactorizar
         const query = "insert into usuario values(?,?,?,?)";
         const query2 = "insert into usuariorol values(?,?,?,?)";
         const query3 = "select Usuario.usr_codigo, usr_nombre, usr_login, usr_password, Rol.rol_id, rol_nombre, usr_correo from (UsuarioRol inner join Usuario on UsuarioRol.usr_codigo = Usuario.usr_codigo) a inner join Rol on a.rol_id, Rol.rol_id where usr_id = ?";
         const user:UsuarioEntity = new UsuarioEntity(usuario[0].usr_codigo, usuario[0].usr_nombre,usuario[0].usr_login,usuario[0].usr_password, usuario[0].usr_correo);
-        const res:UsuarioEntity[] =  [];
+        const res:UsuarioRolEntity[] =  [];
         try{
             const [result1]:any = await db.query(query,[user.usr_codigo,user.usr_nombre,user.usr_login, user.usr_password, user.usr_correo]);
             if(result1.affectedRows == 1)
@@ -24,7 +24,7 @@ export default class GestionUsuarioRepository{
                     await db.query(query2,[user.usr_codigo, row.rol_id, new Date(), null]);
                 })
                 const [result2]:UsuarioRolEntity|any = await db.query(query3,[user.usr_codigo]);
-                result2.map((row:UsuarioEntity)=>{
+                result2.map((row:UsuarioRolEntity)=>{
                     res.push(row);
                 })
             }
