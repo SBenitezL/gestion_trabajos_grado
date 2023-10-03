@@ -36,4 +36,21 @@ export default class UsuarioRolMapper{
         })
         return usuario;
     }
+    public entitiesToDTOs(objEntity:UsuarioRolEntity[]): UsuarioRolDTO[]
+    {
+        const usuarios:UsuarioRolDTO[] = [];
+        objEntity.forEach((row)=>
+        {
+            const user = usuarios.find((usuario)=> usuario.id === row.usr_codigo);
+            if(user)
+            {
+                user.rol.push(new RolDTO(row.rol_id,row.rol_nombre));
+            }
+            else
+            {
+                usuarios.push(new UsuarioRolDTO(row.usr_codigo,row.usr_nombre,row.usr_login,row.usr_password,[new RolDTO(row.rol_id,row.rol_nombre)],row.usr_correo));
+            }
+        })
+        return usuarios;
+    }
 }
