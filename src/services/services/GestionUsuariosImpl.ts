@@ -13,8 +13,7 @@ export default class GestionUsuariosImpl implements IGestionUsuarios{
     async crearUsuario(usuario: UsuarioRolDTO): Promise<UsuarioRolDTO> {
         const usuarioEntity:UsuarioRolEntity[] = this.mapper.dtoToEntity(usuario);
         const res = await this.accesoPersistencia.crearUsuarioRol(usuarioEntity);
-        return this.mapper.entityToDTO(res);
-        
+        return this.mapper.entityToDTO(res);     
     }
     async actualizarUsuario(id: number, usuario: UsuarioRolDTO): Promise<UsuarioRolDTO> {
         const usuarioEntity:UsuarioRolEntity[]= this.mapper.dtoToEntity(usuario)
@@ -22,21 +21,23 @@ export default class GestionUsuariosImpl implements IGestionUsuarios{
         return this.mapper.entityToDTO(res);
         
     }
-    eliminarUsuario(id: number): boolean {
-        throw new Error('Method not implemented.');
+    async eliminarUsuario(id: number): Promise<boolean> {
+        return await this.accesoPersistencia.eliminarUsuario(id);
     }
     async consultarUsuarios(): Promise<UsuarioRolDTO[]> {
         const res= await this.accesoPersistencia.consultarUsuarios();
          return this.mapper.entitiesToDTOs(res);
     }
-    consultarUsuarioPorId(id: number): UsuarioRolDTO {
-        throw new Error('Method not implemented.');
+    async consultarUsuarioPorId(id: number): Promise<UsuarioRolDTO> {
+        const res = await this.accesoPersistencia.consultarUsuarioPorId(id);
+        return this.mapper.entityToDTO(res);
     }
     async consultarUsuariosPorRol(rolId: number): Promise<UsuarioRolDTO[]>  {
         const res= await this.accesoPersistencia.consultarUsuariosPorRol(rolId);
         return this.mapper.entitiesToDTOs(res);
     }
-    consultarUsuariosPorLogin(login: string): UsuarioRolDTO[] {
-        throw new Error('Method not implemented.');
+    async consultarUsuariosPorLogin(login: string): Promise<UsuarioRolDTO> {
+        const res = await this.accesoPersistencia.consultarUsuariosPorLogin(login);
+        return this.mapper.entityToDTO(res);
     }
 }

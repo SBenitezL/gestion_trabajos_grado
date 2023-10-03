@@ -27,7 +27,7 @@ export default interface IGestionUsuarios
      * @param {number} id id del usuario a eliminar
      * @returns {boolean} true en caso de éxito y falso en caso contrario. 
      */
-    eliminarUsuario(id:number):boolean;
+    eliminarUsuario(id:number):Promise<boolean>;
     /**
      * Obtiene la lista de todos los usuarios
      * @route GET /api/usuarios
@@ -40,7 +40,7 @@ export default interface IGestionUsuarios
      * @param {number} id ID del usuario a buscar
      * @returns {UsuarioRolDTO} Usuario recuperado con el Id
      */
-    consultarUsuarioPorId(id:number):UsuarioRolDTO;
+    consultarUsuarioPorId(id:number):Promise<UsuarioRolDTO>;
     /**
      * Obtiene usuarios por rol
      * @route GET /api/usuarios/rol/{id}
@@ -53,5 +53,5 @@ export default interface IGestionUsuarios
      * @router GET /api/usuarios/login/{login}
      * @param {string} login Nombre de usuario para el inicio de sesión
      */
-    consultarUsuariosPorLogin(login:string):UsuarioRolDTO[];
+    consultarUsuariosPorLogin(login:string):Promise<UsuarioRolDTO>;
 }
