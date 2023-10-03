@@ -85,21 +85,18 @@ export default class GestionUsuarioRepository{
         }
         return res;
     }
-     async consultarUsuarioPorId(id: number): Promise<UsuarioRolEntity> {
+     async consultarUsuarioPorId(id: number): Promise<UsuarioRolEntity[]> {
         const query = "select Usuario.usr_codigo, usr_nombre, usr_login, usr_password, Rol.rol_id, rol_nombre, usr_correo from (UsuarioRol inner join Usuario on UsuarioRol.usr_codigo = Usuario.usr_codigo) a inner join Rol on a.rol_id, Rol.rol_id where usr_id = ?";
-       
+        const res:UsuarioRolEntity[] = []
         try{
-            const [result2]:UsuarioRolEntity[]|any = await db.query(query,[id]);
-           if(result2.length>0){
-                return result2[0];
-           }else{
-                return result2;
-           }
+            const [result]:UsuarioRolEntity|any  = await db.query(query, [id]);
+            result.map((row:UsuarioRolEntity)=>{
+                res.push(row);})
         }catch(error)
         {
-            console.error("Error al consultar usuario por ID:", error);
-            throw error;
+            return res;
         }
+        return res;
     }
     async consultarUsuariosPorRol(rolId: number): Promise<UsuarioRolEntity[]> {
         const query1 = "select Usuario.usr_codigo, usr_nombre, usr_login, usr_password, Rol.rol_id, rol_nombre, usr_correo from (UsuarioRol inner join Usuario on UsuarioRol.usr_codigo = Usuario.usr_codigo) a inner join Rol on a.rol_id, Rol.rol_id where Rol.rol_id = ?";
