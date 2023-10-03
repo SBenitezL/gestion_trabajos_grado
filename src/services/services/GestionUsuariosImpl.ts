@@ -27,14 +27,14 @@ export default class GestionUsuariosImpl implements IGestionUsuarios{
     }
     async consultarUsuarios(): Promise<UsuarioRolDTO[]> {
         const res= await this.accesoPersistencia.consultarUsuarios();
-        //return this.mapper.entitiesToDTOs(res);
+         return this.mapper.entitiesToDTOs(res);
     }
     consultarUsuarioPorId(id: number): UsuarioRolDTO {
         throw new Error('Method not implemented.');
     }
     async consultarUsuariosPorRol(rolId: number): Promise<UsuarioRolDTO[]>  {
         const res= await this.accesoPersistencia.consultarUsuariosPorRol(rolId);
-        //return this.mapper.entitiesToDTOs(res);
+        return this.mapper.entitiesToDTOs(res);
     }
     consultarUsuariosPorLogin(login: string): UsuarioRolDTO[] {
         throw new Error('Method not implemented.');
