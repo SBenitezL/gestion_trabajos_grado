@@ -6,7 +6,7 @@ export default class UsuarioRolMapper{
 
     }
     /**
-     * Combierte una lista de UsuarioRolEntity en un objeto UsuarioRolDTO, 
+     * Convierte una lista de UsuarioRolEntity en un objeto UsuarioRolDTO, 
      * se utiliza cuando los datos corresponden a los de un solo usuario
      * @param {UsuarioRolEntity} objEntity 
      * 

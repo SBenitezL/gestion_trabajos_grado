@@ -3,7 +3,7 @@ export default interface IGestionUsuarios
 {
     //200
     //201 -> Crear
-    //202   -> Actualizar
+    //202 -> Actualizar
     //203 -> Eliminar
     //304 -> Sin cmabios
     /**
