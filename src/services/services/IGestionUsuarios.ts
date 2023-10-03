@@ -15,7 +15,7 @@ export default interface IGestionUsuarios
     crearUsuario(usuario:UsuarioRolDTO):Promise<UsuarioRolDTO>;
     /**
      * Actualizar un usuario existente
-     * @route PUT /api/usuarios/{rolId}
+     * @route PUT /api/usuarios/{id}
      * @param {number} id Id del usuario a modificar
      * @param {UsuarioRolDTO} usuario Nuevos datos del usuario
      * @returns {UsuarioRolDTO} Usuario actualizado en la base de datos
