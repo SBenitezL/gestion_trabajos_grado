@@ -59,7 +59,7 @@ export default class GestionUsuarioRepository{
         }
         return res;
     }
-    public async eliminarUsuario(id: number): Promise<boolean> {
+    async eliminarUsuario(id: number): Promise<boolean> {
         const query = "DELETE FROM usuariorol WHERE usr_codigo = ?";
         const query2 = "DELETE FROM usuario WHERE usr_codigo = ?";
         try{
@@ -85,8 +85,21 @@ export default class GestionUsuarioRepository{
         }
         return res;
     }
-    consultarUsuarioPorId(id: number): Promise<UsuarioRolEntity> {
-        throw new Error('Method not implemented.');
+     async consultarUsuarioPorId(id: number): Promise<UsuarioRolEntity> {
+        const query = "select Usuario.usr_codigo, usr_nombre, usr_login, usr_password, Rol.rol_id, rol_nombre, usr_correo from (UsuarioRol inner join Usuario on UsuarioRol.usr_codigo = Usuario.usr_codigo) a inner join Rol on a.rol_id, Rol.rol_id where usr_id = ?";
+       
+        try{
+            const [result2]:UsuarioRolEntity[]|any = await db.query(query,[id]);
+           if(result2.length>0){
+                return result2[0];
+           }else{
+                return result2;
+           }
+        }catch(error)
+        {
+            console.error("Error al consultar usuario por ID:", error);
+            throw error;
+        }
     }
     async consultarUsuariosPorRol(rolId: number): Promise<UsuarioRolEntity[]> {
         const query1 = "select Usuario.usr_codigo, usr_nombre, usr_login, usr_password, Rol.rol_id, rol_nombre, usr_correo from (UsuarioRol inner join Usuario on UsuarioRol.usr_codigo = Usuario.usr_codigo) a inner join Rol on a.rol_id, Rol.rol_id where Rol.rol_id = ?";
@@ -101,8 +114,18 @@ export default class GestionUsuarioRepository{
         }
         return res;
     }
-    consultarUsuariosPorLogin(login: string): Promise<UsuarioRolEntity[]> {
-        throw new Error('Method not implemented.');
+    async consultarUsuariosPorLogin(login: string): Promise<UsuarioRolEntity[]> {
+        const query3 = "select Usuario.usr_codigo, usr_nombre, usr_login, usr_password, Rol.rol_id, rol_nombre, usr_correo from (UsuarioRol inner join Usuario on UsuarioRol.usr_codigo = Usuario.usr_codigo) a inner join Rol on a.rol_id, Rol.rol_id where usr_login = ?";
+        const res:UsuarioRolEntity[] = []
+        try{
+            const [result]:UsuarioRolEntity|any  = await db.query(query3, [login]);
+            result.map((row:UsuarioRolEntity)=>{
+                res.push(row);})
+        }catch(error)
+        {
+            return res;
+        }
+        return res;
     }
     
 }
