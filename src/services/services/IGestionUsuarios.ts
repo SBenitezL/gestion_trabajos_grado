@@ -20,7 +20,7 @@ export default interface IGestionUsuarios
      * @param {UsuarioRolDTO} usuario Nuevos datos del usuario
      * @returns {UsuarioRolDTO} Usuario actualizado en la base de datos
      */
-    actualizarUsuario(id:number, usuario:UsuarioRolDTO):UsuarioRolDTO;
+    actualizarUsuario(id:number, usuario:UsuarioRolDTO):Promise<UsuarioRolDTO>;
     /**
      * Eliminar un usuario
      * @route DELETE /api/usuarios/{id}
@@ -33,7 +33,7 @@ export default interface IGestionUsuarios
      * @route GET /api/usuarios
      * @returns {UsuarioRolDTO[]} lista de todos los usuarios del sistema
      */
-    consultarUsuarios():UsuarioRolDTO[];
+    consultarUsuarios():Promise<UsuarioRolDTO[]>;
     /**
      * Obtiene un usuario por id
      * @route GET /api/usuarios/{id}
@@ -47,7 +47,7 @@ export default interface IGestionUsuarios
      * @param {number} rolId Id del rol que tiene el usuario
      * @returns {UsuarioRolDTO[]} Lista de los usuarios que tienen ese rol
      */
-    consultarUsuariosPorRol(rolId:number):UsuarioRolDTO[];
+    consultarUsuariosPorRol(rolId:number):Promise<UsuarioRolDTO[]>;
     /**
      * Obtiene usuarios por login
      * @router GET /api/usuarios/login/{login}
