@@ -19,4 +19,4 @@ describe('TestComponent2Component', () => {
   });
 
 });
-/*
+*/
