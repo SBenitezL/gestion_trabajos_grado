@@ -36,8 +36,18 @@ export default class GestionUsuarioRepository{
     actualizarUsuario(id: number, usuario: UsuarioRolEntity): Promise<UsuarioRolEntity> {
         throw new Error('Method not implemented.');
     }
-    eliminarUsuario(id: number): Promise<boolean> {
-        throw new Error('Method not implemented.');
+    public async eliminarUsuario(id: number): Promise<boolean> {
+        const query = "DELETE FROM usuariorol WHERE usr_codigo = ?";
+        const query2 = "DELETE FROM usuario WHERE usr_codigo = ?";
+        try{
+            await db.query(query,[id]);
+            await db.query(query2,[id]);
+            return true;
+        }catch(error)
+        {
+            console.error("Error al eliminar usuario:", error);
+            return false;
+        }
     }
     consultarUsuarios(): Promise<UsuarioRolEntity[]> {
         throw new Error('Method not implemented.');
