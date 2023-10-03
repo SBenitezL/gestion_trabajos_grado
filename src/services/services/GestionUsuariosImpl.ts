@@ -13,25 +13,26 @@ export default class GestionUsuariosImpl implements IGestionUsuarios{
     async crearUsuario(usuario: UsuarioRolDTO): Promise<UsuarioRolDTO> {
         const usuarioEntity:UsuarioRolEntity[] = this.mapper.dtoToEntity(usuario);
         const res = await this.accesoPersistencia.crearUsuarioRol(usuarioEntity);
-        return this.mapper.entityToDTO(res);
-        
+        return this.mapper.entityToDTO(res);     
     }
     actualizarUsuario(id: number, usuario: UsuarioRolDTO): UsuarioRolDTO {
         throw new Error('Method not implemented.');
     }
-    eliminarUsuario(id: number): boolean {
-        throw new Error('Method not implemented.');
+    async eliminarUsuario(id: number): Promise<boolean> {
+        return await this.accesoPersistencia.eliminarUsuario(id);
     }
     consultarUsuarios(): UsuarioRolDTO[] {
         throw new Error('Method not implemented.');
     }
-    consultarUsuarioPorId(id: number): UsuarioRolDTO {
-        throw new Error('Method not implemented.');
+    async consultarUsuarioPorId(id: number): Promise<UsuarioRolDTO> {
+        const res = await this.accesoPersistencia.consultarUsuarioPorId(id);
+        return this.mapper.entityToDTO(res);
     }
     consultarUsuariosPorRol(rolId: number): UsuarioRolDTO[] {
         throw new Error('Method not implemented.');
     }
-    consultarUsuariosPorLogin(login: string): UsuarioRolDTO[] {
-        throw new Error('Method not implemented.');
+    async consultarUsuariosPorLogin(login: string): Promise<UsuarioRolDTO> {
+        const res = await this.accesoPersistencia.consultarUsuariosPorLogin(login);
+        return this.mapper.entityToDTO(res);
     }
 }
