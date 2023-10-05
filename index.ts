@@ -1,42 +1,33 @@
-import { RowDataPacket } from 'mysql2';
-import db from './src/database/Database'
+import express,{ Application } from "express";
+import morgan from 'morgan';
+import cors from 'cors';
 
-console.log('WORKS');
-const query = "insert into mi_tabla values (?,?)";
-class MiTabla{
-    constructor (public _id:number, public _texto:string)
-    {
+import usuarioRolRoutes from "./src/routes/UsuarioRolRoutes";
+import indexRoutes from "./src/routes/indexRoutes";
+class Servidor{
+    public app: Application;
+    constructor(){
+       this.app= express();
+       this.config();
+       this.routes();
     }
-    public get id():number{
-        return this._id;
+    config():void{
+        this.app.set('port',process.env.PORT || 3000);
+        this.app.use(morgan('dev'));
+        this.app.use(cors());
+        this.app.use(express.json());//entender los formatos json
+        this.app.use(express.urlencoded({extended: false}));//enviar desde formulario html
     }
-    public get texto():string{
-        return this._texto;
+    routes():void{
+        this.app.use(indexRoutes);
+        this.app.use('/api/usuarios',usuarioRolRoutes);         
     }
-    public set id(id:number)
-    {
-        this._id = id;
+    start():void{
+        this.app.listen(this.app.get('port'),()=>{
+            console.log('Servidor en puerto', this.app.get('port'));
+        });
     }
-    public set texto(texto:string)
-    {
-        this._texto = texto;
-    }
+
 }
-async function prueba(id:number, texto:string){
-    try{
-        //const query = 'INSERT INTO mi_tabla (id, texto) VALUES (?, ?)';
-        //const [result] = await db.query(query, [id, null]);
-        const query2 = "select * from mi_tabla where id = 20";
-        const [result2]:MiTabla|any = await db.query(query2);
-        const lista:MiTabla[] = [];
-        result2.map((row:MiTabla)=>{
-        lista.push(row);
-    });
-       // console.log('Registro insertado con éxito.', result);
-        console.log(lista);
-    }catch(error)
-    {
-        console.error("no se pudo");
-    }
-}
-prueba(9,"hola");
+const server=new Servidor();
+server.start();

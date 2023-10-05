@@ -1,7 +1,7 @@
 import {Router} from 'express';
 import usuarioController from '../controllers/UsuarioController'
 
-class UsuarioController{
+class UsuarioRolRoutes{
     public router:Router = Router();
     constructor()
     {
@@ -17,3 +17,6 @@ class UsuarioController{
         this.router.get('/login/:login', usuarioController.listByLogin);
     }
 }
+const usuarioRolRoutes=new UsuarioRolRoutes();
+export default usuarioRolRoutes.router;
+
