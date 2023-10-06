@@ -14,6 +14,7 @@ class UsuarioRolRoutes{
         this.router.put('/:id', usuarioController.update);
         this.router.delete('/:id', usuarioController.delete);
         this.router.get('/',usuarioController.list);
+        this.router.get('/:id', usuarioController.listById);
         this.router.get('/rol/:id', usuarioController.listByRol);
         this.router.get('/login/:login', usuarioController.listByLogin);
     }

@@ -57,6 +57,7 @@ class UsuarioController{
     public listById = async (req:Request, res:Response)=>
     {
         const {id} =  req.params
+        console.log(id)
         const result = await this.usuarioRolService.consultarUsuarioPorId(parseInt(id));
         if(result.id == req.body.id)
         {
@@ -81,7 +82,7 @@ class UsuarioController{
     {
         const {login} =  req.params
         const result = await this.usuarioRolService.consultarUsuariosPorLogin(login);
-        if(result.login == req.body.login)
+        if(result.login == login)
         {
             res.status(200).json(result);
         }else{
