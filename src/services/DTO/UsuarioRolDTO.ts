@@ -1,3 +1,4 @@
+import RolDTO from "./RolDTO";
 export default class UsuarioRolDTO
 {
     private _id: number;

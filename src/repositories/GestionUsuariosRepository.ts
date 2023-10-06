@@ -73,7 +73,7 @@ export default class GestionUsuarioRepository{
         }
     }
     async consultarUsuarios(): Promise<UsuarioRolEntity[]> {
-        const query1 = "select Usuario.usr_codigo, usr_nombre, usr_login, usr_password, Rol.rol_id, rol_nombre, usr_correo from (UsuarioRol inner join Usuario on UsuarioRol.usr_codigo = Usuario.usr_codigo) a inner join Rol on a.rol_id, Rol.rol_id";
+        const query1 = "select USUARIO.usr_codigo, usr_nombre, usr_login, usr_password, ROL.rol_id, rol_nombre, usr_correo from (USUARIOROL inner join USUARIO on USUARIOROL.usr_codigo = USUARIO.usr_codigo) inner join ROL on USUARIOROL.rol_id = ROL.rol_id";
         const res:UsuarioRolEntity[] = []
         try{
             const [result]:UsuarioRolEntity|any  = await db.query(query1);

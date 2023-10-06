@@ -6,6 +6,7 @@ class UsuarioRolRoutes{
     constructor()
     {
         this.config();
+        console.log("routes");
     }
     private config():void
     {

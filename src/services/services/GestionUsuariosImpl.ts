@@ -3,7 +3,7 @@ import GestionUsuariosRepository from '../../repositories/GestionUsuariosReposit
 import UsuarioRolDTO from '../DTO/UsuarioRolDTO';
 import UsuarioRolMapper from '../Maping/UserRolMapper';
 import IGestionUsuarios from './IGestionUsuarios';
-export default class GestionUsuariosImpl implements IGestionUsuarios{
+class GestionUsuariosImpl implements IGestionUsuarios{
     private accesoPersistencia:GestionUsuariosRepository;
     private mapper:UsuarioRolMapper;
     public constructor(){
@@ -26,7 +26,7 @@ export default class GestionUsuariosImpl implements IGestionUsuarios{
     }
     async consultarUsuarios(): Promise<UsuarioRolDTO[]> {
         const res= await this.accesoPersistencia.consultarUsuarios();
-         return this.mapper.entitiesToDTOs(res);
+        return this.mapper.entitiesToDTOs(res);
     }
     async consultarUsuarioPorId(id: number): Promise<UsuarioRolDTO> {
         const res = await this.accesoPersistencia.consultarUsuarioPorId(id);
@@ -41,3 +41,6 @@ export default class GestionUsuariosImpl implements IGestionUsuarios{
         return this.mapper.entityToDTO(res);
     }
 }
+
+const gestionUsuariosImpl = new GestionUsuariosImpl();
+export default gestionUsuariosImpl;

@@ -1,5 +1,6 @@
 import UsuarioRolEntity from "../../models/UsuarioRolEntity";
 import UsuarioRolDTO from "../DTO/UsuarioRolDTO";
+import RolDTO from "../DTO/RolDTO";
 
 export default class UsuarioRolMapper{
     public constructor(){
@@ -42,13 +43,16 @@ export default class UsuarioRolMapper{
         objEntity.forEach((row)=>
         {
             const user = usuarios.find((usuario)=> usuario.id === row.usr_codigo);
+            var rol = new RolDTO(row.rol_id,row.rol_nombre);
             if(user)
-            {
-                user.rol.push(new RolDTO(row.rol_id,row.rol_nombre));
+            {   
+                user.rol.push(rol);
             }
             else
             {
-                usuarios.push(new UsuarioRolDTO(row.usr_codigo,row.usr_nombre,row.usr_login,row.usr_password,[new RolDTO(row.rol_id,row.rol_nombre)],row.usr_correo));
+               const temp = new UsuarioRolDTO(row.usr_codigo,row.usr_nombre,row.usr_login,row.usr_password,[],row.usr_correo);
+               temp.rol.push(rol);
+               usuarios.push(temp);
             }
         })
         return usuarios;

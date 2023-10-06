@@ -1,16 +1,15 @@
 import {Request, Response} from 'express';
 import IGestionUsuarios from '../services/services/IGestionUsuarios';
-import UsuarioDTO from '../services/DTO/UsuarioDTO';
 import UsuarioRolDTO from '../services/DTO/UsuarioRolDTO';
-import GestionUsuariosImpl from '../services/services/GestionUsuariosImpl';
+import gestionUsuariosImpl from '../services/services/GestionUsuariosImpl';
 
 class UsuarioController{
-    private usuarioRolService:IGestionUsuarios;
+    public usuarioRolService:IGestionUsuarios;
     public constructor(objImpl: IGestionUsuarios)
     {
         this.usuarioRolService = objImpl;
     }
-    public async create(req:Request, res:Response)
+    public create = async (req:Request, res:Response)=>
     {
         const result = await this.usuarioRolService.crearUsuario(req.body);
         if(result.id != 0)
@@ -21,7 +20,7 @@ class UsuarioController{
             res.status(401).json(result);
         }
     }
-    public async update(req:Request, res:Response)
+    public update =  async (req:Request, res:Response)=>
     {
         const {id} = req.params;
         const user:UsuarioRolDTO = req.body;
@@ -44,12 +43,12 @@ class UsuarioController{
             res.status(401).json(result);
         }
     }
-    public async list(req:Request, res:Response)
+    public list = async (req:Request, res:Response)=>
     {
         const result = await this.usuarioRolService.consultarUsuarios();
-        if(result.length > 0)
+        if(result.length >0)
         {
-            res.status(204).json(result);
+            res.status(200).json(result);
         }
         else{
             res.status(401).json(result);
@@ -61,7 +60,7 @@ class UsuarioController{
         const result = await this.usuarioRolService.consultarUsuarioPorId(parseInt(id));
         if(result.id == req.body.id)
         {
-            res.status(204).json(result);
+            res.status(200).json(result);
         }
         else{
             res.status(401).json(result);
@@ -73,7 +72,7 @@ class UsuarioController{
         const result = await this.usuarioRolService.consultarUsuariosPorRol(parseInt(id));
         if(result.length > 0)
         {
-            res.status(204).json(result);
+            res.status(200).json(result);
         }else{
             res.status(401).json(result);
         }
@@ -84,12 +83,12 @@ class UsuarioController{
         const result = await this.usuarioRolService.consultarUsuariosPorLogin(login);
         if(result.login == req.body.login)
         {
-            res.status(204).json(result);
+            res.status(200).json(result);
         }else{
             res.status(401).json(result);
         }
     }
 }
 
-const usuarioController = new UsuarioController(new GestionUsuariosImpl());
+const usuarioController = new UsuarioController(gestionUsuariosImpl);
 export default usuarioController;

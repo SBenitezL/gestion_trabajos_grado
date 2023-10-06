@@ -1,4 +1,4 @@
-class RolDTO{
+export default class RolDTO{
     public constructor(private _id:number, private _nombre:string)
     {
     }
