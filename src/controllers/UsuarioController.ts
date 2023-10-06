@@ -32,7 +32,7 @@ class UsuarioController{
             res.status(401).json(result);
         }
     }
-    public async delete(req:Request, res:Response)
+    public delete = async (req:Request, res:Response)=>
     {
         const {id} = req.params
         const result  = this.usuarioRolService.eliminarUsuario(parseInt(id));
@@ -54,7 +54,7 @@ class UsuarioController{
             res.status(401).json(result);
         }
     }
-    public async listById(req:Request, res:Response)
+    public listById = async (req:Request, res:Response)=>
     {
         const {id} =  req.params
         const result = await this.usuarioRolService.consultarUsuarioPorId(parseInt(id));
@@ -66,7 +66,7 @@ class UsuarioController{
             res.status(401).json(result);
         }
     }
-    public async listByRol(req:Request, res:Response)
+    public listByRol = async (req:Request, res:Response)=>
     {
         const {id} =  req.params
         const result = await this.usuarioRolService.consultarUsuariosPorRol(parseInt(id));
@@ -77,7 +77,7 @@ class UsuarioController{
             res.status(401).json(result);
         }
     }
-    public async listByLogin(req:Request, res:Response)
+    public listByLogin = async (req:Request, res:Response) =>
     {
         const {login} =  req.params
         const result = await this.usuarioRolService.consultarUsuariosPorLogin(login);
