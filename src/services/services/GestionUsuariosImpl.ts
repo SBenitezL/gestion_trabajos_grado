@@ -11,12 +11,14 @@ class GestionUsuariosImpl implements IGestionUsuarios{
         this.mapper = new UsuarioRolMapper();
     }
     async crearUsuario(usuario: UsuarioRolDTO): Promise<UsuarioRolDTO> {
-        const usuarioEntity:UsuarioRolEntity[] = this.mapper.dtoToEntity(usuario);
+        const usuarioDTO = this.mapper.jsonToDTO(usuario);
+        const usuarioEntity:UsuarioRolEntity[] = this.mapper.dtoToEntity(usuarioDTO);
         const res = await this.accesoPersistencia.crearUsuarioRol(usuarioEntity);
         return this.mapper.entityToDTO(res);     
     }
     async actualizarUsuario(id: number, usuario: UsuarioRolDTO): Promise<UsuarioRolDTO> {
-        const usuarioEntity:UsuarioRolEntity[]= this.mapper.dtoToEntity(usuario)
+        const usuarioDTO = this.mapper.jsonToDTO(usuario);
+        const usuarioEntity:UsuarioRolEntity[]= this.mapper.dtoToEntity(usuarioDTO)
         const res= await this.accesoPersistencia.actualizarUsuario(id,usuarioEntity);
         return this.mapper.entityToDTO(res);
         

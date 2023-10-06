@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     4/10/2023 4:29:26 p. m.                      */
+/* Created on:     4/10/2023 4:29:26 p.ï¿½m.                      */
 /*==============================================================*/
 
 
@@ -271,6 +271,14 @@ create table USUARIOROL
    primary key (USR_CODIGO, ROL_ID)
 );
 
+CREATE TABLE USUARIO 
+( 
+      usr_codigo        decimal(12) primary key,
+      usr_nombre        varchar(100) not null, 
+      usr_login         varchar(20) not null unique, 
+      usr_password      varchar(50) not null, 
+      usr_correo        varchar(50) not null UNIQUE);
+
 alter table ANEXOS add constraint FK_ES_UN foreign key (TD_ID)
       references TIPO_DOCUMENTO (TD_ID) on delete restrict on update restrict;
 
@@ -318,6 +326,9 @@ alter table PROCESO add constraint FK_CONTIENE5 foreign key (B_ID)
 
 alter table PROCESO add constraint FK_CONTIENE6 foreign key (C_ID)
       references TI_C (C_ID) on delete restrict on update restrict;
+
+alter table USUARIOROL add constraint FK_USUARIOROL_USUARIO foreign key (USR_CODIGO)
+      references USUARIO (USR_CODIGO) on delete restrict on update restrict;
 
 alter table USUARIOROL add constraint FK_USUARIOROL foreign key (ROL_ID)
       references ROL (ROL_ID) on delete restrict on update restrict;

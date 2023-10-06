@@ -32,9 +32,9 @@ export default class UsuarioRolMapper{
     public dtoToEntity(objDTO:UsuarioRolDTO): UsuarioRolEntity[]
     {
         var usuario:UsuarioRolEntity[] = [];
-        console.log(objDTO);
+        console.log(objDTO.rol);
         objDTO.rol.forEach((row)=>{
-            usuario.push(new UsuarioRolEntity(objDTO.id, objDTO.login,objDTO.nombre, objDTO.password, row.id, row.nombre, objDTO.correo));
+            usuario.push(new UsuarioRolEntity(objDTO.id,objDTO.nombre, objDTO.login, objDTO.password, row.id, row.nombre, objDTO.correo));
         })
         return usuario;
     }
@@ -57,5 +57,23 @@ export default class UsuarioRolMapper{
             }
         })
         return usuarios;
+    }
+    public jsonToDTO(json:any):UsuarioRolDTO
+    {   
+        const roles:RolDTO[] = [];
+        for (const rol of json._rol)
+        {
+            roles.push(new RolDTO(rol._id, rol._nombre));
+        }
+        const usuario = new UsuarioRolDTO(
+            parseInt(json._id),
+            json._nombre,
+            json._login,
+            json._password,
+            roles,
+            json._correo
+        );
+
+        return usuario;
     }
 }

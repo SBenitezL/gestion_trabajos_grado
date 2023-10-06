@@ -23,11 +23,11 @@ class UsuarioController{
     public update =  async (req:Request, res:Response)=>
     {
         const {id} = req.params;
-        const user:UsuarioRolDTO = req.body;
+        const user = req.body;
         const result = await this.usuarioRolService.actualizarUsuario(parseInt(id), user);
-        if(result.id == user.id)
+        if(result.id == user._id)
         {
-            res.status(202).json(result);
+            res.status(200).json(result);
         }else{
             res.status(401).json(result);
         }
@@ -35,10 +35,10 @@ class UsuarioController{
     public delete = async (req:Request, res:Response)=>
     {
         const {id} = req.params
-        const result  = this.usuarioRolService.eliminarUsuario(parseInt(id));
+        const result  =await this.usuarioRolService.eliminarUsuario(parseInt(id));
         if(result)
         {
-            res.status(203).json(result);
+            res.status(200).json(result);
         }else{
             res.status(401).json(result);
         }
