@@ -1,100 +1,112 @@
 export default class FormatoADTO{
-    public constructor(
-        private _id:number, private _objetivos:string,
-        private _conEntrega:string, private _realizacion:string,
-        private _recursos:string, private _financiacion:string, private _perPrograma:boolean,
-        private _revision:Date, private _recibido:Date, private _observaciones:string,
-        private _noRevision:number 
-    )
-    {}
-    public get id():number
-    {
-        return this._id;
-    } 
-    public get objetivos():string
-    {
-        return this._objetivos;
-    }
-    public get conEntrega():string
-    {
-        return this._conEntrega;
-    }
-    public get realizacion():string
-    {
-        return this._realizacion;
-    }
-    public get recursos():string
-    {
-        return this._recursos;
-    }
-    public get a_financiacion():string
-    {
-        return this._financiacion;
-    }
-    public get perPrograma():boolean
-    {
-        return this._perPrograma;
-    }
-    public get revision():Date
-    {
-        return this._revision;
-    }
-    public get recibido():Date
-    {
-        return this._recibido;
-    }
-    public get observaciones():string
-    {
-        return this._observaciones;
-    }
-    public get noRevision():number 
-    {
-        return this._noRevision;
-    }
+    private _id: number;
+    private _objetivos:string;
+    private _con_entrega:string; 
+    private _realizacion:string; 
+    private _recursos:string; 
+    private _financiacion:string; 
+    private _per_programa:boolean; 
+    private _revision:Date; 
+    private _recibido:Date; 
+    private _observaciones:string;
+    private _no_revision:number; 
 
-
-    public set id(id:number)
+    public constructor( id: number,  objetivos:string,  con_entrega:string, 
+         realizacion:string,  recursos:string,  financiacion:string, 
+         per_programa:boolean,  revision:Date,  recibido:Date,  observaciones:string,
+         no_revision:number )
     {
         this._id = id;
-    } 
-    public set objetivos(objetivos:string)
-    {
+        this._objetivos = objetivos;
+        this._con_entrega = con_entrega; 
+        this. _realizacion = realizacion; 
+        this. _recursos = recursos; 
+        this. _financiacion = financiacion; 
+        this._per_programa = per_programa; 
+        this._revision = revision; 
+        this._recibido = recibido; 
+        this._observaciones = observaciones;
+        this._no_revision = no_revision; 
+    }
+
+
+   
+
+    
+    public get id():number{
+        return this._id;
+    }
+    public set id(id:number){
+        this._id = id;
+    }
+
+    public get objetivos():string{
+        return this._objetivos;
+    }
+    public set objetivos(objetivos:string){
         this._objetivos = objetivos;
     }
-    public set conEntrega(conEntrega:string)
-    {
-        this._conEntrega = conEntrega;
+
+    public get con_entrega():string{
+        return this._con_entrega;
     }
-    public set realizacion(realizacion:string)
-    {
+    public set con_entrega(con_entrega:string){
+        this._con_entrega = con_entrega;
+    }
+
+    public get realizacion():string{
+        return this._realizacion;
+    }
+    public set realizacion(realizacion:string){
         this._realizacion = realizacion;
     }
-    public set recursos(recursos:string)
-    {
+
+    public get recursos():string{
+        return this._recursos;
+    }
+    public set recursos(recursos:string){
         this._recursos = recursos;
     }
-    public set a_financiacion(financiacion:string)
-    {
+
+    public get financiacion():string{
+        return this._financiacion;
+    }
+    public set financiacion(financiacion:string){
         this._financiacion = financiacion;
     }
-    public set perPrograma(perPrograma:boolean)
-    {
-        this._perPrograma = perPrograma;
+
+    public get per_programa():boolean{
+        return this._per_programa;
     }
-    public set revision(revision:Date)
-    {
+    public set per_programa(per_programa:boolean){
+        this._per_programa = per_programa;
+    }
+
+    public get revision():Date{
+        return this._revision;
+    }
+    public set revision(revision:Date){
         this._revision = revision;
     }
-    public set recibido(recibido:Date)
-    {
+
+    public get recibido():Date{
+        return this._recibido;
+    }
+    public set recibido(recibido:Date){
         this._recibido = recibido;
     }
-    public set observaciones(observaciones:string)
-    {
-        this._observaciones = observaciones;
+
+    public get no_revision():number{
+        return this._no_revision;
     }
-    public set noRevision(noRevision:number )
-    {
-        this._noRevision = noRevision;
+    public set no_revision(no_revision:number){
+        this._no_revision = no_revision;
+    }
+
+    public get observaciones():string{
+        return this._observaciones;
+    }
+    public set observaciones(observaciones:string){
+        this._observaciones = observaciones;
     }
 }
