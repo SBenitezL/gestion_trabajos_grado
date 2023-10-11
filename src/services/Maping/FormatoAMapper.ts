@@ -25,10 +25,45 @@ export default class FormatoAMapper{
         })
        return form;
     }
-   /* public dtoToEntity(objDTO:FormatoAEntity): FormatoAEntity[]
+    public dtoToEntity(objDTO:FormatoADTO): FormatoAEntity[]
     {
+        //revisar 
         var form:FormatoAEntity[] = [];
-        
-    }*/
+           form.push (new FormatoAEntity(
+                objDTO.id,
+                objDTO.objetivos,
+                objDTO.con_entrega,
+                objDTO.realizacion,
+                objDTO.recursos,
+                objDTO.financiacion,
+                objDTO.per_programa,
+                objDTO.revision,
+                objDTO.recibido,
+                objDTO.observaciones,
+                objDTO.no_revision
+                ))
+            
+        return form;
+    }
+    public jsonToDTO(json:any):FormatoADTO
+    {   
+        //TODO tipo date
+        const form = new FormatoADTO(
+            parseInt(json._id),
+            json._objetivos,
+            json._con_entrega,
+            json._realizacion,
+            json._recursos,
+            json._financiacion,
+            json._per_programa,
+            json._revision,
+            json._recibido,
+            json._observaciones,
+            json._no_revision
+
+        );
+
+        return form;
+    }
 
 }
