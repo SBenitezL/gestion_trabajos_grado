@@ -20,7 +20,6 @@ export default class GestionUsuarioRepository{
             const [result1]:any = await db.query(query,[user.usr_codigo,user.usr_nombre,user.usr_login, user.usr_password, user.usr_correo]);
             if(result1.affectedRows == 1)
             {
-                console.log("entra");
                 usuario.forEach(async (row)=>{
                     await db.query(query2,[user.usr_codigo, row.rol_id, new Date(), null]);
                 })

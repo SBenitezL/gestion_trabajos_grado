@@ -4,6 +4,7 @@ import cors from 'cors';
 
 import usuarioRolRoutes from "./src/routes/UsuarioRolRoutes";
 import indexRoutes from "./src/routes/indexRoutes";
+import rolesRoutes from "./src/routes/RolesRoutes";
 class Servidor{
     public app: Application;
     constructor(){
@@ -20,7 +21,8 @@ class Servidor{
     }
     routes():void{
         this.app.use(indexRoutes);
-        this.app.use('/api/usuarios',usuarioRolRoutes);         
+        this.app.use('/api/usuarios',usuarioRolRoutes);     
+        this.app.use('/api/roles', rolesRoutes);    
     }
     start():void{
         this.app.listen(this.app.get('port'),()=>{
