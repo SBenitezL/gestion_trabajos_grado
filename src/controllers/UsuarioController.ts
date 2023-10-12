@@ -4,7 +4,7 @@ import UsuarioRolDTO from '../services/DTO/UsuarioRolDTO';
 import gestionUsuariosImpl from '../services/services/GestionUsuariosImpl';
 
 class UsuarioController{
-    public usuarioRolService:IGestionUsuarios;
+    private usuarioRolService:IGestionUsuarios;
     public constructor(objImpl: IGestionUsuarios)
     {
         this.usuarioRolService = objImpl;

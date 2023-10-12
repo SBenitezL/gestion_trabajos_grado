@@ -1,6 +1,6 @@
 export default class EstudianteEntity
 {
-    public constructor(private _est_codigo: number, private _prc_id:number, private _est_nombre:string, private _correo:string)
+    public constructor(private _est_codigo: number, private _prc_id:number, private _est_nombre:string, private _est_correo:string)
     {
     }
     public get est_codigo():number{
@@ -14,9 +14,9 @@ export default class EstudianteEntity
     {
         return this._est_nombre;
     }
-    public get correo():string
+    public get est_correo():string
     {
-        return this._correo;
+        return this._est_correo;
     }
 
     public set est_codigo(est_codigo:number)
@@ -31,7 +31,7 @@ export default class EstudianteEntity
     {
         this._est_nombre=est_nombre;
     }
-    public set correo(correo:string){
-        this._correo=correo;
+    public set est_correo(correo:string){
+        this._est_correo=correo;
     }
 }

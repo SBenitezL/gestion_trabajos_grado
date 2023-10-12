@@ -40,6 +40,7 @@ export default class UsuarioRolMapper{
     }
     public entitiesToDTOs(objEntity:UsuarioRolEntity[]): UsuarioRolDTO[]
     {
+        console.log(objEntity);
         const usuarios:UsuarioRolDTO[] = [];
         objEntity.forEach((row)=>
         {
