@@ -12,6 +12,7 @@ class UsuarioController{
     public create = async (req:Request, res:Response)=>
     {
         const result = await this.usuarioRolService.crearUsuario(req.body);
+        
         if(result.id != 0)
         {
             res.status(201).json(result);
