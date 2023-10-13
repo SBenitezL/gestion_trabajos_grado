@@ -9,7 +9,9 @@ class FormatoAController{
     }
     public create = async (req:Request, res:Response)=>
     {
+        //console.log(req.body);
         const result = await this.formatoAService.crearFormatoA(req.body);
+        //console.log(result.objetivos);
         if(result.id != 0)
         {
             res.status(201).json(result);
