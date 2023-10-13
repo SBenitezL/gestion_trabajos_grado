@@ -72,7 +72,7 @@ create table ARCHIVOS
 /*==============================================================*/
 create table AREAS_INTERES
 (
-   AI_ID                int not null,
+   AI_ID                int not null AUTO_INCREMENT,
    AI_NOMBRE            varchar(60) not null,
    primary key (AI_ID)
 );
@@ -196,7 +196,7 @@ create table ROL
 /*==============================================================*/
 create table TIPO_DOCUMENTO
 (
-   TD_ID                int not null,
+   TD_ID                int not null AUTO_INCREMENT,
    TD_NOMBRE            varchar(50) not null,
    primary key (TD_ID)
 );
@@ -206,17 +206,17 @@ create table TIPO_DOCUMENTO
 /*==============================================================*/
 create table TI_A
 (
-   A_ID                 INT AUTO_INCREMENT primary key,
+   A_ID                 INT AUTO_INCREMENT,
    A_OBJETIVOS          text not null,
    A_CON_ENTREGA        text not null,
    A_REALIZACION        text not null,
    A_RECURSOS           text not null,
    A_FINANCIACION       text not null,
-   A_PER_PROGRAMA       bool not null,
-   A_REVISION           date not null,
-   A_RECIBIDO           date not null,
-   A_OBSERVACIONES      text not null,
-   A_NO_REVISION        int not null,
+   A_PER_PROGRAMA       bool,
+   A_REVISION           date,
+   A_RECIBIDO           date,
+   A_OBSERVACIONES      text,
+   A_NO_REVISION        int not null default 0,
    primary key (A_ID)
 );
 
@@ -225,7 +225,7 @@ create table TI_A
 /*==============================================================*/
 create table TI_B
 (
-   B_ID                 int not null,
+   B_ID                 int not null AUTO_INCREMENT,
    USR_CODIGO           numeric(12,0) not null,
    B_APORTES            bool not null,
    B_OBJETIVOS          bool not null,
@@ -247,7 +247,7 @@ create table TI_B
 /*==============================================================*/
 create table TI_C
 (
-   C_ID                 int not null,
+   C_ID                 int not null AUTO_INCREMENT,
    C_DESARROLLO         text not null,
    C_ESTRUCTURA         bool not null,
    C_CON_COMITE         bool not null,
