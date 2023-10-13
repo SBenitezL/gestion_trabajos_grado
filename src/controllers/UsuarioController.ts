@@ -60,7 +60,7 @@ class UsuarioController{
         const {id} =  req.params
         console.log(id)
         const result = await this.usuarioRolService.consultarUsuarioPorId(parseInt(id));
-        if(result.id == req.body.id)
+        if(result.id == parseInt(id))
         {
             res.status(200).json(result);
         }
