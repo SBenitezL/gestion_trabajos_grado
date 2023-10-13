@@ -47,7 +47,7 @@ class FormatoAController{
     {
         const {id} =  req.params
         const result = await this.formatoAService.consultarFormatoA(parseInt(id));
-        if(result.id == req.body.id)
+        if(result.id == parseInt(id))
         {
             res.status(200).json(result);
         }
