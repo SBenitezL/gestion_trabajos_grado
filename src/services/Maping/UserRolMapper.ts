@@ -62,9 +62,10 @@ export default class UsuarioRolMapper{
     public jsonToDTO(json:any):UsuarioRolDTO
     {   
         const roles:RolDTO[] = [];
-        for (const rol of json._rol)
-        {
-            roles.push(new RolDTO(rol._id, rol._nombre));
+        if (Array.isArray(json._rol)) { // Comprobar si _rol es un array
+            for (const rol of json._rol) {
+                roles.push(new RolDTO(rol._id, rol._nombre));
+            }
         }
         const usuario = new UsuarioRolDTO(
             parseInt(json._id),

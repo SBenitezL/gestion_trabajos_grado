@@ -6,7 +6,7 @@
   "scripts": {
     "build": "tsc -w",
     "dev": "nodemon build/index.js",
-    "test": "jest"
+    "test": "jest --verbose --silent"
   },
   "keywords": [],
   "author": "",

@@ -35,7 +35,7 @@ class UsuarioController{
     public delete = async (req:Request, res:Response)=>
     {
         const {id} = req.params
-        const result  =await this.usuarioRolService.eliminarUsuario(parseInt(id));
+        const result = await this.usuarioRolService.eliminarUsuario(parseInt(id));
         if(result)
         {
             res.status(200).json(result);
@@ -56,8 +56,7 @@ class UsuarioController{
     }
     public listById = async (req:Request, res:Response)=>
     {
-        const {id} =  req.params
-        console.log(id)
+        const {id} = req.params
         const result = await this.usuarioRolService.consultarUsuarioPorId(parseInt(id));
         if(result.id == req.body.id)
         {
