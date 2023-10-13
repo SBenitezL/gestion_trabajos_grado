@@ -21,6 +21,15 @@ class FormatoAController{
     }
     public update =  async (req:Request, res:Response)=>
     {
+        const {id} = req.params;
+        const form = req.body;
+        const result = await this.formatoAService.actualizatFormatoA(parseInt(id), form);
+        if(result.id == form._id)
+        {
+            res.status(200).json(result);
+        }else{
+            res.status(401).json(result);
+        }
       
     }
     public delete = async (req:Request, res:Response)=>
@@ -36,6 +45,15 @@ class FormatoAController{
     }
     public listById = async (req:Request, res:Response)=>
     {
+        const {id} =  req.params
+        const result = await this.formatoAService.consultarFormatoA(parseInt(id));
+        if(result.id == req.body.id)
+        {
+            res.status(200).json(result);
+        }
+        else{
+            res.status(401).json(result);
+        }
     }    
     
 }

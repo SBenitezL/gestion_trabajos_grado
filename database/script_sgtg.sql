@@ -206,7 +206,7 @@ create table TIPO_DOCUMENTO
 /*==============================================================*/
 create table TI_A
 (
-   A_ID                 int not null,
+   A_ID                 INT AUTO_INCREMENT primary key,
    A_OBJETIVOS          text not null,
    A_CON_ENTREGA        text not null,
    A_REALIZACION        text not null,
@@ -332,4 +332,7 @@ alter table USUARIOROL add constraint FK_USUARIOROL_USUARIO foreign key (USR_COD
 
 ALTER TABLE USUARIOROL ADD CONSTRAINT FK_USUARIOROL_ROL FOREIGN KEY (ROL_ID) 
       REFERENCES rol(ROL_ID) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE TI_A MODIFY COLUMN A_ID INT AUTO_INCREMENT;
+
 
