@@ -17,7 +17,7 @@ export default class RolEntity{
     // {
     //     this._rol_nombre = rol_nombre;
     // }
-    constructor(public ROL_ID:number, public ROL_NOMBRE:string)
+    constructor(public rol_id:number, public rol_nombre:string)
     {
     }
 }

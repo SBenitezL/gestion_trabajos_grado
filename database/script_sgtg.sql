@@ -330,8 +330,8 @@ alter table PROCESO add constraint FK_CONTIENE6 foreign key (C_ID)
 alter table USUARIOROL add constraint FK_USUARIOROL_USUARIO foreign key (USR_CODIGO)
       references USUARIO (USR_CODIGO) on delete restrict on update restrict;
 
-alter table USUARIOROL add constraint FK_USUARIOROL foreign key (ROL_ID)
-      references ROL (ROL_ID) on delete restrict on update restrict;
+ALTER TABLE USUARIOROL ADD CONSTRAINT FK_USUARIOROL_ROL FOREIGN KEY (ROL_ID) 
+      REFERENCES rol(ROL_ID) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 ALTER TABLE TI_A MODIFY COLUMN A_ID INT AUTO_INCREMENT;
 
