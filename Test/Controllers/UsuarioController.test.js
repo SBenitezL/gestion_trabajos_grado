@@ -1,9 +1,6 @@
 const supertest = require('supertest')
-const { app, server } = require('../../build/index')
-const { beforeEach } = require('node:test')
+const app = require('../../build/index')
 const api = supertest(app)
-
-beforeEach
 
 test('users are returned as json', async () => {
     await api
