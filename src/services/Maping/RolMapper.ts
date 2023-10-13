@@ -7,7 +7,7 @@ export default class RolMapper{
         const roles:RolDTO[] = [];
         rolesEnt.forEach((row:RolEntity)=>
         {
-            roles.push(new RolDTO(row.ROL_ID,row.ROL_NOMBRE));
+            roles.push(new RolDTO(row.rol_id,row.rol_nombre));
         })
         return roles;
     }  
