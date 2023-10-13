@@ -12,9 +12,9 @@ class GestionFormatoAImpl implements IGestionarFormatoA{
     }
 
     async crearFormatoA(formatoA: FormatoADTO): Promise<FormatoADTO> {
-        const FormatoADTO =this.mapper.jsonToDTO(formatoA);
-        const FormatoAEntity: FormatoAEntity[] =this.mapper.dtoToEntity(FormatoADTO);
-        const res = await this.accesoPersistencia.crearFormatoA(FormatoAEntity);
+        const formatoADTO =this.mapper.jsonToDTO(formatoA);
+        const formatoAEntity: FormatoAEntity[] =this.mapper.dtoToEntity(formatoADTO);
+        const res = await this.accesoPersistencia.crearFormatoA(formatoAEntity);
         return this.mapper.entityToDTO(res);
     }
     actualizatFormatoA(id: number, formatoA: FormatoADTO): Promise<FormatoADTO> {
