@@ -12,15 +12,15 @@ export default class GestionEstudianteRepository{
         const  query1 = "update estudiante set est_codigo = ?,  prc_id = ?, est_nombre = ?, est_correo = ? where est_codigo = ?";
        // const query2="update PROCESO set est_codigo = ? WHERE est_codigo = ?";
         const query4 = "select * FROM estudiante WHERE est_codigo = ?";
-        const est:EstudianteEntity = new EstudianteEntity(estudiante.est_codigo, estudiante.prc_id, estudiante.est_nombre, estudiante.est_correo);
+        const est:EstudianteEntity = new EstudianteEntity(estudiante.EST_CODIGO, estudiante.PRC_ID, estudiante.EST_NOMBRE, estudiante.EST_CORREO);
         const res:EstudianteEntity[] = [];
         try{
-            const [result1]:any = await db.query(query1, [est.est_codigo, est.prc_id, est.est_nombre, est.est_correo,cod]);
+            const [result1]:any = await db.query(query1, [estudiante.EST_CODIGO, estudiante.PRC_ID, estudiante.EST_NOMBRE, estudiante.EST_CORREO,cod]);
             if(result1.affectedRows == 0){
                 return res;
             }
          //   await  db.query(query2,[est.est_codigo,cod]);
-            const [result2]:EstudianteEntity|any = await db.query(query4,[est.est_codigo]);
+            const [result2]:EstudianteEntity|any = await db.query(query4,[estudiante.EST_CODIGO]);
             result2.map((row:EstudianteEntity)=>{
                 res.push(row);}
                 )
