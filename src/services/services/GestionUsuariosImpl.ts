@@ -2,7 +2,11 @@ import UsuarioRolEntity from '../../models/UsuarioRolEntity';
 import GestionUsuariosRepository from '../../repositories/GestionUsuariosRepository';
 import UsuarioRolDTO from '../DTO/UsuarioRolDTO';
 import UsuarioRolMapper from '../Maping/UserRolMapper';
+
+import enc from '../Utiles/Encriptar';
+
 import IGestionUsuarios from './IGestionUsuarios';
+
 class GestionUsuariosImpl implements IGestionUsuarios{
     private accesoPersistencia:GestionUsuariosRepository;
     private mapper:UsuarioRolMapper;
@@ -12,6 +16,7 @@ class GestionUsuariosImpl implements IGestionUsuarios{
     }
     async crearUsuario(usuario: UsuarioRolDTO): Promise<UsuarioRolDTO> {
         const usuarioDTO = this.mapper.jsonToDTO(usuario);
+        usuarioDTO.password = enc.hashPassword(usuarioDTO.password);
         const usuarioEntity:UsuarioRolEntity[] = this.mapper.dtoToEntity(usuarioDTO);
         const res = await this.accesoPersistencia.crearUsuarioRol(usuarioEntity);
         return this.mapper.entityToDTO(res);     
