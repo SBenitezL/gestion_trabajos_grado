@@ -335,4 +335,7 @@ ALTER TABLE USUARIOROL ADD CONSTRAINT FK_USUARIOROL_ROL FOREIGN KEY (ROL_ID)
 
 ALTER TABLE TI_A MODIFY COLUMN A_ID INT AUTO_INCREMENT;
 
+alter table bandejaentrada add constraint FK_BANDEJAENTRADA_USUARIO foreign key (usr_codigo)
+	references usuario(usr_codigo) on delete restrict on update restrict;
+    
 
