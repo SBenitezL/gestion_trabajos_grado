@@ -1,11 +1,6 @@
 import UsuarioRolDTO from '../DTO/UsuarioRolDTO';
 export default interface IGestionUsuarios
 {
-    //200
-    //201 -> Crear
-    //202 -> Actualizar
-    //203 -> Eliminar
-    //304 -> Sin cmabios
     /**
      * Crea un nuevo usuario
      * @route POST /api/usuarios

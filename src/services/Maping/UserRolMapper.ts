@@ -28,7 +28,6 @@ export default class UsuarioRolMapper{
         })
        return usuario;
     }
-
     public dtoToEntity(objDTO:UsuarioRolDTO): UsuarioRolEntity[]
     {
         var usuario:UsuarioRolEntity[] = [];

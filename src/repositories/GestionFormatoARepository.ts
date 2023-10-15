@@ -33,6 +33,26 @@ export default class GestionFormatoARepository
         }
         return res;
     }
+    public async actualizarFormatoA(id:number, formato:FormatoAEntity[]):Promise<FormatoAEntity[]>
+    {
+        const query = "UPDATE ti_a SET A_OBJETIVOS = ?, A_CON_ENTREGA = ?, A_REALIZACION = ?, A_RECURSOS = ?, A_FINANCIACION = ?, A_PER_PROGRAMA = ?, A_REVISION = ?, A_RECIBIDO = ?, A_OBSERVACIONES = ?, A_NO_REVISION = ?";
+        const query2 = "SELECT * FROM TI_A where A_ID = ?";
+        const res:FormatoAEntity[] = [];
+        try{
+            const [result]:any = await db.query(query,[formato[0].a_id,formato[0].a_objetivos,formato[0].a_con_entrega,formato[0].a_realizacion,formato[0].a_recursos,formato[0].a_financiacion,formato[0].a_per_programa,formato[0].a_revision,formato[0].a_recibido,formato[0].a_observaciones,formato[0].a_no_revision]);
+            if(result.affectedRows != 0)
+            {
+                const [result2]:FormatoAEntity|any = await db.query(query2, formato[0].a_id);
+                result2.map((row:FormatoAEntity)=>{
+                    res.push(row);
+                })
+            }
+            return result;
+        }catch(error)
+        {
+            return [];
+        }
+    }
     public async EliminarFormatoA(id: number):Promise<boolean>{
         //TODO: Refactorizar
         //PROCESO RELACION

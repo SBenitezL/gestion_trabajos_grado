@@ -20,7 +20,6 @@ export default class EstudianteMapper
             }))
         return estudiantes;
     }
-
     public entitiesToDTOs(estudiantesDTO:EstudianteEntity[]):EstudianteDTO[]
     {
         const estudiantes:EstudianteDTO[] = [];
