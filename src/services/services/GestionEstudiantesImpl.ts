@@ -16,14 +16,18 @@ export default class GestionEstudiantes implements IGestionEstudiantes{
         throw new Error("Method not implemented.");
     }
     public async actualizarEstudiante(cod: number, estudiante: EstudianteDTO): Promise<EstudianteDTO> {
-        throw new Error("Method not implemented.");
+        const estudianteDTO = this.mapper.jsonToDTO(estudiante);
+        const estudianteEntity:EstudianteEntity = this.mapper.dtoToEntity(estudianteDTO);
+        const res = await  this.accesoPersistencia.actualizarEstudiante(cod,estudianteEntity);
+        return this.mapper.entityToDTO(res);
 
     }
     public async eliminarEstudiante(cod: number): Promise<boolean> {
         throw new Error("Method not implemented.");
     }
     async consultarEstudiante(cod: number): Promise<EstudianteDTO> {
-        throw new Error("Method not implemented.");
+        const res = await this.accesoPersistencia.consultarEstudiante(cod);
+        return this.mapper.entityToDTO(res);
 
     }
     public async consultarEstudiantes(): Promise<EstudianteDTO[]> {
