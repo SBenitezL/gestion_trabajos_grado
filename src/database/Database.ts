@@ -7,7 +7,7 @@ const pool = mysql.createPool(keys.database);
 (async () => {
   try {
     const connection = await pool.getConnection();
-    console.log('DB is connected');
+    console.log('Database is connected');
     connection.release();
   } catch (error) {
     console.error('Error connecting to the database:', error);
