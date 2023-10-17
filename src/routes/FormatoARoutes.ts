@@ -6,7 +6,7 @@ class FormatoARoutes{
     constructor()
     {
         this.config();
-        console.log("routes");
+        console.log("hola");
     }
     private config():void
     {

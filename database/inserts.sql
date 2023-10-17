@@ -1,0 +1,1 @@
+insert into rol values(1,'ADMINISTRADOR'), (2,'DIRECTOR');

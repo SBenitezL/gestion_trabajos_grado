@@ -11,6 +11,7 @@ export default interface IGestionEstudiantes
      * @param cod 
      * @param estudiante 
      */
+    //*
     actualizarEstudiante(cod:number, estudiante:EstudianteDTO):Promise<EstudianteDTO>;
     /**
      * @route DELETE api/estudiantes/:cod

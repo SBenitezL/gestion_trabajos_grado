@@ -28,11 +28,9 @@ export default class UsuarioRolMapper{
         })
        return usuario;
     }
-
     public dtoToEntity(objDTO:UsuarioRolDTO): UsuarioRolEntity[]
     {
         var usuario:UsuarioRolEntity[] = [];
-        console.log(objDTO.rol);
         objDTO.rol.forEach((row)=>{
             usuario.push(new UsuarioRolEntity(objDTO.id,objDTO.nombre, objDTO.login, objDTO.password, row.id, row.nombre, objDTO.correo));
         })

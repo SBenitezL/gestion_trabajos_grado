@@ -5,7 +5,6 @@ class RolesRoutes{
 
     constructor(){
         this.config();
-
     }
     config():void{
         this.router.get('/',rolesController.list);

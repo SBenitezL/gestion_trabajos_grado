@@ -16,18 +16,24 @@ export default class GestionUsuarioRepository{
         const query3 = "select USUARIO.usr_codigo, usr_nombre, usr_login, usr_password, ROL.rol_id, rol_nombre, usr_correo from (USUARIOROL inner join USUARIO on USUARIOROL.usr_codigo = USUARIO.usr_codigo) inner join ROL on USUARIOROL.rol_id = ROL.rol_id where usuariorol.USR_CODIGO = ?";
         const user:UsuarioEntity = new UsuarioEntity(usuario[0].usr_codigo, usuario[0].usr_nombre,usuario[0].usr_login,usuario[0].usr_password, usuario[0].usr_correo);
         const res:UsuarioRolEntity[] =  [];
+        console.log("en controller")
         try{
             const [result1]:any = await db.query(query,[user.usr_codigo,user.usr_nombre,user.usr_login, user.usr_password, user.usr_correo]);
-            if(result1.affectedRows == 1)
-            {
-                usuario.forEach(async (row)=>{
-                    await db.query(query2,[user.usr_codigo, row.rol_id, new Date(), null]);
-                })
-                const [result2]:UsuarioRolEntity|any = await db.query(query3,[user.usr_codigo]);
+            console.log("result 1", result1);
+            if (result1.affectedRows === 1) {
+                const promises = usuario.map(async (row) => {
+                    const [result3] = await db.query(query2, [user.usr_codigo, row.rol_id, new Date(), null]);
+                    console.log("result 3", result3);
+                });
+            
+                await Promise.all(promises);
+            
+                const [result2]: UsuarioRolEntity | any = await db.query(query3, [user.usr_codigo]);
                 console.log(user.usr_codigo);
-                result2.map((row:UsuarioRolEntity)=>{
+                result2.map((row: UsuarioRolEntity) => {
                     res.push(row);
-                })
+                    console.log(row);
+                });
             }
         }catch(error)
         {

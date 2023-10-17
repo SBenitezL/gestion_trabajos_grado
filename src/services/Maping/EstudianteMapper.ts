@@ -9,7 +9,7 @@ export default class EstudianteMapper
     }
     public entityToDTO(estudianteEntity:EstudianteEntity):EstudianteDTO
     {
-        return new EstudianteDTO(estudianteEntity.est_codigo, estudianteEntity.prc_id, estudianteEntity.est_nombre, estudianteEntity.est_correo);
+        return new EstudianteDTO(estudianteEntity.EST_CODIGO, estudianteEntity.PRC_ID, estudianteEntity.EST_NOMBRE, estudianteEntity.EST_CORREO);
     }
     public dtosToEntities(estudiantesDTO:EstudianteDTO[]):EstudianteEntity[]
     {
@@ -20,13 +20,12 @@ export default class EstudianteMapper
             }))
         return estudiantes;
     }
-
     public entitiesToDTOs(estudiantesDTO:EstudianteEntity[]):EstudianteDTO[]
     {
         const estudiantes:EstudianteDTO[] = [];
         estudiantesDTO.forEach((row=>
             {
-                estudiantes.push(new EstudianteDTO(row.est_codigo,row.prc_id,row.est_nombre,row.est_correo));
+                estudiantes.push(new EstudianteDTO(row.EST_CODIGO, row.PRC_ID, row.EST_NOMBRE, row.EST_CORREO));
             }))
         return estudiantes;
     }
