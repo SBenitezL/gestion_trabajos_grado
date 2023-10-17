@@ -1,4 +1,4 @@
-import { RowDataPacket } from 'mysql2';
+import { ResultSetHeader, RowDataPacket } from 'mysql2';
 import db from '../database/Database';
 import UsuarioEntity from '../models/UsuarioEntity';
 import UsuarioRolEntity from '../models/UsuarioRolEntity';
@@ -53,9 +53,10 @@ export default class GestionUsuarioRepository{
                 return res;
             }
             await  db.query(query2,[id]);
-            usuario.forEach(async (row)=>{
+            const promises = usuario.map(async (row)=>{
                 await db.query(query3,[user.usr_codigo, row.rol_id, new Date(), null]);
-            })
+            });
+            await Promise.all(promises);
             const [result2]:UsuarioRolEntity|any = await db.query(query4,[user.usr_codigo]);
             result2.map((row:UsuarioRolEntity)=>{
                 res.push(row);})
@@ -70,8 +71,8 @@ export default class GestionUsuarioRepository{
         const query2 = "DELETE FROM usuario WHERE usr_codigo = ?";
         try{
             await db.query(query,[id]);
-            await db.query(query2,[id]);
-            return true;
+            const [res]:ResultSetHeader|any = await db.query(query2,[id]);
+            return res.affectedRows > 0;
         }catch(error)
         {
             console.error("Error al eliminar usuario:", error);
