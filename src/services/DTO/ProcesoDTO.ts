@@ -13,5 +13,6 @@ export default class ProcesoDTO{
     public tipo:string
     )
     { 
+        //TODO:Agregar Asesor
     }
 }

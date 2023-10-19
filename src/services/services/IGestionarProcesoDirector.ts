@@ -1,16 +1,13 @@
 import ProcesoEntity from "../../models/ProcesoEntity"
+import ProcesoDTO from "../DTO/ProcesoDTO"
+import ProcesoListDTO from "../DTO/ProcesoListDTO"
 export default interface IGestionarProcesoDirector{
-    /**
-     * @route POST api/procesos
-     * @param {ProcesoEntity} proceso
-     */
-    crearProceso(proceso:ProcesoEntity):Promise<ProcesoEntity>;
     /**
      * @route PUT api/procesos/:id
      * @param id 
      * @param proceso 
      */
-    actualizarProceso(id:number, proceso:ProcesoEntity):Promise<ProcesoEntity>
+    actualizarProceso(id:number, proceso:ProcesoDTO):Promise<ProcesoDTO>
     /**
      * @route DELETE api/procesos/:id
      * @param id 
@@ -20,14 +17,9 @@ export default interface IGestionarProcesoDirector{
      * @route GET api/procesos/:id
      * @param id 
      */
-    consultarProceso(id:number):Promise<ProcesoEntity>
+    consultarProceso(id:number):Promise<ProcesoDTO>
     /**
      * @route GET api/procesos
      */
-    consultarProcesos():Promise<ProcesoEntity[]>
-    /**
-     * @route GET api/procesos/estudiantes/:cod
-     * @param cod 
-     */
-    consultarProceso(cod:number):Promise<ProcesoEntity>
+    consultarProcesos():Promise<ProcesoListDTO[]>
 }
