@@ -18,7 +18,7 @@ export default class GestionFormatoARepository
             console.log("entra",form.a_objetivos,form.a_con_entrega,form.a_realizacion,form.a_recursos,form.a_financiacion,form.a_per_programa,form.a_revision,form.a_observaciones,form.a_no_revision);
 
             const [result]:any = await db.query(query1,[form.a_objetivos,form.a_con_entrega,form.a_realizacion,form.a_recursos,form.a_financiacion,form.a_per_programa,form.a_revision,form.a_observaciones,form.a_no_revision]);
-            console.log(result);
+            console.log("no entra",result);
             if(result.affectedRows === 1)
             {
                 const [result2]:FormatoAEntity|any = await db.query(query3,[result.insertId]);

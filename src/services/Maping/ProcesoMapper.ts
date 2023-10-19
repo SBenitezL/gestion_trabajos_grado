@@ -3,7 +3,7 @@ import ProcesoListEntity from "../../models/ProcesoListEntity";
 import ProcesoDTO from "../DTO/ProcesoDTO";
 import ProcesoListDTO from "../DTO/ProcesoListDTO";
 
-class ProcesoMapper
+export default  class ProcesoMapper
 {
     public listEntityToDTO(proceso:ProcesoListEntity[]):ProcesoListDTO[]
     {
@@ -30,5 +30,3 @@ class ProcesoMapper
         return dto;
     }
 }
-const mapper = new ProcesoMapper();
-export default mapper;
