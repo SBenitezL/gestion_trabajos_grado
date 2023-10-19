@@ -29,4 +29,18 @@ export default class EstudianteMapper
             }))
         return estudiantes;
     }
+    public jsonToDTO(json:any):EstudianteDTO
+    {   
+        
+        const estudiante = new EstudianteDTO(
+            parseInt(json._codigo),
+            json._proceso,
+            json._nombre,
+            json._correo
+            
+            
+        );
+
+        return estudiante;
+    }
 }
