@@ -1,4 +1,4 @@
-# Reporte de Pruebas del Backend para el Sistema de Gestión de Trabajos de Grado de la Universidad del Cauca
+# Reporte de pruebas del backend para el Sistema de Gestión de Trabajos de Grado de la Universidad del Cauca
 Las pruebas unitarias desempeñan un papel crucial en el desarrollo de aplicaciones,
 especialmente en un entorno de backend construido con Node.js.
 Estas pruebas permiten a los desarrolladores verificar que cada componente de su código funciona como se espera,
