@@ -18,17 +18,18 @@ export default class GestionProcesoRepository{
     }
     public async consultarProceso(id:number):Promise<ProcesoEntity>
     {
-        const query ="SELECT * FROM PROCESO WHERE PRC_ID = ?";
+       const query ="SELECT * FROM PROCESO WHERE PRC_ID = ?";
         
         throw new Error("Method not implemented.");   
     }
-    public async consultarProcesos(id:number):Promise<ProcesoListEntity[]>
+    public async consultarProcesos():Promise<ProcesoListEntity[]>
     {
         //revisar prc_tipo y la igualdad 
-        const query = "SELECT p.prc_titulo, p.prc_tipo, e.est_nombre FROM proceso p INNER JOIN estudiante e ON p.PRC_ID=e.PRC_ID WHERE p.prc_id =?;";
-        const res: ProcesoListEntity[]=[];
+       // const query = "SELECT p.prc_titulo, p.prc_tipo, e.est_nombre FROM proceso p INNER JOIN estudiante e ON p.PRC_ID=e.PRC_ID WHERE p.prc_id =?;";
+       const query ="SELECT p.prc_titulo, p.prc_tipo, e.est_nombre FROM proceso p INNER JOIN estudiante e ON p.PRC_ID=e.PRC_ID"; 
+       const res: ProcesoListEntity[]=[];
         try{
-            const [result]:ProcesoListEntity|any  = await db.query(query,[id]);
+            const [result]:ProcesoListEntity|any  = await db.query(query);
             result.map((row:ProcesoListEntity)=>{
                 res.push(row);})
         } catch(error){
