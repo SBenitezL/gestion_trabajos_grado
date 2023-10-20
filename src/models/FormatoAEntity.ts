@@ -5,7 +5,8 @@ export default class FormatoAEntity
         private _a_per_programa:boolean, private _a_revision:Date, private _a_recibido:Date, private _a_observaciones:string,
         private _a_no_revision:number )
     {
-        /*_a_id = 0;
+        /*
+        _a_id = 0;
         _a_objetivos = "";
         _a_con_entrega = "";
         _a_realizacion = "";

@@ -10,6 +10,7 @@ export default class GestionProcesoRepository{
     }
     public async actualizarProceso(id:number, proceso:ProcesoEntity):Promise<ProcesoEntity>
     {
+        const query = ""
         throw new Error("Method not implemented.");
     }
     public async eliminarProceso(id:number):Promise<boolean>
