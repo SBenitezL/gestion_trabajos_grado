@@ -27,7 +27,7 @@ export default class GestionProcesoRepository{
     {
         //revisar prc_tipo y la igualdad 
        // const query = "SELECT p.prc_titulo, p.prc_tipo, e.est_nombre FROM proceso p INNER JOIN estudiante e ON p.PRC_ID=e.PRC_ID WHERE p.prc_id =?;";
-       const query ="SELECT p.prc_titulo, p.prc_tipo, e.est_nombre FROM proceso p INNER JOIN estudiante e ON p.PRC_ID=e.PRC_ID"; 
+       const query ="SELECT p.prc_id, p.prc_titulo, p.prc_tipo, e.est_nombre FROM proceso p INNER JOIN estudiante e ON p.PRC_ID=e.PRC_ID"; 
        const res: ProcesoListEntity[]=[];
         try{
             const [result]:ProcesoListEntity|any  = await db.query(query);
