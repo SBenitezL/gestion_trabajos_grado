@@ -19,16 +19,18 @@ export default class GestionProcesoRepository{
     }
     public async consultarProceso(id:number):Promise<ProcesoEntity>
     {
-       const query ="SELECT PRC_ID, USR_CODIGO, A_ID, B_ID, C_ID, ASE_CC, PRC_FORM_A, PRC_FORM_B, PRC_FORM_C, PRC_TITULO, PRC_TIPO FROM PROCESO WHERE PRC_ID = ?";
+       const query ="SELECT prc_id, usr_codigo, a_id, b_id, c_id, ase_cc, prc_form_a, prc_form_b, prc_form_c, prc_titulo, prc_tipo FROM PROCESO WHERE prc_id = ?";
        const res: ProcesoEntity = new ProcesoEntity(0,0,0,0,0,0,false,false,false,"",""); // Crear un objeto vacío
     
        try {
+            
            const [result]: ProcesoEntity[] | any = await db.query(query, [id]);
-   
+           
            if (result.length > 0) {
-               return result[0]; 
+            console.log(result[0]);
+                 return result[0]; 
            }
-   
+           console.log("salio");
            return res; 
        } catch (error) {
            throw error; 
