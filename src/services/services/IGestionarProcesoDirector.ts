@@ -1,7 +1,11 @@
-import ProcesoEntity from "../../models/ProcesoEntity"
 import ProcesoDTO from "../DTO/ProcesoDTO"
 import ProcesoListDTO from "../DTO/ProcesoListDTO"
 export default interface IGestionarProcesoDirector{
+    /**
+     * @route POST api/procesos?dir=
+     * @param proceso 
+     */
+    crearProceso(proceso:ProcesoDTO):Promise<ProcesoDTO>;
     /**
      * @route PUT api/procesos/:id
      * @param id 
@@ -9,7 +13,7 @@ export default interface IGestionarProcesoDirector{
      */
     actualizarProceso(id:number, proceso:ProcesoDTO):Promise<ProcesoDTO>
     /**
-     * @route DELETE api/procesos/:id
+     * @route PATCH api/procesos/:id
      * @param id 
      */
     eliminarProceso(id:number):Promise<boolean>
