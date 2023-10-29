@@ -8,6 +8,17 @@ class ProcesoController{
     public constructor (objImpl:IGestionarProcesoDirector){
         this.procesoService = objImpl;
     }
+    public create = async (req:Request, res:Response)=>
+    {
+        const proceso:ProcesoDTO = req.body;
+        const result = await this.procesoService.crearProceso(proceso);
+        if(result.id != 0)
+        {
+            res.status(201).json(result);
+        }else{
+            res.status(400).json(result);
+        }
+    }
     public update =  async (req:Request, res:Response)=>
     {
         

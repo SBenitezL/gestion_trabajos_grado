@@ -5,12 +5,13 @@ export default class ProcesoEntity{
         public a_id:number,
         public b_id:number,
         public c_id:number,
-        public ase_cc:number,
-        public prc_form_a:boolean,
-        public prc_form_b:boolean,
-        public prc_form_c:boolean,
+        public nom_asesor:string,
+        public prc_form_a:number,
+        public prc_form_b:number,
+        public prc_form_c:number,
         public prc_titulo:string,
-        public prc_tipo:string
+        public prc_tipo:string,
+        public est_cod:number[]
     )
     {
 

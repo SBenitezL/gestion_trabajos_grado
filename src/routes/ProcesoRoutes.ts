@@ -9,6 +9,7 @@ class ProcesoRoutes{
     }
     private config():void
     {
+        this.router.post('',procesoController.create);
         this.router.put('/:id', procesoController.update);
         this.router.delete('/:id', procesoController.delete);
         this.router.get('/:id',procesoController.listProcess);
