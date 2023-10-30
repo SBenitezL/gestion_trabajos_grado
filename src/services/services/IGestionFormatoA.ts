@@ -5,7 +5,7 @@ export default interface IGestionarFormatoA
      * @route POST api/formatosa
      * @param formatoA 
      */
-    crearFormatoA(formatoA:FormatoADTO):Promise<FormatoADTO>;
+    crearFormatoA(id:number,formatoA:FormatoADTO):Promise<FormatoADTO>;
     /**
      * @route PUT api/formatosa/:id
      * @param id 

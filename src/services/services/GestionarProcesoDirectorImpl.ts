@@ -50,7 +50,7 @@ class GestionarProcesoDirector implements IGestionarProcesoDirector
     }
     private verificarInvestigacion(proceso:ProcesoDTO)
     {
-        return (proceso.tipo == "Trabajo de investigación" && proceso.estudiantes.length <=2 && proceso.ase == null);
+        return (proceso.tipo == "Trabajo de investigación" && proceso.estudiantes.length <=2 && proceso.ase == '');
     }
 
 }
