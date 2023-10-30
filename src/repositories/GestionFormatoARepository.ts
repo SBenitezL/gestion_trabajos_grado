@@ -10,15 +10,14 @@ export default class GestionFormatoARepository
     public async crearFormatoA(formato: FormatoAEntity[]): Promise<FormatoAEntity[]>{
         //TODO: Refactorizar
         const query1 = "INSERT INTO TI_A (A_OBJETIVOS, A_CON_ENTREGA, A_REALIZACION, A_RECURSOS, A_FINANCIACION, A_PER_PROGRAMA, A_REVISION, A_OBSERVACIONES, A_NO_REVISION) VALUES (?, ?, ?, ?, ?, ?, ? , ? , ?)";
-
+        const query2 = "Update proceso set prc_form_a = ? where proceso = "
         const query3 = "SELECT *  FROM TI_A WHERE a_id = ?";
+
+        
         const form:FormatoAEntity = new FormatoAEntity(formato[0].a_id,formato[0].a_objetivos,formato[0].a_con_entrega,formato[0].a_realizacion,formato[0].a_recursos,formato[0].a_financiacion,formato[0].a_per_programa,formato[0].a_revision,formato[0].a_recibido,formato[0].a_observaciones,formato[0].a_no_revision);
         const res:FormatoAEntity[] =  [];
-        try{
-            console.log("entra",form.a_objetivos,form.a_con_entrega,form.a_realizacion,form.a_recursos,form.a_financiacion,form.a_per_programa,form.a_revision,form.a_observaciones,form.a_no_revision);
-
+        try{            
             const [result]:any = await db.query(query1,[form.a_objetivos,form.a_con_entrega,form.a_realizacion,form.a_recursos,form.a_financiacion,form.a_per_programa,form.a_revision,form.a_observaciones,form.a_no_revision]);
-            console.log(result);
             if(result.affectedRows === 1)
             {
                 const [result2]:FormatoAEntity|any = await db.query(query3,[result.insertId]);

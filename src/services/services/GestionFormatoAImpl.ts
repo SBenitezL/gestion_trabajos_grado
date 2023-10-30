@@ -14,6 +14,7 @@ class GestionFormatoAImpl implements IGestionarFormatoA{
     async crearFormatoA(formatoA: FormatoADTO): Promise<FormatoADTO> {
         const formatoADTO =this.mapper.jsonToDTO(formatoA);
         const formatoAEntity: FormatoAEntity[] =this.mapper.dtoToEntity(formatoADTO);
+        
         const res = await this.accesoPersistencia.crearFormatoA(formatoAEntity);
         return this.mapper.entityToDTO(res);
     }

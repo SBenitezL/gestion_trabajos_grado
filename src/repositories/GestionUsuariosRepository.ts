@@ -17,12 +17,11 @@ export default class GestionUsuarioRepository{
         const user:UsuarioEntity = new UsuarioEntity(usuario[0].usr_codigo, usuario[0].usr_nombre,usuario[0].usr_login,usuario[0].usr_password, usuario[0].usr_correo);
         const res:UsuarioRolEntity[] =  [];
         try{
+            this.verificar(user.usr_codigo,user.usr_login, user.usr_correo);
             const [result1]:any = await db.query(query,[user.usr_codigo,user.usr_nombre,user.usr_login, user.usr_password, user.usr_correo]);
-            console.log("result 1", result1);
             if (result1.affectedRows === 1) {
                 const promises = usuario.map(async (row) => {
                     const [result3] = await db.query(query2, [user.usr_codigo, row.rol_id, new Date(), null]);
-                    console.log("result 3", result3);
                 });
             
                 await Promise.all(promises);
@@ -132,5 +131,16 @@ export default class GestionUsuarioRepository{
         }
         return res;
     }
-    
+    async verificar(id:number, login:string, email:string):Promise<boolean>
+    {
+        const query = "call verificarUsuario(?,?,?)";
+        try{
+            const [res] = await db.query(query, [id,login,email]);
+            console.log(res);
+        }catch(error)
+        {
+
+        }
+        return false;
+    }
 }

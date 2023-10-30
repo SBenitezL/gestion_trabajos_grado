@@ -6,6 +6,7 @@ import usuarioRolRoutes from "./src/routes/UsuarioRolRoutes";
 import indexRoutes from "./src/routes/indexRoutes";
 import rolesRoutes from "./src/routes/RolesRoutes";
 import formatoARoutes from "./src/routes/FormatoARoutes";
+import procesoRoutes from "./src/routes/ProcesoRoutes";
 class Servidor{
     public app: Application;
     constructor(){
@@ -25,6 +26,8 @@ class Servidor{
         this.app.use('/api/usuarios',usuarioRolRoutes);     
         this.app.use('/api/roles', rolesRoutes);  
         this.app.use('/api/formatoA',formatoARoutes)  
+        this.app.use('/api/procesos',procesoRoutes)  
+
     }
     start():void{
         this.app.listen(this.app.get('port'),()=>{

@@ -11,6 +11,9 @@ export default class GestionEstudiantes implements IGestionEstudiantes{
         this.accesoPersistencia = new GestionEstudianteRepository();
         this.mapper = new EstudianteMapper();
     }
+    consultarEstudiantesPorProceso(id: number): Promise<EstudianteDTO[]> {
+        throw new Error("Method not implemented.");
+    }
    
     public async crearEstudiante(estudiante: EstudianteDTO): Promise<EstudianteDTO> {
         throw new Error("Method not implemented.");
