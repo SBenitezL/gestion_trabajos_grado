@@ -22,7 +22,7 @@ export default  class ProcesoMapper
     }
     public dtoToEntity(proceso:ProcesoDTO):ProcesoEntity
     {
-        const entity:ProcesoEntity = new ProcesoEntity(proceso.id, proceso.usuario, proceso.fa, proceso.fb, proceso.fc, proceso.ase, proceso.status_a, proceso.status_b, proceso.status_c, proceso.titulo, proceso.tipo, proceso.estudiantes);
+        const entity:ProcesoEntity = new ProcesoEntity(proceso.id, proceso.usuario, proceso.fa, proceso.fb, proceso.fc, proceso.titulo , proceso.status_a, proceso.status_b, proceso.status_c, proceso.tipo, proceso.ase,proceso.estudiantes);
         return entity;
     }
     public entityToDTO(proceso:ProcesoEntity):ProcesoDTO
