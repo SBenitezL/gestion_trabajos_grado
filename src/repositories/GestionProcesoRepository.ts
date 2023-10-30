@@ -17,8 +17,10 @@ class GestionProcesoRepository implements IGestProcesoDirectorRpstr{
             {   
                 return prc;
             }
-            const [resP]:ProcesoEntity|any = await db.query(query,[proceso.usr_codigo, proceso.prc_titulo, proceso.prc_tipo, proceso.nom_asesor]);
+            const [resP]:any = await db.query(query,[proceso.usr_codigo, proceso.prc_titulo, proceso.prc_tipo, proceso.nom_asesor]);
             const res:ProcesoEntity = resP[0][0];
+            console.log(res);
+            console.log('resp', resP);
             prc = new ProcesoEntity(res.prc_id, res.usr_codigo,res.a_id,res.b_id,res.c_id,res.nom_asesor,res.prc_form_a,res.prc_form_b,res.prc_form_c,res.prc_titulo,res.prc_tipo,[]);
             const promises = proceso.est_cod.map(async (row)=>{
                 let [res2]:ResultSetHeader|any =  await db.query(query2,[prc.prc_id,row]);
@@ -33,6 +35,7 @@ class GestionProcesoRepository implements IGestProcesoDirectorRpstr{
         {
             console.log("error");
         }
+        console.log(prc);
        return prc;
     }
     public async actualizarProceso(id:number, proceso:ProcesoEntity):Promise<ProcesoEntity>

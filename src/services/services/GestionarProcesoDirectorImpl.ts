@@ -46,11 +46,11 @@ class GestionarProcesoDirector implements IGestionarProcesoDirector
     }
     private verificarPractica(proceso:ProcesoDTO):boolean
     {
-        return (proceso.tipo == "Practica Profesional" && proceso.estudiantes.length == 1 && proceso.ase != null);
+        return (proceso.tipo == "Práctica profesional" && proceso.estudiantes.length == 1 && (proceso.ase != null && proceso.ase != ''));
     }
     private verificarInvestigacion(proceso:ProcesoDTO)
     {
-        return (proceso.tipo == "Trabajo de Investigacion" && proceso.estudiantes.length <=2 && proceso.ase == null);
+        return (proceso.tipo == "Trabajo de investigación" && proceso.estudiantes.length <=2 && proceso.ase == null);
     }
 
 }
