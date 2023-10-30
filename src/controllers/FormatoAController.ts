@@ -9,7 +9,7 @@ class FormatoAController{
     }
     public create = async (req:Request, res:Response)=>
     {
-        const id = parseInt(req.query.id as string);
+        const id = parseFloat(req.query.id as string);
         //console.log(req.body);
         const result = await this.formatoAService.crearFormatoA(id, req.body);
         //console.log(result.objetivos);
@@ -18,7 +18,7 @@ class FormatoAController{
             res.status(201).json(result);
         }
         else{
-            res.status(401).json(result);
+            res.status(400).json(result);
         }
        
     }
