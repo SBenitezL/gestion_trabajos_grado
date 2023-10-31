@@ -10,6 +10,7 @@ class EstudiantesRoutes{
     config():void
     {
         this.router.get('/',estudianteController.list);
+        this.router.get('/:cod',estudianteController.getOne);
     }
 }
 const estudiantesRoutes = new EstudiantesRoutes();

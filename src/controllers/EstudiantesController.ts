@@ -14,6 +14,15 @@ class EstudianteController
         else    
             res.status(400).json(result);
     }
+    public getOne = async (req:Request, res:Response)=>
+    {
+        const cod = parseInt(req.params.cod)
+        const result = await this.procesoService.consultarEstudiante(cod);
+        if(result.codigo == cod)
+            res.status(200).json(result);
+        else    
+            res.status(400).json(result);
+    }
 }
 const estudianteController = new EstudianteController(gestionEstudiantesImpl);
 export default estudianteController;
