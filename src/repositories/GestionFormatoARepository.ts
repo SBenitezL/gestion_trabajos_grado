@@ -67,4 +67,19 @@ export default class GestionFormatoARepository
             return false;
         }
     }
+    public async consultarFormatoA(prcId:number):Promise<FormatoAEntity[]>
+    {
+        const query = "select ti_a.a_id, a_objetivos, a_con_entrega, a_realizacion,  a_recursos,  a_financiacion, a_per_programa,  a_revision,  a_recibido,  a_observaciones, a_no_revision from ti_a inner join proceso on ti_a.a_id = proceso.a_id where prc_id = ?";
+        let result :FormatoAEntity[]= [];
+        try{
+            const [res]:any = await db.query(query,[prcId])
+            console.log(res);
+            res.map((row:FormatoAEntity)=>{
+                result.push(row);
+            })
+        }catch(error){
+            console.log("error")
+        }
+        return result;
+    }
 }

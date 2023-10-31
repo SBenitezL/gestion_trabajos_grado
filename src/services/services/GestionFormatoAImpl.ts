@@ -29,7 +29,8 @@ class GestionFormatoAImpl implements IGestionarFormatoA{
         return await this.accesoPersistencia.EliminarFormatoA(id);
     }
     async consultarFormatoA(prcId: number): Promise<FormatoADTO> {
-        throw new Error("Method not implemented.");
+        const res = await this.accesoPersistencia.consultarFormatoA(prcId);
+        return this.mapper.entityToDTO(res);
     }
     
 }
