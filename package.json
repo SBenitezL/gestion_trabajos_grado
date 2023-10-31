@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "tsc -w",
+    "build": "tsc",
     "dev": "nodemon build/index.js",
     "test": "jest --verbose --silent",
     "test:watch": "npm run test -- --watchAll"
