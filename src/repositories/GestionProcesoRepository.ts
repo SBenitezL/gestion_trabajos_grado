@@ -17,11 +17,11 @@ class GestionProcesoRepository implements IGestProcesoDirectorRpstr{
             {   
                 return prc;
             }
-            const [resP]:any = await db.query(query,[proceso.usr_codigo, proceso.prc_titulo, proceso.prc_tipo, proceso.nom_asesor]);
+            const [resP]:any = await db.query(query,[proceso.usr_codigo, proceso.nom_asesor, proceso.prc_titulo, proceso.prc_tipo]);
             const res:ProcesoEntity = resP[0][0];
             console.log(res);
             console.log('resp', resP);
-            prc = new ProcesoEntity(res.prc_id, res.usr_codigo,res.a_id,res.b_id,res.c_id,res.nom_asesor,res.prc_form_a,res.prc_form_b,res.prc_form_c,res.prc_titulo,res.prc_tipo,[]);
+            prc = new ProcesoEntity(res.prc_id, res.usr_codigo,res.a_id,res.b_id,res.c_id,res.prc_titulo,res.prc_form_a,res.prc_form_b,res.prc_form_c,res.prc_tipo,res.nom_asesor,[]);
             const promises = proceso.est_cod.map(async (row)=>{
                 let [res2]:ResultSetHeader|any =  await db.query(query2,[prc.prc_id,row]);
                 console.log(res2);
@@ -70,11 +70,12 @@ class GestionProcesoRepository implements IGestProcesoDirectorRpstr{
     public async consultarProcesos():Promise<ProcesoListEntity[]>
     {
        // const query = "SELECT p.prc_titulo, p.prc_tipo, e.est_nombre FROM proceso p INNER JOIN estudiante e ON p.PRC_ID=e.PRC_ID WHERE p.prc_id =?;";
-       const query ="SELECT p.prc_id, p.prc_titulo, p.prc_tipo, e.est_nombre FROM proceso p INNER JOIN estudiante e ON p.PRC_ID=e.PRC_ID ORDER BY e.est_nombre"; 
+       const query ="SELECT proceso.prc_id, prc_titulo, prc_tipo, est_nombre FROM proceso INNER JOIN estudiante ON proceso.PRC_ID=estudiante.PRC_ID ORDER BY est_nombre"; 
        const res: ProcesoListEntity[]=[];
         try{
-            const [result]:ProcesoListEntity|any  = await db.query(query);
+            const [result]:any  = await db.query(query);
             result.map((row:ProcesoListEntity)=>{
+                console.log(row);
                 res.push(row);})
         } catch(error){
             return res;
