@@ -50,9 +50,8 @@ class GestionProcesoRepository implements IGestProcesoDirectorRpstr{
     }
     public async consultarProceso(id:number):Promise<ProcesoEntity>
     {
-       const query ="SELECT prc_id, usr_codigo, a_id, b_id, c_id, ase_cc, prc_form_a, prc_form_b, prc_form_c, prc_titulo, prc_tipo FROM PROCESO WHERE prc_id = ?";
+       const query ="SELECT prc_id, usr_codigo, a_id, b_id, c_id, nom_asesor, prc_form_a, prc_form_b, prc_form_c, prc_titulo, prc_tipo FROM PROCESO WHERE prc_id = ?";
        const res: ProcesoEntity = new ProcesoEntity(0,0,0,0,0,"",0,0,0,"","",[]); // Crear un objeto vacío
-    
        try {
             
            const [result]: ProcesoEntity[] | any = await db.query(query, [id]);

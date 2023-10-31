@@ -32,9 +32,9 @@ class ProcesoController{
     {
         const {id} =  req.params
         console.log(id)
-        const result = await this.procesoService.consultarProceso(parseInt(id));
+        const result = await this.procesoService.consultarProceso(parseFloat(id));
         console.log(result.id);
-        if(result.id == parseInt(id))
+        if(result.id == parseFloat(id))
         {
             res.status(200).json(result);
         }
