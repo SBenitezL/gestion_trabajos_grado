@@ -27,6 +27,8 @@ export default interface IGestionEstudiantes
      * @route GET api/estudiantes
      */
     consultarEstudiantes():Promise<EstudianteDTO[]>;
-
+    /**
+     * 
+     */
     consultarEstudiantesPorProceso(id:number):Promise<EstudianteDTO[]>
 }

@@ -4,7 +4,7 @@ import EstudianteEntity from "../../models/EstudianteEntity";
 import EstudianteMapper from "../Maping/EstudianteMapper";
 import GestionEstudianteRepository from "../../repositories/GestionEstudianteRepository"; 
 
-export default class GestionEstudiantes implements IGestionEstudiantes{
+class GestionEstudiantesImpl implements IGestionEstudiantes{
     private accesoPersistencia:GestionEstudianteRepository;
     private mapper:EstudianteMapper;
     public constructor(){
@@ -42,3 +42,5 @@ export default class GestionEstudiantes implements IGestionEstudiantes{
 
     }**/
 }
+const gestionEstudiantesImpl = new GestionEstudiantesImpl();
+export default gestionEstudiantesImpl;

@@ -9,3 +9,5 @@ ALTER TABLE proceso ADD prc_tipo VARCHAR(30);
 ALTER TABLE proceso DROP FOREIGN KEY FK_ASESORAR;
 alter table proceso drop COLUMN ASE_CC;
 ALTER TABLE proceso add column nom_asesor varchar(150);
+ALTER TABLE estudiante
+MODIFY COLUMN prc_id decimal(7,3) NULL;
