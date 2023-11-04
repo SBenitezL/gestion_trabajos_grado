@@ -26,4 +26,9 @@ export default interface IGestionarProcesoDirector{
      * @route GET api/procesos
      */
     consultarProcesos():Promise<ProcesoListDTO[]>
+    /**
+     * @route POST  /api/procesos/formatos/:id
+     * @param {number} id Id del procesoa  enviar.
+     */
+    enviarFormatoA(id:number):Promise<boolean>
 }
