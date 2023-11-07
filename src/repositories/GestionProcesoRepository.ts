@@ -8,6 +8,25 @@ class GestionProcesoRepository implements IGestProcesoDirectorRpstr{
     {
 
     }
+    public async enviarFormatoA(id: number): Promise<boolean> {
+        const query = "update proceso set prc_form_a = 1 where a_id = ?"
+        const query2 = "update ti_a set A_revision = CURRENT_DATE, A_NO_REVISION = A_NO_REVISION + 1 where a_id = ?";
+        let res = false;
+        try{
+            const result:any = await db.query(query2,[id]);
+            if(result.affectedRows == 1)
+            {
+                await db.query(query,[id]);
+                return true;
+            }
+            else{
+                return false;
+            }
+        }catch(error)
+        {
+            return false;
+        }
+    }
     public async crearProceso(proceso: ProcesoEntity): Promise<ProcesoEntity> {
         const query = " call ContarRegistrosPrcIdAnioActual(?,?,?,?)";
         const query2 = "update estudiante set prc_id = ? where est_codigo = ?";

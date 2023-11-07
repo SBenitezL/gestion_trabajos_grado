@@ -6,5 +6,6 @@ export default interface IGestProcesoDirectorRpstr{
     actualizarProceso(id:number, proceso:ProcesoEntity):Promise<ProcesoEntity>;
     eliminarProceso(id:number):Promise<boolean>;
     consultarProceso(id:number):Promise<ProcesoEntity>;
-    consultarProcesos():Promise<ProcesoListEntity[]>
+    consultarProcesos():Promise<ProcesoListEntity[]>;
+    enviarFormatoA(id:number):Promise<boolean>;
 }

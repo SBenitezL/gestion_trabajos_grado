@@ -14,6 +14,7 @@ class ProcesoRoutes{
         this.router.delete('/:id', procesoController.delete);
         this.router.get('/:id',procesoController.listProcess);
         this.router.get('/', procesoController.listProcesses);
+        this.router.patch('/:id', procesoController.sendFA)
 
     }
 }

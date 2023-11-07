@@ -56,6 +56,10 @@ class ProcesoController{
             res.status(401).json(result);
         }
     }
+    public sendFA = async(req:Request, res:Response)=>{
+        const {id} = req.params;
+        const result = await this.procesoService.enviarFormatoA(parseInt(id));
+    }
 }
 const procesoController = new ProcesoController(gestionProcesosImpl);
 export default procesoController;
