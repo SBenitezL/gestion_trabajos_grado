@@ -5,7 +5,6 @@ class ProcesoRoutes{
     constructor()
     {
         this.config();
-        console.log("h");
     }
     private config():void
     {

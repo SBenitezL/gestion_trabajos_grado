@@ -7,4 +7,5 @@ export default interface RevisionADTO
     tipo:string;
     estudiantes:EstudianteBasicoDTO[];
     estado:number;
+    no_revision:number;
 }
