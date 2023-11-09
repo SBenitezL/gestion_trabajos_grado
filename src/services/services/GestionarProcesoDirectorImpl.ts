@@ -13,8 +13,8 @@ class GestionarProcesoDirector implements IGestionarProcesoDirector
         this.accesoPersistencia = persistencia;
         this.mapper = new ProcesoMapper();
     }
-    enviarFormatoA(id: number): Promise<boolean> {
-        throw new Error("Method not implemented.");
+    async enviarFormatoA(id: number): Promise<boolean> {
+        return await this.accesoPersistencia.enviarFormatoA(id);
     }
     public async crearProceso(proceso: ProcesoDTO): Promise<ProcesoDTO> {
         let res = new ProcesoDTO(0,0,0,0,0,"",0,0,0,"","",[]);
