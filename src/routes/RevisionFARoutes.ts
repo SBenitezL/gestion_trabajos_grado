@@ -2,10 +2,10 @@ import {Router} from 'express';
 import revisionAController from '../controllers/RevisionAController';
 class RevisionFARoutes
 {
-    public router:Router;
+    public router:Router = Router();    ;
     public constructor()
     {
-        this.router = Router();    
+        this.config();
     }    
     config():void{
         this.router.get('/:cod',revisionAController.list);

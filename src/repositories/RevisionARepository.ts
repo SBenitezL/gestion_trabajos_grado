@@ -12,9 +12,10 @@ class RevisionARepository implements IRevisionARepository
         const res:RevisionAEntity[] = []
         try{
             const [result]:RevisionAEntity|any = await db.query(query);
-            result.map((row:RevisionAEntity)=>{
+            result[0].map((row:RevisionAEntity)=>{
                 res.push(row);
             })
+            console.log(result);
         }catch(error)
         {
         }
