@@ -13,6 +13,9 @@ class GestionarProcesoDirector implements IGestionarProcesoDirector
         this.accesoPersistencia = persistencia;
         this.mapper = new ProcesoMapper();
     }
+    async enviarFormatoA(id: number): Promise<boolean> {
+        return await this.accesoPersistencia.enviarFormatoA(id);
+    }
     public async crearProceso(proceso: ProcesoDTO): Promise<ProcesoDTO> {
         let res = new ProcesoDTO(0,0,0,0,0,"",0,0,0,"","",[]);
         if(proceso.estudiantes.length == 0) return res;

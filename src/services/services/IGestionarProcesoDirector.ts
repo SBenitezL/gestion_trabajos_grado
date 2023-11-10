@@ -11,19 +11,24 @@ export default interface IGestionarProcesoDirector{
      * @param id 
      * @param proceso 
      */
-    actualizarProceso(id:number, proceso:ProcesoDTO):Promise<ProcesoDTO>
+    actualizarProceso(id:number, proceso:ProcesoDTO):Promise<ProcesoDTO>;
     /**
      * @route PATCH api/procesos/:id
      * @param id 
      */
-    eliminarProceso(id:number):Promise<boolean>
+    eliminarProceso(id:number):Promise<boolean>;
     /**
      * @route GET api/procesos/:id
      * @param id 
      */
-    consultarProceso(id:number):Promise<ProcesoDTO>
+    consultarProceso(id:number):Promise<ProcesoDTO>;
     /**
      * @route GET api/procesos
      */
-    consultarProcesos():Promise<ProcesoListDTO[]>
+    consultarProcesos():Promise<ProcesoListDTO[]>;
+    /**
+     * @route PATCH  /api/procesos/formatosa/:id
+     * @param {number} id Id del "formato a" a enviar.
+     */
+    enviarFormatoA(id:number):Promise<boolean>;
 }

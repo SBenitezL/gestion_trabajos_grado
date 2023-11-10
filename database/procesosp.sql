@@ -27,3 +27,25 @@ BEGIN
   where usr_codigo = prmCod or upper(usr_correo) = upper(prmEmail) or upper(usr_login) = upper(prmUsr);
 END //
 DELIMITER ;
+
+
+
+DELIMITER //
+
+CREATE or replace PROCEDURE ConsultarRevisionA()
+BEGIN
+    SELECT 
+        proceso.prc_id, 
+        prc_tipo, 
+        prc_titulo,
+        est_codigo, 
+        est_nombre, 
+        prc_form_a as fA_estado, 
+        a_no_revision as fA_revisiones
+    FROM proceso
+    JOIN ti_a ON proceso.A_ID = ti_a.A_ID
+    JOIN estudiante ON proceso.PRC_ID = estudiante.prc_id
+    where prc_form_a = 1;
+END //
+
+DELIMITER ;
