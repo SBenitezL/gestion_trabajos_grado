@@ -2,7 +2,7 @@ import RevisionAEntity from '../models/RevisionAEntity';
 import IRevisionARepository from './IRevisionARepository';
 import db from '../database/Database';
 
-export default class RevisionARepository implements IRevisionARepository
+class RevisionARepository implements IRevisionARepository
 {
     public constructor()
     {
@@ -21,3 +21,5 @@ export default class RevisionARepository implements IRevisionARepository
         return res;
     }
 }
+const datos = new RevisionARepository();
+export default datos;

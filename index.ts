@@ -8,6 +8,7 @@ import rolesRoutes from "./src/routes/RolesRoutes";
 import formatoARoutes from "./src/routes/FormatoARoutes";
 import procesoRoutes from "./src/routes/ProcesoRoutes";
 import EstudiantesRoutes from "./src/routes/EstudiantesRoutes";
+import revisionFARoutes from "./src/routes/RevisionFARoutes";
 
 class Servidor{
     public app: Application;
@@ -30,6 +31,7 @@ class Servidor{
         this.app.use('/api/formatoA',formatoARoutes)  
         this.app.use('/api/procesos',procesoRoutes)
         this.app.use('/api/estudiantes',EstudiantesRoutes);
+        this.app.use('/api/revisiones', revisionFARoutes)
 
     }
     start():void{
