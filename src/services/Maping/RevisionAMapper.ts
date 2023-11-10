@@ -19,7 +19,7 @@ export default class RevisionAMapper
     }
     public entityToDTO(revsionA:RevisionAEntity[]):RevisionADTO
     {
-        var revDTO:RevisionADTO= new RevisionADTO(0,"","",[],0,0); 
+        var revDTO:RevisionADTO={id: 0,tipo:"",titulo:"",estudiantes:[],estado:0,no_revision:0}; 
         revsionA.forEach((row)=>{
             if(revDTO.id!=row.prc_id){
                 revDTO.id=row.prc_id;
@@ -30,7 +30,7 @@ export default class RevisionAMapper
                 revDTO.no_revision=row.fA_revisiones;
 
             }
-            revDTO.estudiantes.push(new EstudianteBasicoDTO(row.est_codigo,row.est_nombre));
+            revDTO.estudiantes.push({codigo: row.est_codigo,nombre:row.est_nombre});
         } )
         
         return revDTO;
