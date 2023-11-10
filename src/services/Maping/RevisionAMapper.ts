@@ -6,7 +6,20 @@ export default class RevisionAMapper
     public constructor(){
 
     }
-    
+    public listEntityToDTO(revisionA:RevisionAEntity[]):RevisionADTO[]
+    {
+        const list:RevisionADTO[]=[];
+        revisionA .forEach((row)=>{
+            let reviA=list.find((dto)=> dto.id==row.prc_id);
+            if(!reviA){
+                list.push({id:row.prc_id,tipo:row.prc_tipo,titulo:row.prc_titulo,estudiantes:[],estado:row.fA_estado,no_revision:row.fA_revisiones})
+                reviA =list[list.length-1];
+            }
+            reviA.estudiantes.push({codigo:row.est_codigo,nombre:row.est_nombre})
+        })      
+
+        return list;
+    }
    
     public dtoToEntity(revisionA:RevisionADTO):RevisionAEntity[]
     {
