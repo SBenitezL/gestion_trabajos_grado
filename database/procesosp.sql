@@ -32,7 +32,7 @@ DELIMITER ;
 
 DELIMITER //
 
-CREATE or replace PROCEDURE ConsultarRevisionA(IN proceso_prc_id DECIMAL(7, 3))
+CREATE or replace PROCEDURE ConsultarRevisionA()
 BEGIN
     SELECT 
         proceso.prc_id, 
@@ -45,7 +45,7 @@ BEGIN
     FROM proceso
     JOIN ti_a ON proceso.A_ID = ti_a.A_ID
     JOIN estudiante ON proceso.PRC_ID = estudiante.prc_id
-    WHERE proceso.PRC_ID = proceso_prc_id;
+    where prc_form_a = 1;
 END //
 
 DELIMITER ;
