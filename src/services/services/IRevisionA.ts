@@ -1,6 +1,6 @@
 import RevisionADTO from "../DTO/RevisionADTO";
 
-export default interface IRevisionADTO
+export default interface IRevisionA
 {
     /**
      * @route GET /api/revisiones/:cod
