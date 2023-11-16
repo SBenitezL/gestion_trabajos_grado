@@ -1,7 +1,6 @@
 import { RowDataPacket } from 'mysql2';
 import db from '../database/Database';
 import FormatoAEntity from '../models/FormatoAEntity';
-import { Console } from 'console';
 export default class GestionFormatoARepository
 {
     public constructor()
@@ -69,7 +68,7 @@ export default class GestionFormatoARepository
     }
     public async consultarFormatoA(prcId:number):Promise<FormatoAEntity[]>
     {
-        const query = "select ti_a.a_id, a_objetivos, a_con_entrega, a_realizacion,  a_recursos,  a_financiacion, a_per_programa,  a_revision,  a_recibido,  a_observaciones, a_no_revision from ti_a inner join proceso on ti_a.a_id = proceso.a_id where prc_id = ?";
+        const query = "select ti_a.a_id, a_objetivos, a_con_entrega, a_realizacion,  a_recursos,  a_financiacion, a_per_programa,  a_revision,  a_recibido,  a_observaciones, a_no_revision, a_interes from ti_a where a_id = ?";
         let result :FormatoAEntity[]= [];
         try{
             const [res]:any = await db.query(query,[prcId])
@@ -81,5 +80,37 @@ export default class GestionFormatoARepository
             console.log("error")
         }
         return result;
+    }
+    public async existeRuta(id:number):Promise<boolean>
+    {
+        const query = "select * from archivos where a_id = ?";
+        try{
+            const [res]:any = await db.query(query,[id]);
+            return res.length == 1;
+        }catch(error){
+            console.log(error)
+            return false;
+        }
+    }
+    public async crearRuta(id:number, ruta:string):Promise<boolean>
+    {
+        //TODO:limpiar
+        console.log("crear");
+        const query = "insert into archivos(a_id,arc_ruta,arc_recibido) values (?,?,?)"
+        try{
+            const [res]:any = await db.query(query,[id,ruta, new Date()]);
+            return res.affectedRows == 1
+        }catch{
+            return false;
+        }
+    }
+    
+    public async actualizarRuta(id:number, ruta:string):Promise<void>{
+        const query = "insert into archivos set arc_ruta = ?, arc_recibido = ? where a_id = ?";
+        try{
+            await db.query(query,[ruta, new Date(), id]);
+        }catch{
+            console.log("error actualizar ruta");
+        }
     }
 }

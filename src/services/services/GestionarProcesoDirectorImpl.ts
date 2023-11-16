@@ -9,18 +9,34 @@ import path from "path";
 import IReporteA from "../../repositories/report/gateway/IReporteA";
 import reporteA from "../../repositories/report/repositories/ReporteARepository";
 import createPDFFA from "../makePDF/src/services/PDFServices";
+import GestionFormatoARepository from "../../repositories/GestionFormatoARepository";
+import FormatoAMapper from "../Maping/FormatoAMapper";
 class GestionarProcesoDirector implements IGestionarProcesoDirector
 {
     private accesoPersistencia:IGestProcesoDirectorRpstr;
     private mapper:ProcesoMapper;
+    private formato:GestionFormatoARepository;
+    private fMapper:FormatoAMapper;
     public constructor(persistencia:IGestProcesoDirectorRpstr,private reporte:IReporteA){
         this.accesoPersistencia = persistencia;
         this.mapper = new ProcesoMapper();
+        this.formato = new GestionFormatoARepository();
+        this.fMapper = new FormatoAMapper();
     }
     async enviarFormatoA(id: number, prc:number): Promise<boolean> {
+        const formatoA = await this.formato.consultarFormatoA(id);
+        const dto = this.fMapper.entityToDTO(formatoA);
+        console.log(dto.no_revision);
+        if(dto.no_revision >= 3) return false;
         const res = await this.reporte.recuperarReporte(id, prc);
         const filePath = path.join(__dirname,'..','..','..','..','pdf',`${res.tipo}`,`${ res.proceso.id}_${res.formato.revision}.pdf`);
         createPDFFA(filePath, res);
+        if(await this.formato.existeRuta(id))
+        {
+            await this.formato.actualizarRuta(id,filePath);
+        }else{
+            await this.formato.crearRuta(id,filePath);
+        }
         return await this.accesoPersistencia.enviarFormatoA(id);
     }
     public async crearProceso(proceso: ProcesoDTO): Promise<ProcesoDTO> {

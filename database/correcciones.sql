@@ -12,3 +12,6 @@ MODIFY COLUMN prc_id decimal(7,3) NULL;
 
 //Cambio 13/11/2023
 ALTER TABLE ti_a add column a_interes text not null;
+//16/11/2023
+ALTER TABLE archivos
+MODIFY COLUMN arc_id INT AUTO_INCREMENT;

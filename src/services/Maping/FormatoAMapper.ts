@@ -5,7 +5,7 @@ export default class FormatoAMapper{
 
     }
     public entityToDTO(objEntity:FormatoAEntity[]):FormatoADTO{
-        var form:FormatoADTO = new FormatoADTO(0,"","","","","",false,new Date(),new Date(),"",0);
+        var form:FormatoADTO = new FormatoADTO(0,"","","","","",false,new Date(),new Date(),"",0,"");
         objEntity.forEach((row)=>{
             if(form.id!= row.a_id)
             {
@@ -59,8 +59,8 @@ export default class FormatoAMapper{
             json._revision,
             json._recibido,
             json._observaciones,
-            json._no_revision
-
+            json._no_revision,
+            json._interes
         );
 
         return form;
