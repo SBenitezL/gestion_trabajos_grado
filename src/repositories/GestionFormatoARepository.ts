@@ -82,4 +82,13 @@ export default class GestionFormatoARepository
         }
         return result;
     }
+    public async descargarFormato(id:number) {
+        const query="SELECT ruta FROM tabla WHERE IDUSUARIO=?";
+        try{
+            const [res]:any = await db.query(query,[id])
+            const resp = null;
+        }catch(error){
+            console.log("error")
+        }
+    }
 }
