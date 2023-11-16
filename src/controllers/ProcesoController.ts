@@ -57,11 +57,11 @@ class ProcesoController{
         }
     }
     public sendFA = async(req:Request, res:Response)=>{
-        const id = req.params.id;
+        const {id, prc} = req.params;
         let result = false;
       
         try {
-          result = await this.procesoService.enviarFormatoA(parseInt(id));
+          result = await this.procesoService.enviarFormatoA(parseInt(id), parseFloat(prc));
           if (result) {
             res.status(200).json(result);
           } else {

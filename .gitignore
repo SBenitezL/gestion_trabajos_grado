@@ -1,3 +1,5 @@
 node_modules/
 .ENV
 build/
+PP-A/
+TI-A/

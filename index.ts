@@ -10,6 +10,10 @@ import procesoRoutes from "./src/routes/ProcesoRoutes";
 import EstudiantesRoutes from "./src/routes/EstudiantesRoutes";
 import revisionFARoutes from "./src/routes/RevisionFARoutes";
 
+//TODO:Borrar
+import prueba from "./src/repositories/report/repositories/ReporteARepository";
+import EstudianteReporte from "./src/services/DTO/Report/EstudianteReporte";
+
 class Servidor{
     public app: Application;
     constructor(){
@@ -34,12 +38,11 @@ class Servidor{
         this.app.use('/api/revisiones', revisionFARoutes)
 
     }
-    start():void{
+     start():void{
         this.app.listen(this.app.get('port'),()=>{
             console.log('Servidor en puerto', this.app.get('port'));
         });
     }
-
 }
 const server=new Servidor();
 server.start();

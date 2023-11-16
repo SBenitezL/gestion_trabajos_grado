@@ -9,7 +9,7 @@ export default class GestionFormatoARepository
     }
     public async crearFormatoA(id:number, formato: FormatoAEntity[]): Promise<FormatoAEntity[]>{
         //TODO: Refactorizar
-        const query1 = "INSERT INTO TI_A (A_OBJETIVOS, A_CON_ENTREGA, A_REALIZACION, A_RECURSOS, A_FINANCIACION, A_PER_PROGRAMA, A_REVISION, A_OBSERVACIONES, A_NO_REVISION) VALUES (?, ?, ?, ?, ?, ?, ? , ? , ?)";
+        const query1 = "INSERT INTO TI_A (A_OBJETIVOS, A_CON_ENTREGA, A_REALIZACION, A_RECURSOS, A_FINANCIACION, A_PER_PROGRAMA, A_RECIBIDO, A_OBSERVACIONES, A_NO_REVISION) VALUES (?, ?, ?, ?, ?, ?, ? , ? , ?)";
         const query2 = "Update proceso set a_id = ? where prc_id = ?"
         const query3 = "SELECT *  FROM TI_A WHERE a_id = ?";
         console.log(id);

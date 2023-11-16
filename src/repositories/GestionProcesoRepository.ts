@@ -3,6 +3,7 @@ import db from '../database/Database';
 import ProcesoEntity from '../models/ProcesoEntity';
 import ProcesoListEntity from '../models/ProcesoListEntity';
 import IGestProcesoDirectorRpstr from './IGestProcesoDirectorRpstr';
+import path from 'path';
 class GestionProcesoRepository implements IGestProcesoDirectorRpstr{
     public constructor()
     {

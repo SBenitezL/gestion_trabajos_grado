@@ -5,15 +5,22 @@ import IGestionarProcesoDirector from "./IGestionarProcesoDirector";
 import ProcesoMapper from "../Maping/ProcesoMapper";
 import IGestProcesoDirectorRpstr from "../../repositories/IGestProcesoDirectorRpstr";
 import datos from "../../repositories/GestionProcesoRepository";
+import path from "path";
+import IReporteA from "../../repositories/report/gateway/IReporteA";
+import reporteA from "../../repositories/report/repositories/ReporteARepository";
+import createPDFFA from "../makePDF/src/services/PDFServices";
 class GestionarProcesoDirector implements IGestionarProcesoDirector
 {
     private accesoPersistencia:IGestProcesoDirectorRpstr;
     private mapper:ProcesoMapper;
-    public constructor(persistencia:IGestProcesoDirectorRpstr){
+    public constructor(persistencia:IGestProcesoDirectorRpstr,private reporte:IReporteA){
         this.accesoPersistencia = persistencia;
         this.mapper = new ProcesoMapper();
     }
-    async enviarFormatoA(id: number): Promise<boolean> {
+    async enviarFormatoA(id: number, prc:number): Promise<boolean> {
+        const res = await this.reporte.recuperarReporte(id, prc);
+        const filePath = path.join(__dirname,'..','..','..','..','pdf',`${res.tipo}`,`${ res.proceso.id}_${res.formato.revision}.pdf`);
+        createPDFFA(filePath, res);
         return await this.accesoPersistencia.enviarFormatoA(id);
     }
     public async crearProceso(proceso: ProcesoDTO): Promise<ProcesoDTO> {
@@ -21,7 +28,6 @@ class GestionarProcesoDirector implements IGestionarProcesoDirector
         if(proceso.estudiantes.length == 0) return res;
         if(this.verificarInvestigacion(proceso) || this.verificarPractica(proceso))
         {
-            console.log('Entra');
             let entity = this.mapper.dtoToEntity(proceso);
             try{
                entity = await this.accesoPersistencia.crearProceso(entity);
@@ -57,5 +63,5 @@ class GestionarProcesoDirector implements IGestionarProcesoDirector
     }
 
 }
-const gestionProcesosImpl = new GestionarProcesoDirector(datos);
+const gestionProcesosImpl = new GestionarProcesoDirector(datos, reporteA);
 export default gestionProcesosImpl;

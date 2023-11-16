@@ -27,8 +27,8 @@ export default interface IGestionarProcesoDirector{
      */
     consultarProcesos():Promise<ProcesoListDTO[]>;
     /**
-     * @route PATCH  /api/procesos/formatosa/:id
+     * @route PATCH  /api/procesos/formatosa/:id/:prc
      * @param {number} id Id del "formato a" a enviar.
      */
-    enviarFormatoA(id:number):Promise<boolean>;
+    enviarFormatoA(id:number, prc:number):Promise<boolean>;
 }

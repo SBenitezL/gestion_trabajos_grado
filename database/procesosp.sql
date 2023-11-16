@@ -49,3 +49,35 @@ BEGIN
 END //
 
 DELIMITER ;
+
+//13-11-2023
+DELIMITER //
+CREATE OR REPLACE PROCEDURE  reporteEstudiantes(in id decimal(7,3))
+BEGIN
+	select est_nombre "nombre", est_codigo "codigo"
+	from estudiante
+	where prc_id = id;
+END//
+DELIMITER ;
+DELIMITER //
+CREATE OR REPLACE PROCEDURE  reporteFormatoA(in id int(11))
+BEGIN
+select a_objetivos "objetivos",
+		a_con_entrega "condEntrega", 
+        a_realizacion "realizacion", 
+        a_recursos "recursos", 
+        a_financiacion "financiacion", 
+        a_interes "aportes", 
+        a_recibido "recibido",
+        A_NO_REVISION "revision"
+from ti_a
+where a_id = id;
+END//
+DELIMITER //
+CREATE OR REPLACE PROCEDURE  reporteProceso(in id decimal(7,3))
+BEGIN
+select PRC_TITULO "titulo", upper(prc_tipo) "tipo", nom_asesor "asesor", usr_nombre "director", prc_id "id"
+from proceso join usuario
+on (proceso.USR_CODIGO = usuario.usr_codigo)
+where prc_id = id;
+END//
