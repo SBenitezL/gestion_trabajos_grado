@@ -106,7 +106,7 @@ export default class GestionFormatoARepository
     }
     
     public async actualizarRuta(id:number, ruta:string):Promise<void>{
-        const query = "insert into archivos set arc_ruta = ?, arc_recibido = ? where a_id = ?";
+        const query = "update archivos set arc_ruta = ?, arc_recibido = ? where a_id = ?";
         try{
             await db.query(query,[ruta, new Date(), id]);
         }catch{

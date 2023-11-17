@@ -29,7 +29,7 @@ class GestionarProcesoDirector implements IGestionarProcesoDirector
         console.log(dto.no_revision);
         if(dto.no_revision >= 3) return false;
         const res = await this.reporte.recuperarReporte(id, prc);
-        const filePath = path.join(__dirname,'..','..','..','..','pdf',`${res.tipo}`,`${ res.proceso.id}_${res.formato.revision}.pdf`);
+        const filePath = path.join('pdf',`${res.tipo}`,`${ res.proceso.id}_${res.formato.revision}.pdf`);
         createPDFFA(filePath, res);
         if(await this.formato.existeRuta(id))
         {
@@ -50,6 +50,7 @@ class GestionarProcesoDirector implements IGestionarProcesoDirector
                res = this.mapper.entityToDTO(entity);
             }catch(error)
             {
+                console.log("error crear formato")
             }
         }
         return res;

@@ -53,7 +53,7 @@ class GestionProcesoRepository implements IGestProcesoDirectorRpstr{
             await Promise.all(promises);
         }catch(error)
         {
-            console.log("error");
+            console.log("error repositorio");
         }
         console.log(prc);
        return prc;
