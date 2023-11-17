@@ -113,4 +113,24 @@ export default class GestionFormatoARepository
             console.log("error actualizar ruta");
         }
     }
+
+    public async descargarFormatoA(id:number):Promise<string | null>{
+        const query = "SELECT ru.ARC_RUTA FROM RUTA ru INNER JOIN TI_A ta ON ru.A_ID == ta.A_ID INNER JOIN PROCESO pr ON pr.A_ID == ta.A_ID WHERE pr.USR_CODIGO=?; ";
+        
+        try{
+            const [res]:any =await db.query(query,[id]);
+           const ruta=res[0]?.RUTA ||null;
+           console.log(ruta);
+           if (ruta) {
+            console.log(ruta);
+            return ruta;
+          } else {
+            console.log('Ruta no encontrada para el ID:', id);
+            return null;
+          }
+        }catch{
+            console.log("error  ruta");
+            return null;
+        }
+    }
 }
