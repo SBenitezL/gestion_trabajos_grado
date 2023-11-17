@@ -20,6 +20,7 @@ export default class FormatoAMapper{
                form.recibido = row.a_recibido;
                form.observaciones = row.a_observaciones;
                form.no_revision = row.a_no_revision;
+               form.interes = row.a_interes;
             }
             
         })
@@ -40,7 +41,8 @@ export default class FormatoAMapper{
                 objDTO.revision,
                 objDTO.recibido,
                 objDTO.observaciones,
-                objDTO.no_revision
+                objDTO.no_revision,
+                objDTO.interes
                 ))
             
         return form;

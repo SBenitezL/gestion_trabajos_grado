@@ -13,7 +13,7 @@ export default class GestionFormatoARepository
         const query3 = "SELECT *  FROM TI_A WHERE a_id = ?";
         console.log(id);
         
-        const form:FormatoAEntity = new FormatoAEntity(formato[0].a_id,formato[0].a_objetivos,formato[0].a_con_entrega,formato[0].a_realizacion,formato[0].a_recursos,formato[0].a_financiacion,formato[0].a_per_programa,formato[0].a_revision,formato[0].a_recibido,formato[0].a_observaciones,formato[0].a_no_revision);
+        const form:FormatoAEntity = new FormatoAEntity(formato[0].a_id,formato[0].a_objetivos,formato[0].a_con_entrega,formato[0].a_realizacion,formato[0].a_recursos,formato[0].a_financiacion,formato[0].a_per_programa,formato[0].a_revision,formato[0].a_recibido,formato[0].a_observaciones,formato[0].a_no_revision,'');
         const res:FormatoAEntity[] =  [];
         try{            
             const [result]:any = await db.query(query1,[form.a_objetivos,form.a_con_entrega,form.a_realizacion,form.a_recursos,form.a_financiacion,form.a_per_programa,form.a_revision,form.a_observaciones,form.a_no_revision]);
@@ -68,7 +68,7 @@ export default class GestionFormatoARepository
     }
     public async consultarFormatoA(prcId:number):Promise<FormatoAEntity[]>
     {
-        const query = "select ti_a.a_id, a_objetivos, a_con_entrega, a_realizacion,  a_recursos,  a_financiacion, a_per_programa,  a_revision,  a_recibido,  a_observaciones, a_no_revision, a_interes from ti_a where a_id = ?";
+        const query = "select ti_a.a_id, a_objetivos, a_con_entrega, a_realizacion,  a_recursos,  a_financiacion, a_per_programa,  a_revision,  a_recibido,  a_observaciones, a_no_revision, a_interes from ti_a join proceso on ti_a.A_ID = proceso.A_ID where prc_id = ?"
         let result :FormatoAEntity[]= [];
         try{
             const [res]:any = await db.query(query,[prcId])

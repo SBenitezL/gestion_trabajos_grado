@@ -30,6 +30,7 @@ class GestionFormatoAImpl implements IGestionarFormatoA{
     }
     async consultarFormatoA(prcId: number): Promise<FormatoADTO> {
         const res = await this.accesoPersistencia.consultarFormatoA(prcId);
+        console.log(res);
         return this.mapper.entityToDTO(res);
     }
     

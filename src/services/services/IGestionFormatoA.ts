@@ -18,7 +18,7 @@ export default interface IGestionarFormatoA
      */
     eliminarFormatoA(id:number):Promise<boolean>;
     /**
-     * @route GET api/formatosa/prcId
+     * @route GET api/formatoA/prcId
      * @param prcId 
      */
     consultarFormatoA(prcId:number):Promise<FormatoADTO>;
