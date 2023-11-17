@@ -2,6 +2,7 @@ import {Request, Response} from 'express';
 import IGestionUsuarios from '../services/services/IGestionUsuarios';
 import UsuarioRolDTO from '../services/DTO/UsuarioRolDTO';
 import gestionUsuariosImpl from '../services/services/GestionUsuariosImpl';
+import CredencialesDTO from '../services/DTO/CredencialesDTO';
 
 class UsuarioController{
     private usuarioRolService:IGestionUsuarios;
@@ -84,6 +85,18 @@ class UsuarioController{
         const {login} =  req.params
         const result = await this.usuarioRolService.consultarUsuariosPorLogin(login);
         if(result.login == login)
+        {
+            res.status(200).json(result);
+        }else{
+            res.status(401).json(result);
+        }
+    }
+    public verify =  async (req:Request, res:Response)=>
+    {
+        const credencial:CredencialesDTO=req.body;
+        console.log("controller:",credencial)
+        const result = await this.usuarioRolService.verificarUsuario(credencial);
+        if(result.id != 0)
         {
             res.status(200).json(result);
         }else{

@@ -8,8 +8,10 @@ class UsuarioRolRoutes{
         this.config();
     }
     private config():void
-    {
+    {   
+        this.router.post('/verify/', usuarioController.verify);
         this.router.post('/', usuarioController.create);
+        
         this.router.put('/:id', usuarioController.update);
         this.router.delete('/:id', usuarioController.delete);
         this.router.get('/',usuarioController.list);

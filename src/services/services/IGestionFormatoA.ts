@@ -22,4 +22,10 @@ export default interface IGestionarFormatoA
      * @param prcId 
      */
     consultarFormatoA(prcId:number):Promise<FormatoADTO>;
+    /**
+     * 
+     * @param id 
+     * 
+     */
+    descargarFormatoA(id:number):Promise<string | null>
 }

@@ -12,6 +12,7 @@ class FormatoARoutes{
         this.router.post('/', formatoAController.create);
         this.router.put('/:id', formatoAController.update);
         this.router.delete('/:id', formatoAController.delete);
+        this.router.get('/download/:id', formatoAController.download);
         this.router.get('/:id', formatoAController.listById);
 
     }

@@ -57,6 +57,18 @@ class FormatoAController{
         else{
             res.status(400).json(result);
         }
+    }   
+    public download = async (req:Request, res:Response)=>
+    {
+        const {id} =  req.params
+        const result = await this.formatoAService.descargarFormatoA(parseFloat(id));
+        if( result)
+        {
+            res.status(200).json(result);
+        }
+        else{
+            res.status(400).json(result);
+        }
     }    
     
 }
