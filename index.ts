@@ -13,6 +13,7 @@ import revisionFARoutes from "./src/routes/RevisionFARoutes";
 //TODO:Borrar
 import prueba from "./src/repositories/report/repositories/ReporteARepository";
 import EstudianteReporte from "./src/services/DTO/Report/EstudianteReporte";
+import { crearHash, compareHash } from "./src/services/Utiles/Encriptar";
 
 class Servidor{
     public app: Application;
@@ -39,9 +40,12 @@ class Servidor{
 
     }
      start():void{
+        this.pruebas();
         this.app.listen(this.app.get('port'),()=>{
             console.log('Servidor en puerto', this.app.get('port'));
         });
+    }
+    pruebas():void{
     }
 }
 const server=new Servidor();
