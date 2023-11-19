@@ -81,3 +81,15 @@ from proceso join usuario
 on (proceso.USR_CODIGO = usuario.usr_codigo)
 where prc_id = id;
 END//
+DELIMITER ;
+
+//19/11/2023
+DELIMITER //
+create or REPLACE procedure recuperarEvaluadores()
+begin
+	select usuario.usr_codigo, usr_nombre, usuario.usr_correo
+	from usuario join usuariorol on (usuario.usr_codigo = usuariorol.USR_CODIGO)
+	where usuariorol.ROL_ID = 5 and usuariorol.FECHAFIN = null;
+end//
+
+DELIMITER ;
