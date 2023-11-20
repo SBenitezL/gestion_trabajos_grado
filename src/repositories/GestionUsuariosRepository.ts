@@ -5,7 +5,7 @@ import UsuarioRolEntity from '../models/UsuarioRolEntity';
 import { query } from 'express';
 import CredencialesDTO from '../services/DTO/CredencialesDTO';
 import CredencialesEntity from '../models/CredencialesEntity';
-import enc from '../services/Utiles/Encriptar';
+import enc, { compareHash } from '../services/Utiles/Encriptar';
 //TODO: Implementar el uso de transacciones
 export default class GestionUsuarioRepository{
     public constructor()
@@ -149,7 +149,7 @@ export default class GestionUsuarioRepository{
     async verificarUsuario(usr: CredencialesEntity): Promise<UsuarioRolEntity[]>
     {
         const query = "SELECT USR_PASSWORD AS CL FROM USUARIO WHERE USR_LOGIN=? ";
-        const query3 = "select USUARIO.usr_codigo, usr_nombre, usr_login, usr_password, ROL.rol_id, rol_nombre, usr_correo from (USUARIOROL inner join USUARIO on USUARIOROL.usr_codigo = USUARIO.usr_codigo) inner join ROL on USUARIOROL.rol_id = ROL.rol_id WHERE USUARIO.USR_LOGIN=? AND USUARIO.USR_PASSWORD=?";
+        const query3 = "select USUARIO.usr_codigo, usr_nombre, usr_login, usr_password, ROL.rol_id, rol_nombre, usr_correo from (USUARIOROL inner join USUARIO on USUARIOROL.usr_codigo = USUARIO.usr_codigo) inner join ROL on USUARIOROL.rol_id = ROL.rol_id WHERE USUARIO.USR_LOGIN=?";
         const usuario:UsuarioRolEntity= new UsuarioRolEntity(0,"","","",0,"","");
         const crede:CredencialesEntity= new CredencialesEntity(usr.CLAVE,usr.USERNAME);
         const res:UsuarioRolEntity[] = []
@@ -157,11 +157,9 @@ export default class GestionUsuarioRepository{
 
             const [res]:any =await db.query(query,[crede.USERNAME]);
             const pass=res[0]?.CL ||null;
-            console.log("contra",pass,crede.CLAVE);
-            //enc.comparePassword(pass,crede.CLAVE)
-            if (pass === crede.CLAVE) {
-                const [result]:UsuarioRolEntity|any  = await db.query(query3, [crede.USERNAME,crede.CLAVE]);
-               // console.log(result);
+            console.log("contra",pass,crede.CLAVE);            
+            if (compareHash(crede.CLAVE,pass)) {
+                const [result]:UsuarioRolEntity|any  = await db.query(query3, [crede.USERNAME]);
                 result.map((row:UsuarioRolEntity)=>{
                     res.push(row);})
                     return res;
@@ -174,8 +172,6 @@ export default class GestionUsuarioRepository{
         {
             return res;
         }
-        console.log(res);
-        return res;
     }
 }
 /**

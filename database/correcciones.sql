@@ -15,3 +15,6 @@ ALTER TABLE ti_a add column a_interes text not null;
 //16/11/2023
 ALTER TABLE archivos
 MODIFY COLUMN arc_id INT AUTO_INCREMENT;
+//19/11/2023
+ALTER TABLE usuario
+MODIFY usuario.usr_password VARCHAR(64);

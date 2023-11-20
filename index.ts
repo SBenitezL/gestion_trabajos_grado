@@ -46,6 +46,8 @@ class Servidor{
         });
     }
     pruebas():void{
+        console.log(crearHash('luchin123'));
+        
     }
 }
 const server=new Servidor();

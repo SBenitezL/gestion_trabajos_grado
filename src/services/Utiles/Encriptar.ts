@@ -14,7 +14,7 @@ const enc = new Encriptar();
 export default enc;
 
 export const crearHash = (value:string)=>{
-    const salt = bcrypt.genSaltSync();
+    const salt = bcrypt.genSaltSync(10);
     return bcrypt.hashSync(value, salt);
 }
 export const compareHash = (pass:string, encpass:string):boolean=>{
