@@ -115,12 +115,12 @@ export default class GestionFormatoARepository
     }
 
     public async descargarFormatoA(id:number):Promise<string | null>{
-        const query = "SELECT ru.ARC_RUTA FROM RUTA ru INNER JOIN TI_A ta ON ru.A_ID == ta.A_ID INNER JOIN PROCESO pr ON pr.A_ID == ta.A_ID WHERE pr.USR_CODIGO=?; ";
+        const query = "SELECT ru.ARC_RUTA AS RUTA FROM ARCHIVOS ru INNER JOIN TI_A ta ON ru.A_ID = ta.A_ID INNER JOIN PROCESO pr ON pr.A_ID = ta.A_ID INNER JOIN ESTUDIANTE ES ON pr.PRC_ID = es.PRC_ID WHERE es.EST_CODIGO=?; ";
         
         try{
             const [res]:any =await db.query(query,[id]);
            const ruta=res[0]?.RUTA ||null;
-           console.log(ruta);
+           console.log("intento",id);
            if (ruta) {
             console.log(ruta);
             return ruta;

@@ -1,7 +1,7 @@
 import express,{ Application } from "express";
 import morgan from 'morgan';
 import cors from 'cors';
-
+import path from "path";//dr
 import usuarioRolRoutes from "./src/routes/UsuarioRolRoutes";
 import indexRoutes from "./src/routes/indexRoutes";
 import rolesRoutes from "./src/routes/RolesRoutes";
@@ -20,6 +20,7 @@ class Servidor{
        this.app= express();
        this.config();
        this.routes();
+       this.staticFiles();
     }
     config():void{
         this.app.set('port',process.env.PORT || 3000);
@@ -36,6 +37,11 @@ class Servidor{
         this.app.use('/api/procesos',procesoRoutes)
         this.app.use('/api/estudiantes',EstudiantesRoutes);
         this.app.use('/api/revisiones', revisionFARoutes)
+
+    }
+    //dr
+    staticFiles():void{
+        this.app.use('/pdf', express.static(path.join(__dirname, 'GESTION_TRABAJOS_GRADO', 'pdf', 'TI-A')));
 
     }
      start():void{

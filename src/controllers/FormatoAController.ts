@@ -61,10 +61,18 @@ class FormatoAController{
     public download = async (req:Request, res:Response)=>
     {
         const {id} =  req.params
-        const result = await this.formatoAService.descargarFormatoA(parseFloat(id));
-        if( result)
+        const result = await this.formatoAService.descargarFormatoA(parseInt(id));
+        
+        if( result )
         {
-            res.status(200).json(result);
+            console.log("controller",result);
+            const ruta=result;
+            res.download(ruta, (error) => {
+                if (error) {
+                    console.error('Error al descargar el archivo:', error);
+                    res.status(500).json({ error: 'Error al descargar el archivo' });
+                }
+            });
         }
         else{
             res.status(400).json(result);
