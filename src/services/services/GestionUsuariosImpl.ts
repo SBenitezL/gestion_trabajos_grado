@@ -21,6 +21,7 @@ class GestionUsuariosImpl implements IGestionUsuarios{
         console.log(dto.login,dto.password)
         let entity= this.mapper.dtoToEntityC(dto);
         const res = await this.accesoPersistencia.verificarUsuario(entity);
+        console.log('a',res)
         return this.mapper.entityToDTO(res);
     
     }

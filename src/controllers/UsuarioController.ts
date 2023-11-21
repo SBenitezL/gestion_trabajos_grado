@@ -96,6 +96,7 @@ class UsuarioController{
         const credencial:CredencialesDTO=req.body;
         console.log("controller:",credencial)
         const result = await this.usuarioRolService.verificarUsuario(credencial);
+        console.log('controller',result);
         if(result.id != 0)
         {
             res.status(200).json(result);
