@@ -9,6 +9,7 @@ import formatoARoutes from "./src/routes/FormatoARoutes";
 import procesoRoutes from "./src/routes/ProcesoRoutes";
 import EstudiantesRoutes from "./src/routes/EstudiantesRoutes";
 import revisionFARoutes from "./src/routes/RevisionFARoutes";
+import evaluadorRoutes from "./src/routes/EvaluadorRoutes"
 
 //TODO:Borrar
 import prueba from "./src/repositories/report/repositories/ReporteARepository";
@@ -33,10 +34,11 @@ class Servidor{
         this.app.use(indexRoutes);
         this.app.use('/api/usuarios',usuarioRolRoutes);     
         this.app.use('/api/roles', rolesRoutes);  
-        this.app.use('/api/formatoA',formatoARoutes)  
-        this.app.use('/api/procesos',procesoRoutes)
+        this.app.use('/api/formatoA',formatoARoutes);  
+        this.app.use('/api/procesos',procesoRoutes);
         this.app.use('/api/estudiantes',EstudiantesRoutes);
-        this.app.use('/api/revisiones', revisionFARoutes)
+        this.app.use('/api/revisiones', revisionFARoutes);
+        this.app.use('/api/evaluadores', evaluadorRoutes);
 
     }
      start():void{

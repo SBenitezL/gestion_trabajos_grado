@@ -1,7 +1,7 @@
 import EvaluadorEntity from "../../models/EvaluadorEntity";
 import EvaluadorDTO from "../DTO/EvaluadorDTO";
 
-class EvaluadorMapper{
+export default class EvaluadorMapper{
 
     public dtoToEntity(obj:EvaluadorDTO):EvaluadorEntity|null{
         if(obj){
