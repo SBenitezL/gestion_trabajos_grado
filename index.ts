@@ -9,7 +9,7 @@ import formatoARoutes from "./src/routes/FormatoARoutes";
 import procesoRoutes from "./src/routes/ProcesoRoutes";
 import EstudiantesRoutes from "./src/routes/EstudiantesRoutes";
 import revisionFARoutes from "./src/routes/RevisionFARoutes";
-
+import multer from 'multer';
 //TODO:Borrar
 import prueba from "./src/repositories/report/repositories/ReporteARepository";
 import EstudianteReporte from "./src/services/DTO/Report/EstudianteReporte";
@@ -55,6 +55,14 @@ class Servidor{
         console.log(crearHash('luchin123'));
         
     }
+    storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+          cb(null, 'pdf/ANTEPROYECTO/'); // Carpeta donde se guardarán los archivos
+        },
+        filename: function (req, file, cb) {
+          cb(null, file.originalname); // Nombre del archivo original
+        }
+      });
 }
 const server=new Servidor();
 server.start();
