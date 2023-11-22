@@ -59,6 +59,7 @@ BEGIN
 	where prc_id = id;
 END//
 DELIMITER ;
+//Actualizado 21/11/2023
 DELIMITER //
 CREATE OR REPLACE PROCEDURE  reporteFormatoA(in id int(11))
 BEGIN
@@ -68,11 +69,12 @@ select a_objetivos "objetivos",
         a_recursos "recursos", 
         a_financiacion "financiacion", 
         a_interes "aportes", 
-        a_recibido "recibido",
+        DATE_FORMAT(a_recibido,'%d-%m-%Y') "recibido",
         A_NO_REVISION "revision"
 from ti_a
 where a_id = id;
 END//
+DELIMITER ;
 DELIMITER //
 CREATE OR REPLACE PROCEDURE  reporteProceso(in id decimal(7,3))
 BEGIN
@@ -83,13 +85,13 @@ where prc_id = id;
 END//
 DELIMITER ;
 
-//19/11/2023
+//21/11/2023
 DELIMITER //
 create or REPLACE procedure recuperarEvaluadores()
 begin
 	select usuario.usr_codigo, usr_nombre, usuario.usr_correo
 	from usuario join usuariorol on (usuario.usr_codigo = usuariorol.USR_CODIGO)
-	where usuariorol.ROL_ID = 5 and usuariorol.FECHAFIN = null;
+	where usuariorol.ROL_ID = 5 and usuariorol.FECHAFIN is null;
 end//
 
 DELIMITER ;

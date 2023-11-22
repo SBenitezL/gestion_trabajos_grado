@@ -81,7 +81,7 @@ export default class GestionUsuarioRepository{
         }
     }
     async consultarUsuarios(): Promise<UsuarioRolEntity[]> {
-        const query1 = "select USUARIO.usr_codigo, usr_nombre, usr_login, usr_password, ROL.rol_id, rol_nombre, usr_correo from (USUARIOROL inner join USUARIO on USUARIOROL.usr_codigo = USUARIO.usr_codigo) inner join ROL on USUARIOROL.rol_id = ROL.rol_id";
+        const query1 = "select USUARIO.usr_codigo, usr_nombre, usr_login, usr_password, ROL.rol_id, lower(rol_nombre) 'rol_nombre', usr_correo from (USUARIOROL inner join USUARIO on USUARIOROL.usr_codigo = USUARIO.usr_codigo) inner join ROL on USUARIOROL.rol_id = ROL.rol_id";
         const res:UsuarioRolEntity[] = []
         try{
             const [result]:UsuarioRolEntity|any  = await db.query(query1);
@@ -159,10 +159,11 @@ export default class GestionUsuarioRepository{
             const pass=res[0]?.CL ||null;
             console.log("contra",pass,crede.CLAVE);            
             if (compareHash(crede.CLAVE,pass)) {
+                const res2:UsuarioRolEntity[] = []
                 const [result]:UsuarioRolEntity|any  = await db.query(query3, [crede.USERNAME]);
                 result.map((row:UsuarioRolEntity)=>{
-                    res.push(row);})
-                    return res;
+                    res2.push(new UsuarioRolEntity(row.usr_codigo,row.usr_nombre,row.usr_login,row.usr_password,row.rol_id,row.rol_nombre,row.usr_correo));})
+                return res2;
            } else {
              console.log('No concuerdan las contraseñas encriptadas');
              return res;

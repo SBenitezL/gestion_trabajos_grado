@@ -34,7 +34,7 @@ class GestionProcesoRepository implements IGestProcesoDirectorRpstr{
         let prc:ProcesoEntity = new ProcesoEntity(0,0,0,0,0,"",0,0,0,"","",[]);
         try{
             if(! await this.verificarDirector(proceso.usr_codigo))
-            {   
+            {
                 return prc;
             }
             const [resP]:any = await db.query(query,[proceso.usr_codigo, proceso.nom_asesor, proceso.prc_titulo, proceso.prc_tipo]);
