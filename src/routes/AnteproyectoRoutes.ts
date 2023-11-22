@@ -20,8 +20,8 @@ class AnteproyectoRoutes{
     }
     private config():void
     {
+       this.router.post('/upload/:id',upload.single('archivo') ,anteproyectoController.uploadA);
        this.router.get('/download/:id', anteproyectoController.download);
-        this.router.post('/upload/:id',upload.single('archivo') ,anteproyectoController.uploadA);
 
     }
 } 

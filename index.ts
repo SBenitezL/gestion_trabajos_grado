@@ -11,7 +11,7 @@ import EstudiantesRoutes from "./src/routes/EstudiantesRoutes";
 import revisionFARoutes from "./src/routes/RevisionFARoutes";
 import multer from 'multer';
 import evaluadorRoutes from "./src/routes/EvaluadorRoutes"
-
+import anteproyectoRoutes from "./src/routes/AnteproyectoRoutes";
 //TODO:Borrar
 import prueba from "./src/repositories/report/repositories/ReporteARepository";
 import EstudianteReporte from "./src/services/DTO/Report/EstudianteReporte";
@@ -41,6 +41,7 @@ class Servidor{
         this.app.use('/api/estudiantes',EstudiantesRoutes);
         this.app.use('/api/revisiones', revisionFARoutes);
         this.app.use('/api/evaluadores', evaluadorRoutes);
+        this.app.use('/api/anteproyecto', anteproyectoRoutes);
 
     }
     //dr

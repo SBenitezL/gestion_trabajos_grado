@@ -30,6 +30,7 @@ class AnteproyectoController{
     }   
     public uploadA = async (req:Request, res:Response)=>
     {
+        console.log("Ingreso");
         const archivo=req.file;
         if (!archivo) {
             return res.status(400).json({ error: 'No se ha proporcionado ningún archivo' });
