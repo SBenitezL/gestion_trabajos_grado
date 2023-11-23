@@ -10,8 +10,13 @@ class RevisionAImpl implements IRevisionA
     {
         this.mapper = new RevisionAMapper();
     }
-    public async listarProcesos(cod: number): Promise<RevisionADTO[]> {
+    public async cambiarEstadoFormatoA(codigo: number): Promise<RevisionADTO[]> {
         const entity = await this.accesoDatos.listarFormatosA();
+        const dto:RevisionADTO[] = this.mapper.listEntityToDTO(entity);
+        return dto;
+    }
+    public async listarProcesos(cod: number): Promise<RevisionADTO[]> {
+        const entity = await this.accesoDatos.cambiarEstadoFormatoA(cod);
         const dto:RevisionADTO[] = this.mapper.listEntityToDTO(entity);
         return dto;
     }
