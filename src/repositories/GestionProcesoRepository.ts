@@ -94,7 +94,7 @@ class GestionProcesoRepository implements IGestProcesoDirectorRpstr{
         try{
             const [result]:any  = await db.query(query);
             result.map((row:ProcesoListEntity)=>{
-                console.log(row);
+                console.log("repositoy;",row);
                 res.push(row);})
         } catch(error){
             return res;

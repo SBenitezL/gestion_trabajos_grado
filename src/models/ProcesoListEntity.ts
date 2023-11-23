@@ -4,5 +4,5 @@ export default interface ProcesoListEntity
     prc_titulo:string,
     prc_tipo:string,
     est_nombre:string
-    prc_estado:number
+    prc_form_a:number
 }
