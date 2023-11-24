@@ -1,7 +1,7 @@
 import express,{ Application } from "express";
 import morgan from 'morgan';
 import cors from 'cors';
-
+import path from "path";//dr
 import usuarioRolRoutes from "./src/routes/UsuarioRolRoutes";
 import indexRoutes from "./src/routes/indexRoutes";
 import rolesRoutes from "./src/routes/RolesRoutes";
@@ -9,8 +9,9 @@ import formatoARoutes from "./src/routes/FormatoARoutes";
 import procesoRoutes from "./src/routes/ProcesoRoutes";
 import EstudiantesRoutes from "./src/routes/EstudiantesRoutes";
 import revisionFARoutes from "./src/routes/RevisionFARoutes";
+import multer from 'multer';
 import evaluadorRoutes from "./src/routes/EvaluadorRoutes"
-
+import anteproyectoRoutes from "./src/routes/AnteproyectoRoutes";
 //TODO:Borrar
 import prueba from "./src/repositories/report/repositories/ReporteARepository";
 import EstudianteReporte from "./src/services/DTO/Report/EstudianteReporte";
@@ -22,6 +23,7 @@ class Servidor{
        this.app= express();
        this.config();
        this.routes();
+       this.staticFiles();
     }
     config():void{
         this.app.set('port',process.env.PORT || 3000);
@@ -39,6 +41,12 @@ class Servidor{
         this.app.use('/api/estudiantes',EstudiantesRoutes);
         this.app.use('/api/revisiones', revisionFARoutes);
         this.app.use('/api/evaluadores', evaluadorRoutes);
+        this.app.use('/api/anteproyecto', anteproyectoRoutes);
+
+    }
+    //dr
+    staticFiles():void{
+        this.app.use('/pdf', express.static(path.join(__dirname, 'GESTION_TRABAJOS_GRADO', 'pdf', 'TI-A')));
 
     }
      start():void{
@@ -51,6 +59,14 @@ class Servidor{
         console.log(crearHash('luchin123'));
         
     }
+    storage = multer.diskStorage({
+        destination: function (req, file, cb) {
+          cb(null, 'pdf/ANTEPROYECTO/'); // Carpeta donde se guardarán los archivos
+        },
+        filename: function (req, file, cb) {
+          cb(null, file.originalname); // Nombre del archivo original
+        }
+      });
 }
 const server=new Servidor();
 server.start();

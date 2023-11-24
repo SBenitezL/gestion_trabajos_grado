@@ -50,6 +50,7 @@ class ProcesoController{
         const result = await this.procesoService.consultarProcesos();
         if(result.length >0)
         {
+            console.log(result);
             res.status(200).json(result);
         }
         else{

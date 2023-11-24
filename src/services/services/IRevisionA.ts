@@ -7,4 +7,9 @@ export default interface IRevisionA
      * @param {number} cod código del usuario que realiza la petición.
      */
     listarProcesos(cod:number):Promise<RevisionADTO[]>;
+    
+    
+    
+    cambiarEstadoFormatoA(codigo:number): Promise<RevisionADTO[]>
+
 }

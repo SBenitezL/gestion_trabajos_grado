@@ -89,12 +89,12 @@ class GestionProcesoRepository implements IGestProcesoDirectorRpstr{
     public async consultarProcesos():Promise<ProcesoListEntity[]>
     {
        // const query = "SELECT p.prc_titulo, p.prc_tipo, e.est_nombre FROM proceso p INNER JOIN estudiante e ON p.PRC_ID=e.PRC_ID WHERE p.prc_id =?;";
-       const query ="SELECT proceso.prc_id, prc_titulo, prc_tipo, est_nombre FROM proceso INNER JOIN estudiante ON proceso.PRC_ID=estudiante.PRC_ID ORDER BY est_nombre"; 
+       const query ="SELECT proceso.prc_id, prc_titulo, prc_tipo, est_nombre,proceso.prc_form_a FROM proceso INNER JOIN estudiante ON proceso.PRC_ID=estudiante.PRC_ID ORDER BY est_nombre"; 
        const res: ProcesoListEntity[]=[];
         try{
             const [result]:any  = await db.query(query);
             result.map((row:ProcesoListEntity)=>{
-                console.log(row);
+                console.log("repositoy;",row);
                 res.push(row);})
         } catch(error){
             return res;
