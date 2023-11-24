@@ -66,8 +66,8 @@ class GestionarProcesoDirector implements IGestionarProcesoDirector
          return this.mapper.entityToDTO(res);
 
     }
-    public async consultarProcesos(): Promise<ProcesoListDTO[]> {
-       const res = await this.accesoPersistencia.consultarProcesos();
+    public async consultarProcesos(usr:number): Promise<ProcesoListDTO[]> {
+       const res = await this.accesoPersistencia.consultarProcesos(usr);
         return this.mapper.listEntityToDTO(res);
     }
     private verificarPractica(proceso:ProcesoDTO):boolean

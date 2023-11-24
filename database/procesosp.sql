@@ -44,10 +44,8 @@ BEGIN
         a_no_revision as fA_revisiones
     FROM proceso
     JOIN ti_a ON proceso.A_ID = ti_a.A_ID
-    JOIN estudiante ON proceso.PRC_ID = estudiante.prc_id
-    where prc_form_a = 1;
+    JOIN estudiante ON proceso.PRC_ID = estudiante.prc_id;
 END //
-
 DELIMITER ;
 
 //13-11-2023
@@ -93,46 +91,6 @@ begin
 	from usuario join usuariorol on (usuario.usr_codigo = usuariorol.USR_CODIGO)
 	where usuariorol.ROL_ID = 5 and usuariorol.FECHAFIN is null;
 end//
-
-DELIMITER ;
-
-//22/11/2023
-DELIMITER //
-
-CREATE PROCEDURE cambiarEstadoFormatoA(IN estudiante_id DECIMAL(12,0))
-BEGIN
-    DECLARE prc_value INT;
-
-  
-    SELECT PRC_FORM_A INTO prc_value
-    FROM PROCESO
-    WHERE PRC_ID = (SELECT PRC_ID FROM ESTUDIANTE WHERE EST_CODIGO = estudiante_id);
-
-    SET prc_value = LEAST(prc_value + 1, 3);
-
-    UPDATE PROCESO
-    SET PRC_FORM_A = prc_value
-    WHERE PRC_ID = (SELECT PRC_ID FROM ESTUDIANTE WHERE EST_CODIGO = estudiante_id);
-END //
-
-DELIMITER ;
-DELIMITER //
-
-CREATE or replace PROCEDURE consultarEstadoFormA(IN estudiante_id DECIMAL(12,0))
-BEGIN
-    SELECT 
-        proceso.prc_id, 
-        prc_tipo, 
-        prc_titulo,
-        est_codigo, 
-        est_nombre, 
-        prc_form_a as fA_estado, 
-        a_no_revision as fA_revisiones
-    FROM proceso
-    JOIN ti_a ON proceso.A_ID = ti_a.A_ID
-    JOIN estudiante ON proceso.PRC_ID = estudiante.prc_id
-    WHERE EST_CODIGO = estudiante_id;
-END //
 
 DELIMITER ;
 

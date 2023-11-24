@@ -44,10 +44,8 @@ class ProcesoController{
     }
     public listProcesses = async (req:Request, res:Response) =>
     {
-        //const {id} =  req.params
-        //console.log(id)
-        //falta id
-        const result = await this.procesoService.consultarProcesos();
+        const usr = parseInt(req.query.usr as string);
+        const result = await this.procesoService.consultarProcesos(usr);
         if(result.length >0)
         {
             console.log(result);

@@ -152,26 +152,25 @@ export default class GestionUsuarioRepository{
         const query3 = "select USUARIO.usr_codigo, usr_nombre, usr_login, usr_password, ROL.rol_id, rol_nombre, usr_correo from (USUARIOROL inner join USUARIO on USUARIOROL.usr_codigo = USUARIO.usr_codigo) inner join ROL on USUARIOROL.rol_id = ROL.rol_id WHERE USUARIO.USR_LOGIN=?";
         const usuario:UsuarioRolEntity= new UsuarioRolEntity(0,"","","",0,"","");
         const crede:CredencialesEntity= new CredencialesEntity(usr.CLAVE,usr.USERNAME);
-        const res:UsuarioRolEntity[] = []
+        const res2:UsuarioRolEntity[] = []
         try{
 
             const [res]:any =await db.query(query,[crede.USERNAME]);
-            const pass=res[0]?.CL ||null;
-            console.log("contra",pass,crede.CLAVE);            
+            const pass=res[0]?.CL ||null; 
             if (compareHash(crede.CLAVE,pass)) {
-                const res2:UsuarioRolEntity[] = []
+                
                 const [result]:UsuarioRolEntity|any  = await db.query(query3, [crede.USERNAME]);
+                console.log(result);
                 result.map((row:UsuarioRolEntity)=>{
                     res2.push(new UsuarioRolEntity(row.usr_codigo,row.usr_nombre,row.usr_login,row.usr_password,row.rol_id,row.rol_nombre,row.usr_correo));})
                 return res2;
            } else {
-             console.log('No concuerdan las contraseñas encriptadas');
-             return res;
+             return res2;
            }
             
         }catch(error)
         {
-            return res;
+            return res2;
         }
     }
 }

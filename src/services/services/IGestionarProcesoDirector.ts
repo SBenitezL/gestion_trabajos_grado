@@ -23,9 +23,9 @@ export default interface IGestionarProcesoDirector{
      */
     consultarProceso(id:number):Promise<ProcesoDTO>;
     /**
-     * @route GET api/procesos
+     * @route GET api/procesos?usr
      */
-    consultarProcesos():Promise<ProcesoListDTO[]>;
+    consultarProcesos(usr:number):Promise<ProcesoListDTO[]>;
     /**
      * @route PATCH  /api/procesos/formatosa/:id/:prc
      * @param {number} id Id del "formato a" a enviar.
