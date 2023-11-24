@@ -95,3 +95,24 @@ begin
 end//
 
 DELIMITER ;
+
+//22/11/2023
+
+DELIMITER //
+CREATE OR REPLACE PROCEDURE verificarEvaluadores(IN ev1 decimal(12,0), IN ev2 decimal(12,0))
+BEGIN
+	select usuario.usr_codigo, usuario.usr_nombre, usuario.usr_correo
+	from usuario join usuariorol on(usuariorol.USR_CODIGO = usuario.usr_codigo)
+	where usuariorol.ROL_ID = 5 and (usuario.usr_codigo = ev1 or usuariorol.USR_CODIGO = ev2);
+END //
+DELIMITER ;
+//22/11/2023
+DELIMITER //
+DELIMITER //
+CREATE OR REPLACE PROCEDURE verificarAsignados(IN id decimal(7,3))
+BEGIN
+	SELECT usuario.usr_codigo, usuario.usr_nombre, usuario.usr_correo
+	FROM evaluarfacultad join usuario on (usuario.usr_codigo = evaluarfacultad.USR_CODIGO)
+	WHERE evaluarfacultad.PRC_ID = id;
+END //
+DELIMITER ;

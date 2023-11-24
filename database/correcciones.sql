@@ -18,3 +18,6 @@ MODIFY COLUMN arc_id INT AUTO_INCREMENT;
 //19/11/2023
 ALTER TABLE usuario
 MODIFY usuario.usr_password VARCHAR(64);
+//22/11/2023
+alter table evaluarfacultad add constraint FK_EVALUARFACULTAD_USUARIO foreign key (USR_CODIGO)
+      references usuario (USR_CODIGO) on delete restrict on update restrict;
