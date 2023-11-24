@@ -1,3 +1,4 @@
+import CredencialesDTO from '../DTO/CredencialesDTO';
 import UsuarioRolDTO from '../DTO/UsuarioRolDTO';
 export default interface IGestionUsuarios
 {
@@ -49,4 +50,10 @@ export default interface IGestionUsuarios
      * @param {string} login Nombre de usuario para el inicio de sesión
      */
     consultarUsuariosPorLogin(login:string):Promise<UsuarioRolDTO>;
+
+    /**
+     * 
+     * 
+     */
+    verificarUsuario(usr:CredencialesDTO):Promise<UsuarioRolDTO>;
 }

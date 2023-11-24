@@ -3,7 +3,7 @@ export default class FormatoAEntity
     public constructor(private _a_id: number,private _a_objetivos:string, private _a_con_entrega:string, 
         private _a_realizacion:string, private _a_recursos:string, private _a_financiacion:string, 
         private _a_per_programa:boolean, private _a_revision:Date, private _a_recibido:Date, private _a_observaciones:string,
-        private _a_no_revision:number )
+        private _a_no_revision:number, private _a_interes:string)
     {
         /*
         _a_id = 0;
@@ -95,5 +95,11 @@ export default class FormatoAEntity
     }
     public set a_observaciones(a_observaciones:string){
         this._a_observaciones = a_observaciones;
+    }
+    public get a_interes():string{
+        return this._a_interes
+    }
+    public set a_interes(interes:string){
+        this._a_interes = interes; 
     }
 }

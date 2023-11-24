@@ -1,7 +1,8 @@
 import UsuarioRolEntity from "../../models/UsuarioRolEntity";
 import UsuarioRolDTO from "../DTO/UsuarioRolDTO";
 import RolDTO from "../DTO/RolDTO";
-
+import CredencialesDTO from "../DTO/CredencialesDTO";
+import CredencialesEntity from "../../models/CredencialesEntity";
 export default class UsuarioRolMapper{
     public constructor(){
 
@@ -75,4 +76,25 @@ export default class UsuarioRolMapper{
 
         return usuario;
     }
+    ///
+    public entityToDTOC(objEntity:CredencialesEntity):CredencialesDTO{
+        const dtoC:CredencialesDTO=new CredencialesDTO(objEntity.CLAVE,objEntity.USERNAME);
+        return dtoC;
+     }
+     public dtoToEntityC(objDTO:CredencialesDTO): CredencialesEntity
+     {
+         const entity:CredencialesEntity= new CredencialesEntity(objDTO.password,objDTO.login);
+         return entity;
+     }
+     public jsonToDTOCr(json:any):CredencialesDTO
+     {   
+         const usuario = new CredencialesDTO(
+             json._clave,
+             json._username
+         );
+ 
+         return usuario;
+     }
+    
+ 
 }

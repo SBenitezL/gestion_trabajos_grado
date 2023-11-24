@@ -13,7 +13,7 @@ export default  class ProcesoMapper
             let prc = list.find((dto)=> dto.id == row.prc_id);
             if(!prc)
             {
-                list.push(new ProcesoListDTO(row.prc_id,row.prc_titulo, row.prc_tipo,[]));
+                list.push(new ProcesoListDTO(row.prc_id,row.prc_titulo, row.prc_tipo,[],row.prc_form_a));
                 prc = list[list.length-1];
             }
             prc.estudiantes.push(row.est_nombre);

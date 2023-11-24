@@ -10,6 +10,9 @@ class GestionFormatoAImpl implements IGestionarFormatoA{
         this.accesoPersistencia = new GestionFormatoARepository();
         this.mapper = new FormatoAMapper();
     }
+    async descargarFormatoA(id: number): Promise<string | null> {
+        return await this.accesoPersistencia.descargarFormatoA(id);
+    }
 
     async crearFormatoA(id:number, formatoA: FormatoADTO): Promise<FormatoADTO> {
         const formatoADTO =this.mapper.jsonToDTO(formatoA);
@@ -30,6 +33,7 @@ class GestionFormatoAImpl implements IGestionarFormatoA{
     }
     async consultarFormatoA(prcId: number): Promise<FormatoADTO> {
         const res = await this.accesoPersistencia.consultarFormatoA(prcId);
+        console.log(res);
         return this.mapper.entityToDTO(res);
     }
     

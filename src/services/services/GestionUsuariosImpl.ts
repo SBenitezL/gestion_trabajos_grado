@@ -1,9 +1,10 @@
 import UsuarioRolEntity from '../../models/UsuarioRolEntity';
 import GestionUsuariosRepository from '../../repositories/GestionUsuariosRepository';
+import CredencialesDTO from '../DTO/CredencialesDTO';
 import UsuarioRolDTO from '../DTO/UsuarioRolDTO';
 import UsuarioRolMapper from '../Maping/UserRolMapper';
 
-import enc from '../Utiles/Encriptar';
+import enc, {crearHash} from '../Utiles/Encriptar';
 
 import IGestionUsuarios from './IGestionUsuarios';
 
@@ -14,9 +15,19 @@ class GestionUsuariosImpl implements IGestionUsuarios{
         this.accesoPersistencia = new GestionUsuariosRepository();
         this.mapper = new UsuarioRolMapper();
     }
+    async verificarUsuario(usr: CredencialesDTO): Promise<UsuarioRolDTO> {
+        const dto=this.mapper.jsonToDTOCr(usr);
+        console.log("dto usr");
+        console.log(dto.login,dto.password)
+        let entity= this.mapper.dtoToEntityC(dto);
+        const res = await this.accesoPersistencia.verificarUsuario(entity);
+        console.log('a',res)
+        return this.mapper.entityToDTO(res);
+    
+    }
     async crearUsuario(usuario: UsuarioRolDTO): Promise<UsuarioRolDTO> {
         const usuarioDTO = this.mapper.jsonToDTO(usuario);
-        //usuarioDTO.password = enc.hashPassword(usuarioDTO.password);
+        usuarioDTO.password = crearHash(usuarioDTO.password);
         const usuarioEntity:UsuarioRolEntity[] = this.mapper.dtoToEntity(usuarioDTO);
         const res = await this.accesoPersistencia.crearUsuarioRol(usuarioEntity);
         return this.mapper.entityToDTO(res);     

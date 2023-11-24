@@ -3,7 +3,9 @@ import db from '../database/Database';
 import UsuarioEntity from '../models/UsuarioEntity';
 import UsuarioRolEntity from '../models/UsuarioRolEntity';
 import { query } from 'express';
-
+import CredencialesDTO from '../services/DTO/CredencialesDTO';
+import CredencialesEntity from '../models/CredencialesEntity';
+import enc, { compareHash } from '../services/Utiles/Encriptar';
 //TODO: Implementar el uso de transacciones
 export default class GestionUsuarioRepository{
     public constructor()
@@ -79,7 +81,7 @@ export default class GestionUsuarioRepository{
         }
     }
     async consultarUsuarios(): Promise<UsuarioRolEntity[]> {
-        const query1 = "select USUARIO.usr_codigo, usr_nombre, usr_login, usr_password, ROL.rol_id, rol_nombre, usr_correo from (USUARIOROL inner join USUARIO on USUARIOROL.usr_codigo = USUARIO.usr_codigo) inner join ROL on USUARIOROL.rol_id = ROL.rol_id";
+        const query1 = "select USUARIO.usr_codigo, usr_nombre, usr_login, usr_password, ROL.rol_id, lower(rol_nombre) 'rol_nombre', usr_correo from (USUARIOROL inner join USUARIO on USUARIOROL.usr_codigo = USUARIO.usr_codigo) inner join ROL on USUARIOROL.rol_id = ROL.rol_id";
         const res:UsuarioRolEntity[] = []
         try{
             const [result]:UsuarioRolEntity|any  = await db.query(query1);
@@ -143,4 +145,39 @@ export default class GestionUsuarioRepository{
         }
         return false;
     }
+    async verificarUsuario(usr: CredencialesEntity): Promise<UsuarioRolEntity[]>
+    {
+        const query = "SELECT USR_PASSWORD AS CL FROM USUARIO WHERE USR_LOGIN=? ";
+        const query3 = "select USUARIO.usr_codigo, usr_nombre, usr_login, usr_password, ROL.rol_id, rol_nombre, usr_correo from (USUARIOROL inner join USUARIO on USUARIOROL.usr_codigo = USUARIO.usr_codigo) inner join ROL on USUARIOROL.rol_id = ROL.rol_id WHERE USUARIO.USR_LOGIN=?";
+        const usuario:UsuarioRolEntity= new UsuarioRolEntity(0,"","","",0,"","");
+        const crede:CredencialesEntity= new CredencialesEntity(usr.CLAVE,usr.USERNAME);
+        const res:UsuarioRolEntity[] = []
+        try{
+
+            const [res]:any =await db.query(query,[crede.USERNAME]);
+            const pass=res[0]?.CL ||null;
+            console.log("contra",pass,crede.CLAVE);            
+            if (compareHash(crede.CLAVE,pass)) {
+                const res2:UsuarioRolEntity[] = []
+                const [result]:UsuarioRolEntity|any  = await db.query(query3, [crede.USERNAME]);
+                result.map((row:UsuarioRolEntity)=>{
+                    res2.push(new UsuarioRolEntity(row.usr_codigo,row.usr_nombre,row.usr_login,row.usr_password,row.rol_id,row.rol_nombre,row.usr_correo));})
+                return res2;
+           } else {
+             console.log('No concuerdan las contraseñas encriptadas');
+             return res;
+           }
+            
+        }catch(error)
+        {
+            return res;
+        }
+    }
 }
+/**
+ *    "select USUARIO.usr_codigo, usr_nombre, usr_login, usr_password, ROL.rol_id, rol_nombre, usr_correo
+ *  from (USUARIOROL inner join USUARIO on USUARIOROL.usr_codigo = USUARIO.usr_codigo) 
+ * inner join ROL on USUARIOROL.rol_id = ROL.rol_id 
+ * WHERE USUARIO.USR_LOGIN=? AND USUARIO.USR_PASSWORD=?";
+
+ */

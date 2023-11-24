@@ -10,11 +10,12 @@ export default class FormatoADTO{
     private _recibido:Date; 
     private _observaciones:string;
     private _no_revision:number; 
+    private _interes:string;
 
     public constructor( id: number,  objetivos:string,  con_entrega:string, 
          realizacion:string,  recursos:string,  financiacion:string, 
          per_programa:boolean,  revision:Date,  recibido:Date,  observaciones:string,
-         no_revision:number )
+         no_revision:number, interes:string )
     {
         this._id = id;
         this._objetivos = objetivos;
@@ -27,6 +28,7 @@ export default class FormatoADTO{
         this._recibido = recibido; 
         this._observaciones = observaciones;
         this._no_revision = no_revision; 
+        this._interes = interes;
     }
 
 
@@ -78,6 +80,9 @@ export default class FormatoADTO{
     public get per_programa():boolean{
         return this._per_programa;
     }
+    public get interes():string{
+        return this._interes;
+    }
     public set per_programa(per_programa:boolean){
         this._per_programa = per_programa;
     }
@@ -108,5 +113,9 @@ export default class FormatoADTO{
     }
     public set observaciones(observaciones:string){
         this._observaciones = observaciones;
+    }
+    public set interes(interes:string)
+    {
+        this._interes = interes;
     }
 }
