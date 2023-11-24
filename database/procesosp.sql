@@ -50,7 +50,7 @@ END //
 
 DELIMITER ;
 
-//13-11-2023
+--13-11-2023
 DELIMITER //
 CREATE OR REPLACE PROCEDURE  reporteEstudiantes(in id decimal(7,3))
 BEGIN
@@ -59,7 +59,7 @@ BEGIN
 	where prc_id = id;
 END//
 DELIMITER ;
-//Actualizado 21/11/2023
+--Actualizado 21/11/2023
 DELIMITER //
 CREATE OR REPLACE PROCEDURE  reporteFormatoA(in id int(11))
 BEGIN
@@ -85,7 +85,7 @@ where prc_id = id;
 END//
 DELIMITER ;
 
-//21/11/2023
+--21/11/2023
 DELIMITER //
 create or REPLACE procedure recuperarEvaluadores()
 begin
@@ -96,7 +96,7 @@ end//
 
 DELIMITER ;
 
-//22/11/2023
+--22/11/2023
 DELIMITER //
 
 CREATE PROCEDURE cambiarEstadoFormatoA(IN estudiante_id DECIMAL(12,0))
@@ -136,7 +136,7 @@ END //
 
 DELIMITER ;
 
-//22/11/2023
+--22/11/2023
 DELIMITER //
 
 CREATE PROCEDURE cambiarEstadoFormatoA(IN estudiante_id DECIMAL(12,0))
@@ -176,7 +176,7 @@ END //
 
 DELIMITER ;
 
-//22/11/2023
+--22/11/2023
 
 DELIMITER //
 CREATE OR REPLACE PROCEDURE verificarEvaluadores(IN ev1 decimal(12,0), IN ev2 decimal(12,0))
@@ -186,7 +186,7 @@ BEGIN
 	where usuariorol.ROL_ID = 5 and (usuario.usr_codigo = ev1 or usuariorol.USR_CODIGO = ev2);
 END //
 DELIMITER ;
-//22/11/2023
+--22/11/2023
 DELIMITER //
 DELIMITER //
 CREATE OR REPLACE PROCEDURE verificarAsignados(IN id decimal(7,3))
