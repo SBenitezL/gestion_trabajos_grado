@@ -31,17 +31,40 @@ export default class EvaluadorRepositoryImpl implements IEvaluadorRepository{
         return res;
     }
     async asignarEvaluador(id: number, evaluadores: EvaluadorEntity[]): Promise<EvaluadorEntity[]> {
+        console.log("asignarEvaluador()")
         const query = "insert into evaluarfacultad values(?,?)";
         const query2 = 'select usuario.usr_codigo, usuario.usr_nombre, usuario.usr_correo from usuario join evaluarfacultad on (usuario.usr_codigo = evaluarfacultad.USR_CODIGO) where evaluarfacultad.PRC_ID = ?';
+        const cancelar = "delete from evaluarfacultad where prc_id = ? and usr_codigo = ?"
+        const res:EvaluadorEntity[] = [];
         try{
-            await db.query(query,[evaluadores[0].usr_codigo, id]);
-            await db.query(query,[evaluadores[1].usr_codigo]);
-            
+            let pDelete:any;
+            let borrados = [];
+            const insert:any = []
+            const pInsert = evaluadores.map(async evaluador =>{
+                insert.push(await db.query(query, [evaluador.usr_codigo, id]));
+            });
+            console.log();
+            await Promise.all(pInsert);
+            insert.forEach((row:any) =>{
+                if(row.affectedRows == 0){
+                    pDelete = evaluadores.map(async evaluador =>{
+                            borrados.push(await db.query(cancelar, [id, evaluador.usr_codigo]));
+                        });
+                }
+            })
+            if(borrados.length > 0) await Promise.all(pDelete);
+            else{
+                const [result]:any = await db.query(query2,[id]);
+                console.log(result) 
+                result.map((row:EvaluadorEntity) =>{
+                    res.push(new EvaluadorEntity(row.usr_codigo, row.usr_nombre, row.usr_correo));
+                })
+            }
 
         }catch{
 
         }
-        throw new Error("Method not implemented.");
+        return res;
     }
     eliminarEvaluador(id: number, evaluador: number): Promise<boolean> {
         throw new Error("Method not implemented.");

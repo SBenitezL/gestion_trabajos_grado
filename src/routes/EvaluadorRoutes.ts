@@ -10,7 +10,7 @@ class EvaluadorRoutes{
     private config():void
     {
         this.router.get('/', evaluadorController.findAll);
-
+        this.router.post('/', evaluadorController.assign);
     }
 } 
 const evaluadorRoutes = new EvaluadorRoutes();
