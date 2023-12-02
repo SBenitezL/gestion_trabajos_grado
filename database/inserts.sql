@@ -20,3 +20,5 @@ INSERT INTO ROL VALUES(3, 'JEFATURA'),(4, 'CONSEJO DE FACULTAD'), (5, 'EVALUADOR
  * WHERE USR_CODIGO=?;
  */
  INSERT INTO `tipo_documento` (`TD_ID`, `TD_NOMBRE`) VALUES ('1', 'Anteproyecto');
+ //02/12/2023
+  INSERT INTO `tipo_documento` (`TD_ID`, `TD_NOMBRE`) VALUES ('2', 'ComentarioForm_A');
