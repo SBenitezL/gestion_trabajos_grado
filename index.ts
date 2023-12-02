@@ -16,7 +16,7 @@ import anteproyectoRoutes from "./src/routes/AnteproyectoRoutes";
 import prueba from "./src/repositories/report/repositories/ReporteARepository";
 import EstudianteReporte from "./src/services/DTO/Report/EstudianteReporte";
 import { crearHash, compareHash } from "./src/services/Utiles/Encriptar";
-
+import comentarioRoutes from "./src/routes/comentarioRouter";
 class Servidor{
     public app: Application;
     constructor(){
@@ -42,6 +42,7 @@ class Servidor{
         this.app.use('/api/revisiones', revisionFARoutes);
         this.app.use('/api/evaluadores', evaluadorRoutes);
         this.app.use('/api/anteproyecto', anteproyectoRoutes);
+        this.app.use('/api/comentario', comentarioRoutes);
 
     }
     //dr
