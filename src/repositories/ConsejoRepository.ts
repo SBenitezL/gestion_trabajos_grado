@@ -4,9 +4,9 @@ import RevisionAEntity from "../models/RevisionAEntity";
 export default class ConsejoRepository
 {
     async verificarUsuario(usuarioId:number):Promise<number>{
-        const query = "select * from usuariorol where usr_codigo = ? and rol_id = ? and fechafin is null";
+        const query = "select * from usuariorol where usr_codigo = ? and (rol_id = ? or rol_id = ?) and fechafin is null";
         try{
-            const [res]:any[] = await db.query(query,[usuarioId,4]);
+            const [res]:any[] = await db.query(query,[usuarioId,4,5]);
             return res.length
         }catch  
         {

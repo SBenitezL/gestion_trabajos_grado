@@ -7,5 +7,5 @@ export default interface IGestionCoordinacion extends IGestionConsejo{
      * @param usrId 
      * @param prc 
      */
-    rechazarFormatoA(usrId:number, prc:number):Promise<boolean>
+    rechazarFormatoA(usrId:number, prc:number):Promise<boolean|null>
 }
