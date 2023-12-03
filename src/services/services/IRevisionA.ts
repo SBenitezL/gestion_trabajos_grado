@@ -8,8 +8,6 @@ export default interface IRevisionA
      */
     listarProcesos(cod:number):Promise<RevisionADTO[]>;
     
-    
-    
     cambiarEstadoFormatoA(codigo:number): Promise<RevisionADTO[]>
 
 }

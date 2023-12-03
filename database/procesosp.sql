@@ -155,3 +155,23 @@ BEGIN
 END //
 
 DELIMITER ;
+
+//3/12/2023
+DELIMITER //
+
+CREATE or replace PROCEDURE ConsultarRevisionAConsejo()
+BEGIN
+    SELECT 
+        proceso.prc_id, 
+        prc_tipo, 
+        prc_titulo,
+        est_codigo, 
+        est_nombre, 
+        prc_form_a as fA_estado, 
+        a_no_revision as fA_revisiones
+    FROM proceso
+    JOIN ti_a ON proceso.A_ID = ti_a.A_ID
+    JOIN estudiante ON proceso.PRC_ID = estudiante.prc_id
+    where proceso.PRC_FORM_A = 2;
+END //
+DELIMITER ;

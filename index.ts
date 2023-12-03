@@ -12,11 +12,13 @@ import revisionFARoutes from "./src/routes/RevisionFARoutes";
 import multer from 'multer';
 import evaluadorRoutes from "./src/routes/EvaluadorRoutes"
 import anteproyectoRoutes from "./src/routes/AnteproyectoRoutes";
+import comentarioRoutes from "./src/routes/comentarioRouter";
+import consejoRoutes from "./src/routes/ConsejoRoutes";
 //TODO:Borrar
 import prueba from "./src/repositories/report/repositories/ReporteARepository";
 import EstudianteReporte from "./src/services/DTO/Report/EstudianteReporte";
 import { crearHash, compareHash } from "./src/services/Utiles/Encriptar";
-import comentarioRoutes from "./src/routes/comentarioRouter";
+
 class Servidor{
     public app: Application;
     constructor(){
@@ -43,6 +45,7 @@ class Servidor{
         this.app.use('/api/evaluadores', evaluadorRoutes);
         this.app.use('/api/anteproyecto', anteproyectoRoutes);
         this.app.use('/api/comentario', comentarioRoutes);
+        this.app.use('/api/consejo', consejoRoutes)
 
     }
     //dr

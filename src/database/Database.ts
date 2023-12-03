@@ -1,6 +1,5 @@
 import mysql from "mysql2/promise";
 import keys from "./Keys";
-
 const pool = mysql.createPool(keys.database);
 
 // Ahora puedes usar `await` en lugar de callbacks
