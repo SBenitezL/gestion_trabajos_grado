@@ -1,7 +1,6 @@
 export default class FormatoBDTO
 {
     private _id: number;
-    private _userCodigo:number;
     private _aportes:boolean; 
     private _objetivos: boolean; 
     private _metodologia: boolean; 
@@ -14,10 +13,9 @@ export default class FormatoBDTO
     private _observaciones: string;
     private _no_revisiones: number;
     private _revision: Date;
-    public constructor(id: number,userCodigo:number,aportes:boolean,objetivos:boolean,metodologia:boolean,entrega:boolean,estructura:boolean,cronograma:boolean,patrocinio:boolean,concepto:number,recibido:Date,observaciones:string,no_revisiones:number,revision:Date){
+    public constructor(id: number,aportes:boolean,objetivos:boolean,metodologia:boolean,entrega:boolean,estructura:boolean,cronograma:boolean,patrocinio:boolean,concepto:number,recibido:Date,observaciones:string,no_revisiones:number,revision:Date){
 
             this._id=id;
-            this._userCodigo=userCodigo;
             this._aportes=aportes; 
             this._objetivos=objetivos; 
             this._metodologia=metodologia; 
@@ -37,12 +35,7 @@ export default class FormatoBDTO
     public set id(id:number){
         this._id = id;
     }
-    public get userCod():number{
-        return this._userCodigo;
-    }
-    public set userCod(userCodigo:number){
-        this._userCodigo= userCodigo;
-    }
+  
     public get aportes():boolean{
         return this._aportes;
     }
