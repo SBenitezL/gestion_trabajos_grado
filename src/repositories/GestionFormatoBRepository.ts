@@ -26,8 +26,24 @@ export default class GestionFormatoBRepositoryImpl implements IGestionFormatoBRe
     consultarFormatoB(prcId: number): Promise<FormatoBEntity> {
         throw new Error("Method not implemented.");
     }
-    descargarFormatoB(id: number): Promise<string | null> {
-        throw new Error("Method not implemented.");
+    public async descargarFormatoB(id: number): Promise<string | null> {
+        const query = "SELECT ru.ARC_RUTA AS RUTA FROM ARCHIVOS ru INNER JOIN TI_B tb ON ru.B_ID = tb.B_ID INNER JOIN PROCESO pr ON pr.B_ID = tb.B_ID INNER JOIN ESTUDIANTE ES ON pr.PRC_ID = es.PRC_ID WHERE es.EST_CODIGO=?; ";
+        
+        try{
+            const [res]:any =await db.query(query,[id]);
+           const ruta=res[0]?.RUTA ||null;
+           console.log("intento",id);
+           if (ruta) {
+            console.log(ruta);
+            return ruta;
+          } else {
+            console.log('Ruta no encontrada para el ID:', id);
+            return null;
+          }
+        }catch{
+            console.log("error  ruta");
+            return null;
+        }
     }
     
 }
