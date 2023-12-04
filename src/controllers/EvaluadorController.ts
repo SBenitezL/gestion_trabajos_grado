@@ -27,6 +27,19 @@ class EvaluadorController{
         if(result != null) res.status(201).json(result);
         else res.status(406).json({error: "Fallo"});
     }
+    public list = async (req:Request,res:Response)=>{
+        const {usuarioId} = req.params
+        const result = await this.servicios.listarAnteproyectos(parseInt(usuarioId));
+        if(result)
+        {
+            if(result.length>0)
+                res.status(200).json(result);
+            else    
+                res.status(404).json({message:"No se encontraron registros"});
+        }else{
+            res.status(401).json({error:"Usuario sin acceso"});
+        }
+    }
 }
 const evaluadorController = new EvaluadorController();
 export default evaluadorController;

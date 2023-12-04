@@ -176,3 +176,20 @@ BEGIN
     where proceso.PRC_FORM_A = 2;
 END //
 DELIMITER ;
+//4/12/2023
+DELIMITER //
+
+CREATE or replace PROCEDURE ConsultarRevisionAEvaluadores(IN id DECIMAL(12,0))
+BEGIN
+    SELECT 
+        proceso.prc_id, 
+        prc_tipo, 
+        prc_titulo,
+        est_codigo, 
+        est_nombre 
+    FROM proceso
+    JOIN EVALUARFACULTAD ef ON proceso.PRC_ID= ef.PRC_ID
+    JOIN estudiante ON proceso.PRC_ID = estudiante.prc_id
+    where ef.USR_CODIGO = id;
+END //
+DELIMITER ;

@@ -1,6 +1,7 @@
 import EvaluadorEntity from "../models/EvaluadorEntity";
 import IEvaluadorRepository from "./IEvaluadorRepositoyry";
 import db from "../database/Database";
+import RevisionAEntity from "../models/RevisionAEntity";
 
 
 export default class EvaluadorRepositoryImpl implements IEvaluadorRepository{
@@ -84,6 +85,33 @@ export default class EvaluadorRepositoryImpl implements IEvaluadorRepository{
     }
     findOne(id: number): Promise<EvaluadorEntity[]> {
         throw new Error("Method not implemented.");
+    }
+
+    public async listarAnteproyectos(id:number): Promise<RevisionAEntity[]> {
+        const query = "call ConsultarRevisionAEvaluadores(?)";
+        const res:RevisionAEntity[] = []
+        try{
+            const [result]:RevisionAEntity|any = await db.query(query, [id]);
+            console.log(result);
+            result[0].map((row:RevisionAEntity)=>{
+                res.push(row);
+            })
+            console.log(result);
+        }catch(error)
+        {
+        }
+        return res;
+    }
+    async verificarUsuario(usuarioId:number):Promise<number>{
+        const query = "select * from usuariorol where usr_codigo = ? and (rol_id = ? or rol_id = ?) and fechafin is null";
+        try{
+            const [res]:any[] = await db.query(query,[usuarioId,4,5]);
+            return res.length
+        }catch  
+        {
+            console.log("error verificando usuario");
+        }
+        return 0;
     }
     
 }

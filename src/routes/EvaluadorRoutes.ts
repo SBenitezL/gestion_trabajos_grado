@@ -11,6 +11,7 @@ class EvaluadorRoutes{
     {
         this.router.get('/', evaluadorController.findAll);
         this.router.post('/', evaluadorController.assign);
+        this.router.get('/listAnteproyecto/:usuarioId',evaluadorController.list);
     }
 } 
 const evaluadorRoutes = new EvaluadorRoutes();
