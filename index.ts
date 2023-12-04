@@ -15,13 +15,14 @@ import anteproyectoRoutes from "./src/routes/AnteproyectoRoutes";
 import comentarioRoutes from "./src/routes/comentarioRouter";
 import consejoRoutes from "./src/routes/ConsejoRoutes";
 import coordinacionRoutes from "./src/routes/CoordinacionRoutes";
+import formatoBRoutes from "./src/routes/FormatoBRoutes";
+
 //TODO:Borrar
 import prueba from "./src/repositories/report/repositories/ReporteARepository";
 import EstudianteReporte from "./src/services/DTO/Report/EstudianteReporte";
 import GestionFormatoBRepositoryImpl from "./src/repositories/GestionFormatoBRepository";
 import { crearHash, compareHash } from "./src/services/Utiles/Encriptar";
 import FormatoBEntity from "./src/models/FormatoBEntity";
-
 class Servidor{
     public app: Application;
     constructor(){
@@ -50,7 +51,7 @@ class Servidor{
         this.app.use('/api/comentario', comentarioRoutes);
         this.app.use('/api/consejo', consejoRoutes);
         this.app.use('/api/coordinacion', coordinacionRoutes);
-
+        this.app.use('/api/formatoB', formatoBRoutes);
     }
     //dr
     staticFiles():void{
