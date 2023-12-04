@@ -44,7 +44,8 @@ BEGIN
         a_no_revision as fA_revisiones
     FROM proceso
     JOIN ti_a ON proceso.A_ID = ti_a.A_ID
-    JOIN estudiante ON proceso.PRC_ID = estudiante.prc_id;
+    JOIN estudiante ON proceso.PRC_ID = estudiante.prc_id
+    where proceso.PRC_FORM_A = 1;
 END //
 DELIMITER ;
 

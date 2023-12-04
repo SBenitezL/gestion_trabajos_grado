@@ -12,6 +12,7 @@ class RevisionAImpl implements IRevisionA
     }
     public async listarProcesos(codigo: number): Promise<RevisionADTO[]> {
         const entity = await this.accesoDatos.listarFormatosA();
+        console.log(entity);
         const dto:RevisionADTO[] = this.mapper.listEntityToDTO(entity);
         return dto;
     }

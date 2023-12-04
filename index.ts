@@ -14,6 +14,7 @@ import evaluadorRoutes from "./src/routes/EvaluadorRoutes"
 import anteproyectoRoutes from "./src/routes/AnteproyectoRoutes";
 import comentarioRoutes from "./src/routes/comentarioRouter";
 import consejoRoutes from "./src/routes/ConsejoRoutes";
+import coordinacionRoutes from "./src/routes/CoordinacionRoutes";
 //TODO:Borrar
 import prueba from "./src/repositories/report/repositories/ReporteARepository";
 import EstudianteReporte from "./src/services/DTO/Report/EstudianteReporte";
@@ -45,7 +46,8 @@ class Servidor{
         this.app.use('/api/evaluadores', evaluadorRoutes);
         this.app.use('/api/anteproyecto', anteproyectoRoutes);
         this.app.use('/api/comentario', comentarioRoutes);
-        this.app.use('/api/consejo', consejoRoutes)
+        this.app.use('/api/consejo', consejoRoutes);
+        this.app.use('/api/coordinacion', coordinacionRoutes);
 
     }
     //dr
@@ -61,7 +63,7 @@ class Servidor{
     }
     pruebas():void{
         console.log(crearHash('luchin123'));
-        
+
     }
     storage = multer.diskStorage({
         destination: function (req, file, cb) {

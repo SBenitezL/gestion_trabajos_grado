@@ -8,4 +8,10 @@ export default interface IGestionCoordinacion extends IGestionConsejo{
      * @param prc 
      */
     rechazarFormatoA(usrId:number, prc:number):Promise<boolean|null>
+    /**
+     * @route PATCH /api/coordinacion/formatos/a/correcciones/:prc/:usr
+     * @param usrId 
+     * @param prc 
+     */
+    aprobarFormatoACorrecciones(usrId: number, prc: number): Promise<boolean|null>
 }

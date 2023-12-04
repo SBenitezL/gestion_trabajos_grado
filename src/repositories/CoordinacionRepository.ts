@@ -11,7 +11,26 @@ export default class CoordinacionRepository{
         }
         return 0;
     }
-    async rechazarFormtoA(prc:number){
-        const query ="update proceso set prc_form_a = -1 where prc_id = ?";
+    async rechazarFormtoA(prc:number, estado:number):Promise<number>{
+        const query ="update proceso set prc_form_a = ? where prc_id = ?";
+        try
+        {
+            const [res]:any = await db.query(query, [estado,prc]);
+            return res.affectedRows;
+        }catch
+        {
+            console.log("error rechazar repository")
+        }
+        return 0
+    }
+    async mermarRevisiones(prc:number):Promise<number>{
+        const query = "update ti_a set A_NO_REVISION = A_NO_REVISION -1 where A_ID = (select A_ID from proceso where prc_id = ?)";
+        try{
+            const [res]:any = await db.query(query, [prc]);
+            return res.affectedRows
+        }catch{
+            console.log("Error mermando no revisión")            
+        }
+        return 0
     }
 }
