@@ -27,14 +27,13 @@ export default class GestionAnteproyectoRepository
     }
     public async  cargarAnteproyecto(id: number,ruta:string,nombre:string):Promise<boolean>{
         const query="INSERT INTO ANEXOS (TD_ID,PRC_ID,ANX_RECIBIDO,ANX_SRC) VALUES(1,?,?,?);";
-        const query2="SELECT PRC_ID as PRC FROM PROCESO WHERE USR_CODIGO=?;";
+        const query2="SELECT * FROM PROCESO WHERE PRC_ID=?;";
         try{
               console.log("id de carga",id);
               const [res]:any =await db.query(query2,[id]);
-              const proceso=res[0]?.PRC ||null;
-              console.log("intento cargar",proceso);
-              if (proceso !=0) {
-                const [res2]:any =await db.query(query,[proceso,new Date(),ruta+nombre]);
+              
+              if (res.length == 1) {
+                const [res2]:any =await db.query(query,[id,new Date(),ruta+nombre]);
                 return true;
             } else {
               console.log('No se encontro el proceso');
