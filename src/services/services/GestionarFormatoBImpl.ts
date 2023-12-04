@@ -29,8 +29,8 @@ export  class GestionarFormatoBImpl implements IGestionarFormatoB{
     consultarFormatoB(prcId: number): Promise<FormatoBDTO> {
         throw new Error("Method not implemented.");
     }
-    descargarFormatoB(id: number): Promise<string | null> {
-        throw new Error("Method not implemented.");
+    async descargarFormatoB(id: number): Promise<string | null> {
+        return await this.datos.descargarFormatoB(id);
     }
     private async verificarUsuario(usr:number):Promise<boolean>
     {
