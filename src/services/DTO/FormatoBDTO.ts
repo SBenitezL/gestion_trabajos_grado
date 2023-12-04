@@ -1,19 +1,19 @@
 export default class FormatoBDTO
 {
     private _id: number;
-    private _aportes:boolean; 
-    private _objetivos: boolean; 
-    private _metodologia: boolean; 
-    private _entrega: boolean; 
-    private _estructura: boolean; 
-    private _cronograma: boolean; 
-    private _patrocinio: boolean;
+    private _aportes:number; 
+    private _objetivos: number; 
+    private _metodologia: number; 
+    private _entrega: number; 
+    private _estructura: number; 
+    private _cronograma: number; 
+    private _patrocinio: number;
     private _concepto: number; 
     private _recibido: Date;
     private _observaciones: string;
     private _no_revisiones: number;
     private _revision: Date;
-    public constructor(id: number,aportes:boolean,objetivos:boolean,metodologia:boolean,entrega:boolean,estructura:boolean,cronograma:boolean,patrocinio:boolean,concepto:number,recibido:Date,observaciones:string,no_revisiones:number,revision:Date){
+    public constructor(id: number,aportes:number,objetivos:number,metodologia:number,entrega:number,estructura:number,cronograma:number,patrocinio:number,concepto:number,recibido:Date,observaciones:string,no_revisiones:number,revision:Date){
 
             this._id=id;
             this._aportes=aportes; 
@@ -36,48 +36,48 @@ export default class FormatoBDTO
         this._id = id;
     }
   
-    public get aportes():boolean{
+    public get aportes():number{
         return this._aportes;
     }
    
-    public set aportes(aportes:boolean){
+    public set aportes(aportes:number){
         this._aportes = aportes;
     }
-    public get objetivos(): boolean {
+    public get objetivos(): number {
         return this._objetivos;
     }
-    public set objetivos(value: boolean) {
+    public set objetivos(value: number) {
         this._objetivos = value;
     }
-    public get metodologia(): boolean {
+    public get metodologia(): number {
         return this._metodologia;
     }
-    public set metodologia(value: boolean) {
+    public set metodologia(value: number) {
         this._metodologia = value;
     }
-    public get entrega(): boolean {
+    public get entrega(): number {
         return this._entrega;
     }
-    public set entrega(value: boolean) {
+    public set entrega(value: number) {
         this._entrega = value;
     }
 
-    public get estructura(): boolean {
+    public get estructura(): number {
         return this._estructura;
     }
-    public set estructura(value: boolean) {
+    public set estructura(value: number) {
         this._estructura = value;
     }
-    public get cronograma(): boolean {
+    public get cronograma(): number {
         return this._cronograma;
     }
-    public set cronograma(value: boolean) {
+    public set cronograma(value: number) {
         this._cronograma = value;
     }
-    public get patrocinio(): boolean {
+    public get patrocinio(): number {
         return this._patrocinio;
     }
-    public set patrocinio(value: boolean) {
+    public set patrocinio(value: number) {
         this._patrocinio = value;
     }
     public get concepto(): number {

@@ -18,7 +18,9 @@ import coordinacionRoutes from "./src/routes/CoordinacionRoutes";
 //TODO:Borrar
 import prueba from "./src/repositories/report/repositories/ReporteARepository";
 import EstudianteReporte from "./src/services/DTO/Report/EstudianteReporte";
+import GestionFormatoBRepositoryImpl from "./src/repositories/GestionFormatoBRepository";
 import { crearHash, compareHash } from "./src/services/Utiles/Encriptar";
+import FormatoBEntity from "./src/models/FormatoBEntity";
 
 class Servidor{
     public app: Application;
@@ -63,6 +65,8 @@ class Servidor{
     }
     pruebas():void{
         console.log(crearHash('luchin123'));
+        const test = new GestionFormatoBRepositoryImpl();
+        test.crearFormatoB(2023.001,new FormatoBEntity(1,1,1,1,1,1,1,1,1,new Date(),"cositas",1,new Date()))
 
     }
     storage = multer.diskStorage({
