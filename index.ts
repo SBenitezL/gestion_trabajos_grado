@@ -64,9 +64,7 @@ class Servidor{
         });
     }
     pruebas():void{
-        console.log(crearHash('luchin123'));
-        const test = new GestionFormatoBRepositoryImpl();
-        test.crearFormatoB(2023.001,new FormatoBEntity(1,1,1,1,1,1,1,1,1,new Date(),"cositas",1,new Date()))
+        console.log(crearHash('luchin123'))
 
     }
     storage = multer.diskStorage({
