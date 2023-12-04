@@ -1,4 +1,3 @@
-import { BlobOptions } from "buffer";
 
 export default class FormatoBEntity
 {
