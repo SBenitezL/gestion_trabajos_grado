@@ -13,8 +13,12 @@ export  class GestionarFormatoBImpl implements IGestionarFormatoB{
         this.mapper = new FormatoBMapper();
         this.datos = new GestionFormatoBRepositoryImpl();
     }
-    crearFormatoB(id: number, formatoB: FormatoBDTO): Promise<FormatoBDTO> {
-        throw new Error("Method not implemented.");
+    async crearFormatoB(id: number, formatoB: FormatoBDTO, usr:number): Promise<FormatoBDTO|null> {
+        if(!this.verificarUsuario(usr))return null;
+        const petDTO = this.mapper.dtoToEntity(formatoB);
+        this.datos.crearFormatoB(id, petDTO);
+        const resEntity = await this.datos.crearFormatoB(id, petDTO);
+        return this.mapper.entityToDTO(resEntity);
     }
     actualizatFormatoB(id: number, formatoB: FormatoBDTO): Promise<FormatoBDTO> {
         throw new Error("Method not implemented.");
@@ -27,6 +31,10 @@ export  class GestionarFormatoBImpl implements IGestionarFormatoB{
     }
     async descargarFormatoB(id: number): Promise<string | null> {
         return await this.datos.descargarFormatoB(id);
+    }
+    private async verificarUsuario(usr:number):Promise<boolean>
+    {
+        return false;
     }
     
 }

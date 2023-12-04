@@ -11,17 +11,20 @@ class FormatoBController{
     public create = async (req:Request, res:Response)=>
     {
         const id = parseFloat(req.query.id as string);
+        const usr = parseInt(req.query.usr as string);
         //console.log(req.body);
-        const result = await this.formatoBService.crearFormatoB(id, req.body);
+        const result = await this.formatoBService.crearFormatoB(id, req.body, usr);
         //console.log(result.objetivos);
-        if(result.id != 0)
+        if(result)
         {
-            res.status(201).json(result);
-        }
-        else{
-            res.status(400).json(result);
-        }
-       
+            if(result.id != 0)
+            {
+                res.status(201).json(result);
+            }
+            else{
+                res.status(400).json(result);
+            }
+        }else res.status(401).json({error:"Usuario no autorizado."})
     }
     public update =  async (req:Request, res:Response)=>
     {

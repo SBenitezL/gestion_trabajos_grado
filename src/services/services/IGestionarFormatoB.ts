@@ -1,7 +1,7 @@
 import FormatoBDTO from "../DTO/FormatoBDTO";
 export default interface IGestionarFormatoB
 {
-    crearFormatoB(id:number,formatoB:FormatoBDTO):Promise<FormatoBDTO>;
+    crearFormatoB(id:number,formatoB:FormatoBDTO, usr:number):Promise<FormatoBDTO|null>;
     /**
      * @route PUT api/formatos/b/:id
      * @param id 
