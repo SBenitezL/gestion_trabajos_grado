@@ -3,18 +3,18 @@ export default interface IGestionarFormatoB
 {
     crearFormatoB(id:number,formatoB:FormatoBDTO):Promise<FormatoBDTO>;
     /**
-     * @route PUT api/formatosa/:id
+     * @route PUT api/formatos/b/:id
      * @param id 
      * @param formatoA 
      */
     actualizatFormatoB(id:number, formatoB:FormatoBDTO):Promise<FormatoBDTO>;
     /**
-     * @route DELETE api/formatosa/:id
+     * @route DELETE api/formatos/b/:id
      * @param id 
      */
     eliminarFormatoB(id:number):Promise<boolean>;
     /**
-     * @route GET api/formatoA/prcId
+     * @route GET api/formatos/b/:prcId
      * @param prcId 
      */
     consultarFormatoB(prcId:number):Promise<FormatoBDTO>;

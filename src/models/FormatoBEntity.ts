@@ -4,7 +4,6 @@ export default class FormatoBEntity
 {
     public constructor( 
         public B_ID:number,
-        public USR_CODIGO:number,
         public B_APORTES:boolean,
         public B_OBJETIVOS:boolean,
         public B_METODOLOGIA:boolean,

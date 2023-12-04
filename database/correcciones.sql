@@ -24,3 +24,5 @@ MODIFY COLUMN ANX_ID INT AUTO_INCREMENT;
 //22/11/2023
 alter table evaluarfacultad add constraint FK_EVALUARFACULTAD_USUARIO foreign key (USR_CODIGO)
       references usuario (USR_CODIGO) on delete restrict on update restrict;
+//3/12/2023
+ALTER TABLE ti_b DROP USR_CODIGO;
