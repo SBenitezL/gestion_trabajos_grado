@@ -38,7 +38,7 @@ class AnteproyectoController{
         const {id}=req.params;
         const ruta_arch=archivo?.path;
         const nombre_arch=archivo?.filename;
-        const result = await this.anteproyectoService.cargarAnteproyecto(parseInt(id),ruta_arch,nombre_arch); 
+        const result = await this.anteproyectoService.cargarAnteproyecto(parseFloat(id),ruta_arch,nombre_arch); 
 
         if( result )
         {
