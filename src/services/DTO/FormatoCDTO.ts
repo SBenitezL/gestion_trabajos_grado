@@ -1,14 +1,14 @@
 export default class FormatoBDTO
 {
-    private id: number;
-    private desarrollo:string; 
-    private estructura: number; 
-    private con_comite: number; 
-    private con_depto: number; 
-    private recibido: Date;
-    private observaciones: string;
-    private no_revisiones: number;
-    private revision: Date;
+    private id!: number;
+    private desarrollo!:string; 
+    private estructura!: number; 
+    private con_comite!: number; 
+    private con_depto!: number; 
+    private recibido!: Date;
+    private observaciones!: string;
+    private no_revisiones!: number;
+    private revision!: Date;
     public constructor(id: number,desarrollo:string,estructura:number,
         con_comite:number,con_depto:number,recibido:Date,
         observaciones:string,no_revisiones:number,revision:Date){
