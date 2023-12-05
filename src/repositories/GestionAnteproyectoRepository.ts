@@ -33,7 +33,7 @@ export default class GestionAnteproyectoRepository
               const [res]:any =await db.query(query2,[id]);
               
               if (res.length == 1) {
-                const [res2]:any =await db.query(query,[id,new Date(),ruta+nombre]);
+                const [res2]:any =await db.query(query,[id,new Date(),ruta]);
                 return true;
             } else {
               console.log('No se encontro el proceso');
