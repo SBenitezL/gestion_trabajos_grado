@@ -3,7 +3,7 @@ import FormatoCEntity from "../../models/FormatoCEntity";
 export default class FormatoCMapper
 {
     public entityToDTO(objEntity:FormatoCEntity):FormatoCDTO{
-        return new FormatoCDTO(objEntity.C_ID,objEntity.C_DESARROLLO,objEntity.C_ESTRUCTURA,objEntity.C_CON_COMITE,objEntity.C_CON_DEPTO,objEntity.C_RECIBIDO,objEntity.C_OBSERVACIONES,objEntity.C_NO_REVISIONES,objEntity.C_REVISION);
+        return new FormatoCDTO(objEntity.c_ID,objEntity.C_DESARROLLO,objEntity.C_ESTRUCTURA,objEntity.C_CON_COMITE,objEntity.C_CON_DEPTO,objEntity.C_RECIBIDO,objEntity.C_OBSERVACIONES,objEntity.C_NO_REVISIONES,objEntity.C_REVISION);
     }
     public dtoToEntity(objDTO:FormatoCDTO): FormatoCEntity
     {

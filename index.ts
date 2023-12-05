@@ -24,6 +24,7 @@ import EstudianteReporte from "./src/services/DTO/Report/EstudianteReporte";
 import GestionFormatoBRepositoryImpl from "./src/repositories/GestionFormatoBRepository";
 import { crearHash, compareHash } from "./src/services/Utiles/Encriptar";
 import FormatoBEntity from "./src/models/FormatoBEntity";
+import reporte from "./src/repositories/report/repositories/ReporteARepository";
 class Servidor{
     public app: Application;
     constructor(){
@@ -66,8 +67,10 @@ class Servidor{
             console.log('Servidor en puerto', this.app.get('port'));
         });
     }
-    pruebas():void{
+    async pruebas():Promise<void>{
         console.log(crearHash('luchin123'))
+        console.log( await reporte.consultarFormatoC(7));
+        
 
     }
     storage = multer.diskStorage({

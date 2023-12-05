@@ -139,7 +139,7 @@ async function llenarFormatoB(pdfDoc:PDFDocument) {
 }
 async function llenarFormatoC(pdfDoc:PDFDocument) {
     const page = pdfDoc.addPage();
-    await addEncabezadoTextB(page, pdfDoc);
+    await addEncabezadoTextC(page, pdfDoc);
     let content = `TITULO: ${datosC.proceso.titulo}`
     await addPageContent(content,page,pdfDoc);
     let i = 1;

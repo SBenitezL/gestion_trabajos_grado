@@ -21,7 +21,7 @@ export default class GestionFormatoCRepositoryImpl implements IGestionFormatoCRe
         {
             console.log("errorcito")
         }
-        formatoC.C_ID = -1;
+        formatoC.c_ID = -1;
         return formatoC;
         
         

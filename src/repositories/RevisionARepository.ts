@@ -9,7 +9,7 @@ class RevisionARepository implements IRevisionARepository
     }   
     //pendiente
     public async listarFormatosA(): Promise<RevisionAEntity[]> {
-        const query = "call ConsultarRevisionA()";
+        const query = "call ConsultarRevisionProcesos()";
         const res:RevisionAEntity[] = []
         try{
             const [result]:RevisionAEntity|any = await db.query(query);

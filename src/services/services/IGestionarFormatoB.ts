@@ -1,5 +1,9 @@
 import FormatoBDTO from "../DTO/FormatoBDTO";
-export default interface IGestionarFormatoB
+export default interface 
+
+
+
+IGestionarFormatoB
 {
     crearFormatoB(id:number,formatoB:FormatoBDTO, usr:number):Promise<FormatoBDTO|null>;
     /**
