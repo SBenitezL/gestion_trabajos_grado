@@ -1,3 +1,5 @@
+import RevisionADTO from "../DTO/RevisionADTO";
+
 export default interface IGestionarAnteproyecto
 {
     
@@ -11,4 +13,7 @@ export default interface IGestionarAnteproyecto
     //falta upload
 
     cargarAnteproyecto(id:number,ruta:string,nombre:string):Promise<boolean>;
+
+
+
 }

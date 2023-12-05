@@ -9,6 +9,7 @@ class GestionAnteproyectoImpl implements IGestionarAnteproyecto{
         //todo
         this.accesoPersistencia = new GestionAnteproyectoRepository();
     }
+    
     async cargarAnteproyecto(id: number,ruta:string,nombre:string):Promise<boolean> {
         return await this.accesoPersistencia.cargarAnteproyecto(id,ruta,nombre);
     }
@@ -16,7 +17,7 @@ class GestionAnteproyectoImpl implements IGestionarAnteproyecto{
         return await this.accesoPersistencia.descargarAnteproyecto(id);
     }
     
-    
+  
 }
 const gestionAnteproyectoImpl = new GestionAnteproyectoImpl();
 export default gestionAnteproyectoImpl;

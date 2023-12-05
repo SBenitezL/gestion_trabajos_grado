@@ -1,4 +1,5 @@
 import EvaluadorEntity from "../models/EvaluadorEntity";
+import RevisionAEntity from "../models/RevisionAEntity";
 
 export default interface IEvaluadorRepository{
     findAll():Promise<EvaluadorEntity[]>;
@@ -7,4 +8,6 @@ export default interface IEvaluadorRepository{
     eliminarEvaluador(id:number, evaluador:number):Promise<boolean>;
     verificarEvaluador(ev1:number, ev2:number):Promise<EvaluadorEntity[]>;
     verificarAsignados(prc:number):Promise<EvaluadorEntity[]>;
+    listarAnteproyectos(id:number): Promise<RevisionAEntity[]>;
+    verificarUsuario(usuarioId:number):Promise<number>;
 }

@@ -3,7 +3,7 @@ export default interface IGestionFormatoBRepository
 {
     crearFormatoB(id:number,formatoB:FormatoBEntity, usr:number):Promise<FormatoBEntity>;
    
-    actualizatFormatoB(id:number, formatoB:FormatoBEntity):Promise<FormatoBEntity>;
+    actualizarFormatoB(id:number, formatoB:FormatoBEntity):Promise<FormatoBEntity>;
    
     eliminarFormatoB(id:number):Promise<boolean>;
     

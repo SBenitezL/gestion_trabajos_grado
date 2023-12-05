@@ -7,12 +7,11 @@ export default class GestionComentariosTIARepository
     }
 
     public async descargarComentariosFormA(id:number):Promise<string | null>{
-        const query = "SELECT a.ANX_SRC AS RUTA FROM ANEXOS a INNER JOIN PROCESO p ON a.PRC_ID = p.PRC_ID INNER JOIN ESTUDIANTE e ON e.PRC_ID = p.PRC_ID WHERE e.EST_CODIGO=? AND a.TD_ID=2";
+        const query = "SELECT a.ANX_SRC AS RUTA FROM ANEXOS a INNER JOIN PROCESO p ON a.PRC_ID = p.PRC_ID INNER JOIN ESTUDIANTE e ON e.PRC_ID = p.PRC_ID WHERE e.EST_CODIGO=? AND a.TD_ID=2 ORDER BY a.ANX_RECIBIDO DESC LIMIT 1;";
         
         try{
             const [res]:any =await db.query(query,[id]);
            const ruta=res[0]?.RUTA ||null;
-           console.log("intento descargar",id);
            if (ruta) {
             console.log(ruta);
             return ruta;
@@ -29,7 +28,7 @@ export default class GestionComentariosTIARepository
         const query="INSERT INTO ANEXOS (TD_ID,PRC_ID,ANX_RECIBIDO,ANX_SRC) VALUES(2,?,?,?);";
         try{
               console.log("id de carga",id);
-                const [res2]:any =await db.query(query,[id,new Date(),ruta+nombre]);
+                const [res2]:any =await db.query(query,[id,new Date(),ruta]);
                 return true;
         }catch{
             console.log("error carga de archivos");
