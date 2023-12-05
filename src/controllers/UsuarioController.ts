@@ -93,7 +93,6 @@ class UsuarioController{
     public verify =  async (req:Request, res:Response)=>
     {
         const credencial:CredencialesDTO=req.body;
-        console.log("controller:",credencial)
         const result = await this.usuarioRolService.verificarUsuario(credencial);
         console.log('controller',result);
         if(result.id != 0)

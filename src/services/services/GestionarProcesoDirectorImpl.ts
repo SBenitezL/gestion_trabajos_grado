@@ -27,7 +27,7 @@ class GestionarProcesoDirector implements IGestionarProcesoDirector
         const formatoA = await this.formato.consultarFormatoA(id);
         const dto = this.fMapper.entityToDTO(formatoA);
         console.log(dto.no_revision);
-        if(dto.no_revision >= 3) return false;
+        if(dto.no_revision >= 2) return false;
         const res = await this.reporte.recuperarReporte(id, prc);
         const filePath = path.join('pdf',`${res.tipo}`,`${ res.proceso.id}_${res.formato.revision}.pdf`);
         createPDFFA(filePath, res);
@@ -66,8 +66,8 @@ class GestionarProcesoDirector implements IGestionarProcesoDirector
          return this.mapper.entityToDTO(res);
 
     }
-    public async consultarProcesos(): Promise<ProcesoListDTO[]> {
-       const res = await this.accesoPersistencia.consultarProcesos();
+    public async consultarProcesos(usr:number): Promise<ProcesoListDTO[]> {
+       const res = await this.accesoPersistencia.consultarProcesos(usr);
         return this.mapper.listEntityToDTO(res);
     }
     private verificarPractica(proceso:ProcesoDTO):boolean

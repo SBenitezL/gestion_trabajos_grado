@@ -3,6 +3,7 @@ insert into usuario values (104619021331,"santiago benitez",'sbenitez', 'prueba'
 insert into usuariorol values (104619021331,2,sysdate,null);
 INSERT INTO `estudiante` (`EST_CODIGO`, `PRC_ID`, `EST_NOMBRE`, `EST_CORREO`) VALUES ('1', null, 'Santiago', 'sbenitez@unicauca.edu.co');
 INSERT INTO ROL VALUES(3, 'JEFATURA'),(4, 'CONSEJO DE FACULTAD'), (5, 'EVALUADOR');
+INSERT INTO ROL VALUES(6, 'COORDINACIÓN');
 /**
  * SELECT a.ANX_SRC AS RUTA
  * FROM ANEXOS a INNER JOIN PROCESO p
@@ -20,5 +21,5 @@ INSERT INTO ROL VALUES(3, 'JEFATURA'),(4, 'CONSEJO DE FACULTAD'), (5, 'EVALUADOR
  * WHERE USR_CODIGO=?;
  */
  INSERT INTO `tipo_documento` (`TD_ID`, `TD_NOMBRE`) VALUES ('1', 'Anteproyecto');
-
- -- DONE
+ //02/12/2023
+  INSERT INTO `tipo_documento` (`TD_ID`, `TD_NOMBRE`) VALUES ('2', 'ComentarioForm_A');

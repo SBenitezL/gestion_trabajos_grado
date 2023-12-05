@@ -101,8 +101,7 @@ export default class GestionFormatoARepository
         }catch{
             return false;
         }
-    }
-    
+    }   
     public async actualizarRuta(id:number, ruta:string):Promise<void>{
         const query = "update archivos set arc_ruta = ?, arc_recibido = ? where a_id = ?";
         try{
@@ -111,7 +110,6 @@ export default class GestionFormatoARepository
             console.log("error actualizar ruta");
         }
     }
-
     public async descargarFormatoA(id:number):Promise<string | null>{
         const query = "SELECT ru.ARC_RUTA AS RUTA FROM ARCHIVOS ru INNER JOIN TI_A ta ON ru.A_ID = ta.A_ID INNER JOIN PROCESO pr ON pr.A_ID = ta.A_ID INNER JOIN ESTUDIANTE ES ON pr.PRC_ID = es.PRC_ID WHERE es.EST_CODIGO=?; ";
         

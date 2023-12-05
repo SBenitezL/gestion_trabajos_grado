@@ -24,5 +24,30 @@ MODIFY COLUMN ANX_ID INT AUTO_INCREMENT;
 --22/11/2023
 alter table evaluarfacultad add constraint FK_EVALUARFACULTAD_USUARIO foreign key (USR_CODIGO)
       references usuario (USR_CODIGO) on delete restrict on update restrict;
+//3/12/2023
+ALTER TABLE ti_b DROP USR_CODIGO;
+alter TABLE ti_b MODIFY COLUMN B_ID int(11) AUTO_INCREMENT;
+ALTER TABLE ti_b
+MODIFY COLUMN B_APORTES tinyint null,
+MODIFY COLUMN B_OBJETIVOS tinyint null,
+MODIFY COLUMN B_METODOLOGIA tinyint null,
+MODIFY COLUMN B_ENTREGA tinyint null,
+MODIFY COLUMN B_ESTRUCTURA tinyint null,
+MODIFY COLUMN B_CRONOGRAMA tinyint null,
+MODIFY COLUMN B_PATROCINIO tinyint null,
+MODIFY COLUMN B_CONCEPTO tinyint null,
+MODIFY COLUMN B_RECIBIDO date null,
+MODIFY COLUMN B_OBSERVACIONES text null,
+MODIFY COLUMN B_NO_REVISIONES int null,
+MODIFY COLUMN B_REVISION date null;
 
---DONE
+CREATE TABLE b_proceso (
+    b_id INT not null,
+    prc_id DECIMAL(7,3) not null,
+    b_prc_estado INT null,
+    usr_codigo decimal(12,0) not null,
+    PRIMARY KEY (b_id, prc_id),
+    FOREIGN KEY (prc_id) REFERENCES proceso(prc_id),
+    FOREIGN KEY (b_id) REFERENCES ti_b(b_id),
+    FOREIGN KEY (usr_codigo) REFERENCES usuario(usr_codigo)
+);

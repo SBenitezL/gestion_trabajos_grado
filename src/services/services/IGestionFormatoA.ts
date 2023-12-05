@@ -1,4 +1,5 @@
 import FormatoADTO from "../DTO/FormatoADTO"
+import RevisionADTO from "../DTO/RevisionADTO";
 export default interface IGestionarFormatoA
 {
     /**

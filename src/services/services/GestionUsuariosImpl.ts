@@ -17,11 +17,8 @@ class GestionUsuariosImpl implements IGestionUsuarios{
     }
     async verificarUsuario(usr: CredencialesDTO): Promise<UsuarioRolDTO> {
         const dto=this.mapper.jsonToDTOCr(usr);
-        console.log("dto usr");
-        console.log(dto.login,dto.password)
         let entity= this.mapper.dtoToEntityC(dto);
         const res = await this.accesoPersistencia.verificarUsuario(entity);
-        console.log('a',res)
         return this.mapper.entityToDTO(res);
     
     }

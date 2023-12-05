@@ -10,7 +10,7 @@ class GestionProcesoRepository implements IGestProcesoDirectorRpstr{
 
     }
     public async enviarFormatoA(id: number): Promise<boolean> {
-        const query = "update proceso set prc_form_a = 1 where a_id = ?"
+        const query = "update proceso set prc_form_a = 1 where a_id = ? and prc_form_a < 1"
         const query2 = "update ti_a set A_revision = CURRENT_DATE, A_NO_REVISION = A_NO_REVISION + 1 where a_id = ?";
         try{
             const [result]:any = await db.query(query2,[id]);
@@ -86,13 +86,13 @@ class GestionProcesoRepository implements IGestProcesoDirectorRpstr{
            throw error; 
        }
     }
-    public async consultarProcesos():Promise<ProcesoListEntity[]>
+    public async consultarProcesos(usr:number):Promise<ProcesoListEntity[]>
     {
        // const query = "SELECT p.prc_titulo, p.prc_tipo, e.est_nombre FROM proceso p INNER JOIN estudiante e ON p.PRC_ID=e.PRC_ID WHERE p.prc_id =?;";
-       const query ="SELECT proceso.prc_id, prc_titulo, prc_tipo, est_nombre,proceso.prc_form_a FROM proceso INNER JOIN estudiante ON proceso.PRC_ID=estudiante.PRC_ID ORDER BY est_nombre"; 
+       const query ="SELECT proceso.prc_id, prc_titulo, prc_tipo, est_nombre,proceso.prc_form_a FROM proceso INNER JOIN estudiante ON proceso.PRC_ID=estudiante.PRC_ID where proceso.usr_codigo = ? ORDER BY est_nombre"; 
        const res: ProcesoListEntity[]=[];
         try{
-            const [result]:any  = await db.query(query);
+            const [result]:any  = await db.query(query, [usr]);
             result.map((row:ProcesoListEntity)=>{
                 console.log("repositoy;",row);
                 res.push(row);})

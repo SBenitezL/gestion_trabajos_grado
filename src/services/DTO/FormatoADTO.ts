@@ -12,7 +12,7 @@ export default class FormatoADTO{
     private _no_revision:number; 
     private _interes:string;
 
-    public constructor( id: number,  objetivos:string,  con_entrega:string, 
+    public constructor( id: number,  objetivos:string,  con_entrega:string,
          realizacion:string,  recursos:string,  financiacion:string, 
          per_programa:boolean,  revision:Date,  recibido:Date,  observaciones:string,
          no_revision:number, interes:string )

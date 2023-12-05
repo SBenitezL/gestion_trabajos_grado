@@ -1,23 +1,32 @@
 import EvaluadorRepositoryImpl from "../../repositories/EvaluadorRepositoryImpl";
 import IEvaluadorRepository from "../../repositories/IEvaluadorRepositoyry";
 import EvaluadorDTO from "../DTO/EvaluadorDTO";
+import RevisionADTO from "../DTO/RevisionADTO";
 import EvaluadorMapper from "../Maping/EvaluadorMapper";
 import IAsignarEvaluadores from "./IAsignarEvaluadores";
 import IEvaluadores from "./IEvaluadores";
+import RevisionAMapper from "../Maping/RevisionAMapper";
 
 export default class EvaluadorImpl implements IEvaluadores,IAsignarEvaluadores{
     private mapper:EvaluadorMapper;
-    private datos:IEvaluadorRepository
+    private datos:IEvaluadorRepository;
+    private revMapper:RevisionAMapper;
     constructor()
     {
         this.mapper = new EvaluadorMapper();
         this.datos = new EvaluadorRepositoryImpl();
+        this.revMapper = new RevisionAMapper();
     }
+    async listarAnteproyectos(id: number): Promise<RevisionADTO[] | null> {
+        if(! await this.comprobarUsuario(id)) return null;
+        const entity = await this.datos.listarAnteproyectos(id);
+        return this.revMapper.listEntityToDTO(entity)    }
     
     async asignarEvaluador(id: number, evaluadores: EvaluadorDTO[]): Promise<EvaluadorDTO[]|null> {
+        const entity = this.mapper.dtosToEntities(evaluadores)
         if(! await this.comprobarReglas(id, evaluadores))return null;
-        
-        throw new Error("Method not implemented.");
+        const res = await this.datos.asignarEvaluador(id, entity);
+        return this.mapper.entitiesToDTOS(res);
     }
     eliminarEvaluador(id: number, evaluador: number): Promise<boolean> {
         throw new Error("Method not implemented.");
@@ -30,7 +39,7 @@ export default class EvaluadorImpl implements IEvaluadores,IAsignarEvaluadores{
     }
     private async verificarAsignados(prc:number, eva:number):Promise<boolean>{
         const res = await this.datos.verificarAsignados(prc);
-        return res.length + eva < 2
+        return res.length + eva <= 2
     }
     private async comprobarReglas(prc:number, evaluadores:EvaluadorDTO[]):Promise<boolean>
     {
@@ -41,4 +50,7 @@ export default class EvaluadorImpl implements IEvaluadores,IAsignarEvaluadores{
     async consultarEvaluadores(): Promise<EvaluadorDTO[]> {
         return this.mapper.entitiesToDTOS(await this.datos.findAll())
     } 
+    private async comprobarUsuario(usuarioId:number):Promise<boolean>{
+        return await this.datos.verificarUsuario(usuarioId) > 0;
+    }
 }

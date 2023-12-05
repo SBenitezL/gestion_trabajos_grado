@@ -9,7 +9,7 @@ class RevisionFARoutes
     }    
     config():void{
         this.router.get('/:cod',revisionAController.list);
-        this.router.get('/state/:cod',revisionAController.changeState);
+        this.router.patch('/state/:cod',revisionAController.changeState);
     }
 }
 const revisionFARoutes = new RevisionFARoutes();
