@@ -28,7 +28,7 @@ export default class GestionFormatoBRepositoryImpl implements IGestionFormatoBRe
         const query2 = "INSERT INTO b_proceso (b_id, prc_id, b_prc_estado, usr_codigo)values (?,?,?,?)";
         const query3 = "select * from ti_b where b_id = ?";
         try{
-            const [resInsert]:any = await db.query(query, [formatoB.B_APORTES,formatoB.B_OBJETIVOS,formatoB.B_METODOLOGIA, formatoB.B_ENTREGA, formatoB.B_ESTRUCTURA, formatoB.B_CRONOGRAMA, formatoB.B_PATROCINIO,formatoB.B_CONCEPTO, formatoB.B_RECIBIDO, formatoB.B_OBSERVACIONES, formatoB.B_NO_REVISIONES, formatoB.B_REVISION]);
+            const [resInsert]:any = await db.query(query, [formatoB.B_APORTES,formatoB.B_OBJETIVOS,formatoB.B_METODOLOGIA, formatoB.B_ENTREGA, formatoB.B_ESTRUCTURA, formatoB.B_CRONOGRAMA, formatoB.B_PATROCINIO,formatoB.B_CONCEPTO, new Date(), formatoB.B_OBSERVACIONES, formatoB.B_NO_REVISIONES, new Date()]);
             console.log(resInsert);
             console.log(resInsert.insertId); 
             console.log("pasa")
@@ -45,11 +45,11 @@ export default class GestionFormatoBRepositoryImpl implements IGestionFormatoBRe
         formatoB.B_ID = -1;
         return formatoB;
     }
-    async actualizatFormatoB(id: number, formatoB: FormatoBEntity): Promise<FormatoBEntity> {
+    async actualizarFormatoB(id: number, formatoB: FormatoBEntity): Promise<FormatoBEntity> {
         const query = "update ti_b set  UPDATE tu_tabla SET aportes = ?, objetivos = ?,metodologia = ?,entrega = ?,estructura = ?,cronograma = ?, patrocinio = ?, concepto = ?, recibido = ?, observaciones = ? WHERE id = ?";
         const query2 = "select * from ti_b where b_id = ?";
         try{
-            const [update]:any = await db.query(query, [formatoB.B_APORTES,formatoB.B_OBJETIVOS, formatoB.B_METODOLOGIA, formatoB.B_ENTREGA, formatoB.B_ESTRUCTURA, formatoB.B_CRONOGRAMA, formatoB.B_PATROCINIO, formatoB.B_CONCEPTO, formatoB.B_RECIBIDO, formatoB.B_OBSERVACIONES, new Date(), id]);
+            const [update]:any = await db.query(query, [formatoB.B_APORTES,formatoB.B_OBJETIVOS, formatoB.B_METODOLOGIA, formatoB.B_ENTREGA, formatoB.B_ESTRUCTURA, formatoB.B_CRONOGRAMA, formatoB.B_PATROCINIO, formatoB.B_CONCEPTO, new Date(), formatoB.B_OBSERVACIONES, new Date(), id]);
             if(update.affectedRows==1){
                 const [res]:FormatoBEntity[]|any = await db.query(query2,[id]);
                 console.log(res[0]);

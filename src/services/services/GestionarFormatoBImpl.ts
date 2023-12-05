@@ -35,7 +35,7 @@ export  class GestionarFormatoBImpl implements IGestionarFormatoB{
             return formatoB;
         }
         const petEntity = this.mapper.dtoToEntity(formatoB);
-        const entity = await this.datos.actualizatFormatoB(idB,petEntity);
+        const entity = await this.datos.actualizarFormatoB(idB,petEntity);
         return this.mapper.entityToDTO(entity);
     }
     async eliminarFormatoB(id: number, usr:number): Promise<boolean|null> {
