@@ -3,7 +3,7 @@ export default class CoordinacionRepository{
     async verificarUsuario(usuarioId:number):Promise<number>{
         const query = "select * from usuariorol where usr_codigo = ? and rol_id = ? and fechafin is null";
         try{
-            const [res]:any[] = await db.query(query,[usuarioId,5]);
+            const [res]:any[] = await db.query(query,[usuarioId,6]);
             return res.length
         }catch  
         {

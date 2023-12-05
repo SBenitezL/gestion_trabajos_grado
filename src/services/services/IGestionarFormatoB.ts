@@ -3,21 +3,21 @@ export default interface IGestionarFormatoB
 {
     crearFormatoB(id:number,formatoB:FormatoBDTO, usr:number):Promise<FormatoBDTO|null>;
     /**
-     * @route PUT api/formatos/b/:id
+     * @route PUT api/formatos/b/?id=&usr=
      * @param id 
      * @param formatoA 
      */
-    actualizatFormatoB(id:number, formatoB:FormatoBDTO):Promise<FormatoBDTO>;
+    actualizatFormatoB(id:number, formatoB:FormatoBDTO, usr:number):Promise<FormatoBDTO|null>;
     /**
-     * @route DELETE api/formatos/b/:id
+     * @route DELETE api/formatos/b/?id=&usr=
      * @param id 
      */
-    eliminarFormatoB(id:number):Promise<boolean>;
+    eliminarFormatoB(id:number, usr:number):Promise<boolean|null>;
     /**
-     * @route GET api/formatos/b/:prcId
+     * @route GET api/formatos/b/?id=&usr=
      * @param prcId 
      */
-    consultarFormatoB(prcId:number):Promise<FormatoBDTO>;
+    consultarFormatoB(prcId:number, usr:number):Promise<FormatoBDTO|null>;
     /**
      * 
      * @param id 
