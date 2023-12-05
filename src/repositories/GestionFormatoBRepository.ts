@@ -5,10 +5,10 @@ import db from "../database/Database";
 export default class GestionFormatoBRepositoryImpl implements IGestionFormatoBRepository{
 
 
-    async enviarFormB(id: number, usr: number): Promise<boolean> {
-        const query = "UPDATE b_proceso set b_prc_estado = 2 where prc_id = ? and usr_codigo = ?";
+    async enviarFormB(id: number): Promise<boolean> {
+        const query = "UPDATE b_proceso set b_prc_estado = 2 where b_id = ?";
         try{
-            const res = await db.query(query,[id,usr]);
+            const res = await db.query(query,[id]);
             return await res.length > 0
         }catch
         {   

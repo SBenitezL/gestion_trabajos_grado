@@ -98,16 +98,14 @@ class FormatoBController{
     {
         const id = parseFloat(req.query.id as string);
         const usr = parseInt(req.query.usr as string);
-        const form = req.body;
-        const result = await this.formatoBService.actualizatFormatoB(id, form, usr);
-        if(result)
+        const result = await this.formatoBService.enviarFormB(id, usr);
+        if(result === null)
         {
-            if(result.id > 0)
+            if(result)
             {
                 res.status(200).json(result);
             }else{
-                if(result.id == -2) res.status(404).json({error:"No se encontró un formato previo para el proceso."})
-                else res.status(500).json({message:"Error en el servidor, comuniquese con el administrador."})
+                res.status(400).json(result);
             }
         }else res.status(401).json({error:"Usuario no autorizado"})
     }
