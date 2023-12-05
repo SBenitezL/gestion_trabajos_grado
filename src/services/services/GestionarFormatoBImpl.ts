@@ -54,6 +54,7 @@ export  class GestionarFormatoBImpl implements IGestionarFormatoB{
         if(!this.verificarUsuario(usr))return null;
         const bId = await this.datos.recuperarIdB(id,usr);
         if(bId === undefined) return false;
+        this.instanciarFormato
         const res = await this.datos.enviarFormB(bId);
         return res;
     }
@@ -71,10 +72,10 @@ export  class GestionarFormatoBImpl implements IGestionarFormatoB{
     {
         return this.datos.verificarUsuario(usr);
     }
-    private async instanciarFormato(id:number, usr:number):Promise<boolean|null>
+    private async instanciarFormato(id:number, usr:number):Promise<void>
     {
         const idB = await this.datos.recuperarIdB(id, usr);
-        if(idB === undefined) return null;
+        if(idB === undefined) return;
         const res = await reporte.recuperarReporteB(idB,id,usr);
         const spl = res.evaluador.split(' ');
         const ev = spl.join('_');
@@ -86,7 +87,6 @@ export  class GestionarFormatoBImpl implements IGestionarFormatoB{
         }else{
             await this.datos.crearRuta(id,filePath);
         }
-        return false;
     }
     
     
