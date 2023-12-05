@@ -4,3 +4,5 @@ build/
 PP-A/
 TI-A/
 Keys.ts
+*.pdf
+pdf/
