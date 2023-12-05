@@ -12,9 +12,9 @@ export default class GestionAnteproyectoRepository
         try{
             const [res]:any =await db.query(query,[id]);
            const ruta=res[0]?.RUTA ||null;
-           console.log("intento descargar",id);
+           console.log("a ver",ruta)
            if (ruta) {
-            console.log(ruta);
+            console.log("ruta desde repos",ruta);
             return ruta;
           } else {
             console.log('Ruta no encontrada para el ID:', id);

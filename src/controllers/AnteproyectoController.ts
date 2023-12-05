@@ -15,7 +15,6 @@ class AnteproyectoController{
         
         if( result )
         {
-            console.log("controller",result);
             const ruta=result;
             res.download(ruta, (error) => {
                 if (error) {
