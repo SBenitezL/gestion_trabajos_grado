@@ -7,7 +7,7 @@ export default class GestionComentariosTIARepository
     }
 
     public async descargarComentariosFormA(id:number):Promise<string | null>{
-        const query = "SELECT a.ANX_SRC AS RUTA FROM ANEXOS a INNER JOIN PROCESO p ON a.PRC_ID = p.PRC_ID INNER JOIN ESTUDIANTE e ON e.PRC_ID = p.PRC_ID WHERE e.EST_CODIGO=? AND a.TD_ID=2";
+        const query = "SELECT a.ANX_SRC AS RUTA FROM ANEXOS a INNER JOIN PROCESO p ON a.PRC_ID = p.PRC_ID INNER JOIN ESTUDIANTE e ON e.PRC_ID = p.PRC_ID WHERE e.EST_CODIGO=? AND a.TD_ID=1 ORDER BY a.ANX_RECIBIDO DESC LIMIT 1;";
         
         try{
             const [res]:any =await db.query(query,[id]);
