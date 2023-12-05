@@ -45,7 +45,7 @@ export default class GestionFormatoBRepositoryImpl implements IGestionFormatoBRe
         formatoB.B_ID = -1;
         return formatoB;
     }
-    async actualizatFormatoB(id: number, formatoB: FormatoBEntity): Promise<FormatoBEntity> {
+    async actualizarFormatoB(id: number, formatoB: FormatoBEntity): Promise<FormatoBEntity> {
         const query = "update ti_b set  UPDATE tu_tabla SET aportes = ?, objetivos = ?,metodologia = ?,entrega = ?,estructura = ?,cronograma = ?, patrocinio = ?, concepto = ?, recibido = ?, observaciones = ? WHERE id = ?";
         const query2 = "select * from ti_b where b_id = ?";
         try{
