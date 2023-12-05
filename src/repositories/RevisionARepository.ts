@@ -7,6 +7,7 @@ class RevisionARepository implements IRevisionARepository
     public constructor()
     {
     }   
+    //pendiente
     public async listarFormatosA(): Promise<RevisionAEntity[]> {
         const query = "call ConsultarRevisionA()";
         const res:RevisionAEntity[] = []

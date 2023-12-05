@@ -14,6 +14,7 @@ class FormatoBRoutes{
         this.router.delete('/', formatoBController.delete);
         this.router.get('/download/:id', formatoBController.download);
         this.router.get('/:id', formatoBController.listById);
+        this.router.patch('/send/',formatoBController.sendFormB);
 
     }
 } 

@@ -16,6 +16,7 @@ export  class GestionarFormatoBImpl implements IGestionarFormatoB{
         this.mapper = new FormatoBMapper();
         this.datos = new GestionFormatoBRepositoryImpl();
     }
+    
     async crearFormatoB(id: number, formatoB: FormatoBDTO, usr:number): Promise<FormatoBDTO|null> {
         if(!this.verificarUsuario(usr))return null;
         if(!this.datos.verificarFormato(usr,id)){
@@ -49,6 +50,13 @@ export  class GestionarFormatoBImpl implements IGestionarFormatoB{
         return res;
 
     }
+    async enviarFormB(id: number, usr: number): Promise<boolean | null> {
+        if(!this.verificarUsuario(usr))return null;
+        const bId = await this.datos.recuperarIdB(id,usr);
+        if(bId === undefined) return false;
+        const res = await this.datos.enviarFormB(bId);
+        return res;
+    }
     async consultarFormatoB(prcId: number, usr:number): Promise<FormatoBDTO|null> {
         if(!this.verificarUsuario(usr))return null;
         const bId = await this.datos.recuperarIdB(prcId, usr);
@@ -80,6 +88,7 @@ export  class GestionarFormatoBImpl implements IGestionarFormatoB{
         }
         return false;
     }
+    
     
 }
 const gestionFormatoBImpl = new GestionarFormatoBImpl();
