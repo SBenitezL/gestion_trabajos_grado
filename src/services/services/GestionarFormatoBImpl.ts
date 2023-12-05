@@ -61,6 +61,7 @@ export  class GestionarFormatoBImpl implements IGestionarFormatoB{
         return false;
     }
     
+    
 }
 const gestionFormatoBImpl = new GestionarFormatoBImpl();
 export default gestionFormatoBImpl;

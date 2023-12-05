@@ -14,5 +14,8 @@ export default interface IGestionFormatoBRepository
     verificarUsuario(usr:number):Promise<boolean>
 
     verificarFormato(usr:number, id:number):Promise<boolean>;
+    
     recuperarIdB(id:number, usr:number):Promise<number|undefined>;
+
+    enviarFormB(id:number, usr:number):Promise<boolean>;
 }

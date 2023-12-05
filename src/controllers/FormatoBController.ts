@@ -91,8 +91,26 @@ class FormatoBController{
         else{
             res.status(400).json(result);
         }
-    }    
-    
+    }   
+    //query param
+    //id proceso y usr 
+    public sendFormB =  async (req:Request, res:Response)=>
+    {
+        const id = parseFloat(req.query.id as string);
+        const usr = parseInt(req.query.usr as string);
+        const form = req.body;
+        const result = await this.formatoBService.actualizatFormatoB(id, form, usr);
+        if(result)
+        {
+            if(result.id > 0)
+            {
+                res.status(200).json(result);
+            }else{
+                if(result.id == -2) res.status(404).json({error:"No se encontró un formato previo para el proceso."})
+                else res.status(500).json({message:"Error en el servidor, comuniquese con el administrador."})
+            }
+        }else res.status(401).json({error:"Usuario no autorizado"})
+    }
 }
 const formatoBController = new FormatoBController(gestionFormatoBImpl);
 export default formatoBController;

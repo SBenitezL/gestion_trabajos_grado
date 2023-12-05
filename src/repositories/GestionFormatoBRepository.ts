@@ -3,6 +3,18 @@ import IGestionFormatoBRepository from "./IGestionFormatoBRepository";
 import db from "../database/Database";
 
 export default class GestionFormatoBRepositoryImpl implements IGestionFormatoBRepository{
+
+
+    async enviarFormB(id: number, usr: number): Promise<boolean> {
+        const query = "UPDATE b_proceso set b_prc_estado = 2 where prc_id = ? and usr_codigo = ?";
+        try{
+            const res = await db.query(query,[id,usr]);
+            return await res.length > 0
+        }catch
+        {   
+            return false;
+        }
+    }
     async verificarFormato(usr: number, id: number): Promise<boolean> {
         const query = "select * from b_proceso where prc_id = ? and usr_codigo = ?";
         try{
