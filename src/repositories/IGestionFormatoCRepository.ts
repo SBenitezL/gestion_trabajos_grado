@@ -14,4 +14,8 @@ export default interface IGestionFormatoCRepository
     recuperarIdC(id:number, usr:number):Promise<number|undefined>;
 
     enviarFormC(id:number):Promise<boolean>;
+
+    existeRuta(id:number):Promise<boolean>;
+    crearRuta(id:number, ruta:string):Promise<boolean>;
+    actualizarRuta(id:number, ruta:string):Promise<void>;
 }

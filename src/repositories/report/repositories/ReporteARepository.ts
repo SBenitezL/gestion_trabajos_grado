@@ -10,6 +10,8 @@ import db from "../../../database/Database";
 import IReporteB from "../gateway/IReporteB";
 import DatosReporteB from "../../../services/DTO/Report/DatosReporteB";
 import FormatoBEntity from "../../../models/FormatoBEntity";
+import FormatoCEntity from "../../../models/FormatoCEntity";
+import DatosReporteC from "../../../services/DTO/Report/DatosReporteC";
 
 class ReporteARepository 
 implements IReporteA, IEstudianteReporte, IFormatoAReporte, IProcesoReporte, IReporteB
@@ -31,6 +33,20 @@ implements IReporteA, IEstudianteReporte, IFormatoAReporte, IProcesoReporte, IRe
         const evaluador = await this.consultarEvaluador(usr)
         return new DatosReporteB(tipo,proceso,estudiantes,formato, evaluador);
     }
+    async recuperarReporteC(id: number, prc: number, usr:number): Promise<DatosReporteC> {
+        const estudiantes = await this.getEstudiantes(prc);
+        const proceso = await this.getProceso(prc);
+        let tipo;
+        if(proceso.tipo == "TRABAJO DE INVESTIGACIÓN")
+        {
+            tipo = "TI-C";
+        }else{
+            tipo = "PP-C";
+        }
+        const formato = await this.consultarFormatoC(id);
+        const evaluador = await this.consultarEvaluadores(usr)
+        return new DatosReporteC(tipo,proceso,estudiantes,formato, evaluador);
+    }
     private async consultarFormatoB(prcId: number): Promise<FormatoBEntity> {
         const query = "select * from ti_b where b_id = ?";
         try{
@@ -49,6 +65,14 @@ implements IReporteA, IEstudianteReporte, IFormatoAReporte, IProcesoReporte, IRe
             return res[0].usr_nombre;
             
         }catch{return ""}
+    }
+    private async consultarEvaluadores(usr:number):Promise<string[]>{
+        const query = "select DISTINCT(usr_nombre) from usuario join b_proceso on usuario.usr_codigo = b_proceso.usr_codigo where b_proceso.prc_id = ?;";
+        try{
+            const [res]:string|any = await db.query(query,[usr]);
+            return [res[0].usr_nombre, res[1].usr_nombre];
+            
+        }catch{return []}
     }
     async recuperarReporte(id: number, prc:number): Promise<DatosReporteA> {
         const estudiantes = await this.getEstudiantes(prc);
@@ -101,6 +125,18 @@ implements IReporteA, IEstudianteReporte, IFormatoAReporte, IProcesoReporte, IRe
         {        
         }
         return res;
+    }
+    async consultarFormatoC(prcId: number): Promise<FormatoCEntity> {
+        const query = "select * from ti_c where c_id = ?";
+        try{
+            const [res]:FormatoCEntity[]|any = await db.query(query,[prcId]);
+            return res[0];
+
+        }catch{
+
+        }
+        return new FormatoCEntity(-3,"",1,1,1,new Date(),"",1,new Date());
+   
     }
 
 }
