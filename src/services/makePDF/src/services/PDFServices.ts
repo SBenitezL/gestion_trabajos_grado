@@ -3,6 +3,7 @@ import fs from 'fs';
 import path from "path";
 import { Content, isImageContent, isTextContent } from "./PDFContent";
 import DatosReporteA from "../../../DTO/Report/DatosReporteA";
+import DatosReporteB from "../../../DTO/Report/DatosReporteB";
 
 const currentPage = {
     marginLeft:85,
@@ -14,6 +15,7 @@ const currentPage = {
     y:0    
 }
 let datos:DatosReporteA;
+let datosB:DatosReporteB;
 export default async function createPDFFA(filePath:string, datosA:DatosReporteA)
 {
     datos = datosA
@@ -50,6 +52,78 @@ async function createFirstPage(pdfDoc:PDFDocument)
     await addPageContent(content, page, pdfDoc);
     content = `FECHA: ${datos.formato.recibido}`;
     await addPageContent(content, page, pdfDoc);
+}
+export async function createFormatoB(filePath:string, datosB:DatosReporteB) {
+    datosB = datosB
+    const pdfDoc = await PDFDocument.create();
+    await llenarFormatoB(pdfDoc);
+    await save(filePath,pdfDoc);
+}
+async function llenarFormatoB(pdfDoc:PDFDocument) {
+    const page = pdfDoc.addPage();
+    await addEncabezadoText(page, pdfDoc);
+    let content = `TTITULO: ${datos.proceso.titulo}`
+    await addPageContent(content,page,pdfDoc);
+    let i = 1;
+    for(let estudiante of datos.estudiante)
+    {
+        content = `ESTUDIANTE ${i}: ${estudiante.nombre} CODIGO: ${estudiante.codigo}`
+        await addPageContent(content, page, pdfDoc);
+    }
+    content = `DIRECTOR DEL TRABAJO: ${datos.proceso.director}`;
+    await addPageContent(content, page, pdfDoc);
+    if(datosB.tipo == "PP-B"){
+        content = `ASESOR DE LA ORGANIZACIÓN: ${datosB.proceso.asesor}`;
+        await addPageContent(content, page, pdfDoc);
+    }
+    await addPageContent('', page, pdfDoc);
+    let valor = ""
+    await addPageContent('ELEMENTOS CONSIDERADOS', page, pdfDoc);
+
+    if(datosB.formato.B_APORTES > 0) valor = "Aprobado"
+    else valor = "Rechazado" 
+    content = `A) PRESENTACION Y APORTES (Están indicados con claridad?) ${valor}`;
+    await addPageContent(content, page, pdfDoc);
+
+    if(datosB.formato.B_OBJETIVOS > 0) valor = "Aprobado"
+    else valor = "Rechazado" 
+    content = `B) OBJETIVOS (Establecidos claramente?) ${valor}`;
+    await addPageContent(content, page, pdfDoc);
+
+    if(datosB.formato.B_METODOLOGIA > 0) valor = "Aprobado"
+    else valor = "Rechazado" 
+    content = `C) METODOLOGÍA (Se indica explícitamente?) ${valor}`;
+    await addPageContent(content, page, pdfDoc);
+
+    if(datosB.formato.B_ENTREGA > 0) valor = "Aprobado"
+    else valor = "Rechazado" 
+    content = `D) CONDICIONES DE ENTREGA (Se establecen claramente?) ${valor}`;
+    await addPageContent(content, page, pdfDoc);
+
+    if(datosB.formato.B_CRONOGRAMA > 0) valor = "Aprobado"
+    else valor = "Rechazado" 
+    content = `E) CRONOGRAMA (se indica en forma clara y completa?) ${valor}`;
+    await addPageContent(content, page, pdfDoc);
+
+    if(datosB.formato.B_PATROCINIO > 0) valor = "Aprobado"
+    else valor = "Rechazado" 
+    content = `F) PATROCINIO (existe?) ${valor}`;
+    await addPageContent(content, page, pdfDoc);
+
+    if(datosB.formato.B_CONCEPTO > 0) valor = "Aprobado(X) No Aprobado()"
+    else valor = "Aprobado() No Aprobado(X)" 
+    content = `G) CONCEPTO GENERAL (existe?) ${valor}`;
+    await addPageContent(content, page, pdfDoc);
+
+    await addPageContent('OBSERVACIONES', page, pdfDoc);
+    await addPageContent(datosB.formato.B_OBSERVACIONES, page, pdfDoc);
+    let fecha = datosB.formato.B_REVISION;
+    const dia = fecha.getDate().toString().padStart(2, '0');
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Nota: los meses van de 0 a 11
+    const año = fecha.getFullYear();
+    const fechaComoString: string = `${dia}/${mes}/${año}`;
+    await addPageContent(`FECHA: ${fechaComoString}`, page, pdfDoc);
+    await addPageContent(`${datosB.evaluador}`, page, pdfDoc);
 }
 async function createSecondPage(pdfDoc:PDFDocument)
 {

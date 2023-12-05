@@ -26,7 +26,7 @@ export default class GestionFormatoBRepositoryImpl implements IGestionFormatoBRe
         }
     }
     async verificarUsuario(usr: number): Promise<boolean> {
-        const query = "Select usr_codigo, rol_id from usuariorol where usr_codigo = ? and rol_id = 4";
+        const query = "Select usr_codigo, rol_id from usuariorol where usr_codigo = ? and rol_id = 5";
         try{
             const [res]:any = await db.query(query,[usr]);
             return res.length > 0;
@@ -58,7 +58,7 @@ export default class GestionFormatoBRepositoryImpl implements IGestionFormatoBRe
         return formatoB;
     }
     async actualizarFormatoB(id: number, formatoB: FormatoBEntity): Promise<FormatoBEntity> {
-        const query = "update ti_b set  UPDATE tu_tabla SET aportes = ?, objetivos = ?,metodologia = ?,entrega = ?,estructura = ?,cronograma = ?, patrocinio = ?, concepto = ?, recibido = ?, observaciones = ? WHERE id = ?";
+        const query = "update ti_b SET aportes = ?, objetivos = ?,metodologia = ?,entrega = ?,estructura = ?,cronograma = ?, patrocinio = ?, concepto = ?, recibido = ?, observaciones = ? WHERE id = ?";
         const query2 = "select * from ti_b where b_id = ?";
         try{
             const [update]:any = await db.query(query, [formatoB.B_APORTES,formatoB.B_OBJETIVOS, formatoB.B_METODOLOGIA, formatoB.B_ENTREGA, formatoB.B_ESTRUCTURA, formatoB.B_CRONOGRAMA, formatoB.B_PATROCINIO, formatoB.B_CONCEPTO, new Date(), formatoB.B_OBSERVACIONES, new Date(), id]);
@@ -125,6 +125,35 @@ export default class GestionFormatoBRepositoryImpl implements IGestionFormatoBRe
         }catch{
         }
         return 0;
+    }
+    public async existeRuta(id:number):Promise<boolean>
+    {
+        const query = "select * from archivos where b_id = ?";
+        try{
+            const [res]:any = await db.query(query,[id]);
+            return res.length == 1;
+        }catch(error){
+            console.log(error)
+            return false;
+        }
+    }
+    public async crearRuta(id:number, ruta:string):Promise<boolean>
+    {
+        const query = "insert into archivos(b_id,arc_ruta,arc_recibido) values (?,?,?)"
+        try{
+            const [res]:any = await db.query(query,[id,ruta, new Date()]);
+            return res.affectedRows == 1
+        }catch{
+            return false;
+        }
+    }   
+    public async actualizarRuta(id:number, ruta:string):Promise<void>{
+        const query = "update archivos set arc_ruta = ?, arc_recibido = ? where b_id = ?";
+        try{
+            await db.query(query,[ruta, new Date(), id]);
+        }catch{
+            console.log("error actualizar ruta");
+        }
     }
     
 }
