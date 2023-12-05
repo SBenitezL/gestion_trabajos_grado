@@ -40,3 +40,14 @@ MODIFY COLUMN B_RECIBIDO date null,
 MODIFY COLUMN B_OBSERVACIONES text null,
 MODIFY COLUMN B_NO_REVISIONES int null,
 MODIFY COLUMN B_REVISION date null;
+
+CREATE TABLE b_proceso (
+    b_id INT not null,
+    prc_id DECIMAL(7,3) not null,
+    b_prc_estado INT null,
+    usr_codigo decimal(12,0) not null,
+    PRIMARY KEY (b_id, prc_id),
+    FOREIGN KEY (prc_id) REFERENCES proceso(prc_id),
+    FOREIGN KEY (b_id) REFERENCES ti_b(b_id),
+    FOREIGN KEY (usr_codigo) REFERENCES usuario(usr_codigo)
+);

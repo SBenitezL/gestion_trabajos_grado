@@ -51,7 +51,7 @@ class Servidor{
         this.app.use('/api/comentario', comentarioRoutes);
         this.app.use('/api/consejo', consejoRoutes);
         this.app.use('/api/coordinacion', coordinacionRoutes);
-        this.app.use('/api/formatoB', formatoBRoutes);
+        this.app.use('/api/formatos/b', formatoBRoutes);
     }
     //dr
     staticFiles():void{
