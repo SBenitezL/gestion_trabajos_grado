@@ -1,13 +1,13 @@
 import FormatoBEntity from "../models/FormatoBEntity";
 export default interface IGestionFormatoBRepository
 {
-    crearFormatoC(id:number,user:number,formatoB:FormatoBEntity):Promise<FormatoBEntity>;
+    crearFormatoB(id:number,formatoB:FormatoBEntity):Promise<FormatoBEntity>;
    
-    actualizarFormatoC(id:number, formatoB:FormatoBEntity):Promise<FormatoBEntity>;
+    actualizatFormatoB(id:number, formatoB:FormatoBEntity):Promise<FormatoBEntity>;
    
-    eliminarFormatoC(id:number):Promise<boolean>;
+    eliminarFormatoB(id:number):Promise<boolean>;
     
-    consultarFormatoC(prcId:number):Promise<FormatoBEntity>;
+    consultarFormatoB(prcId:number):Promise<FormatoBEntity>;
    
-    descargarFormatoC(id:number):Promise<string | null>
+    descargarFormatoB(id:number):Promise<string | null>
 }

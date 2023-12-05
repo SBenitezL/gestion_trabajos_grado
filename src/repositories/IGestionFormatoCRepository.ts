@@ -1,13 +1,13 @@
 import FormatoCEntity from "../models/FormatoCEntity";
 export default interface IGestionFormatoBRepository
 {
-    crearFormatoB(id:number,formatoB:FormatoCEntity):Promise<FormatoCEntity>;
+    crearFormatoC(id:number,formatoC:FormatoCEntity):Promise<FormatoCEntity>;
    
-    actualizatFormatoB(id:number, formatoB:FormatoCEntity):Promise<FormatoCEntity>;
+    actualizatFormatoC(id:number, formatoC:FormatoCEntity):Promise<FormatoCEntity>;
    
-    eliminarFormatoB(id:number):Promise<boolean>;
+    eliminarFormatoC(id:number):Promise<boolean>;
     
-    consultarFormatoB(prcId:number):Promise<FormatoCEntity>;
+    consultarFormatoC(prcId:number):Promise<FormatoCEntity>;
    
-    descargarFormatoB(id:number):Promise<string | null>
+    descargarFormatoC(id:number):Promise<string | null>
 }
