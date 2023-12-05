@@ -28,7 +28,7 @@ export default class GestionComentariosTIARepository
         const query="INSERT INTO ANEXOS (TD_ID,PRC_ID,ANX_RECIBIDO,ANX_SRC) VALUES(2,?,?,?);";
         try{
               console.log("id de carga",id);
-                const [res2]:any =await db.query(query,[id,new Date(),ruta+nombre]);
+                const [res2]:any =await db.query(query,[id,new Date(),ruta]);
                 return true;
         }catch{
             console.log("error carga de archivos");
