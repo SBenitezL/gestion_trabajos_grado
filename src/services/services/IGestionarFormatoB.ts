@@ -29,4 +29,6 @@ export default interface IGestionarFormatoB
 
 
     enviarFormB(id:number, usr:number):Promise<boolean|null>;
+
+
 }

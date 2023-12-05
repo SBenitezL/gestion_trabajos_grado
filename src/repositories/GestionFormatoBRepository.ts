@@ -3,6 +3,7 @@ import IGestionFormatoBRepository from "./IGestionFormatoBRepository";
 import db from "../database/Database";
 
 export default class GestionFormatoBRepositoryImpl implements IGestionFormatoBRepository{
+   
 
 
     async enviarFormB(id: number): Promise<boolean> {
@@ -155,5 +156,8 @@ export default class GestionFormatoBRepositoryImpl implements IGestionFormatoBRe
             console.log("error actualizar ruta");
         }
     }
+   
+        
+    
     
 }
