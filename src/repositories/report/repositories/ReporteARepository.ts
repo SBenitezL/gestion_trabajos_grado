@@ -43,12 +43,11 @@ implements IReporteA, IEstudianteReporte, IFormatoAReporte, IProcesoReporte, IRe
         return new FormatoBEntity(-3,1,1,1,1,1,1,1,1,new Date(),"",1,new Date());
     }
     private async consultarEvaluador(usr:number):Promise<string>{
-        const query = "select usr_nombre from usuarios where usr_codigo = ?";
+        const query = "select usr_nombre from usuario where usr_codigo = ?";
         try{
-            const [res]:string|any = db.query(query,[usr]);
-            if(typeof(res) == "string")
-                return res[0]
-            else return ""
+            const [res]:string|any = await db.query(query,[usr]);
+            return res[0].usr_nombre;
+            
         }catch{return ""}
     }
     async recuperarReporte(id: number, prc:number): Promise<DatosReporteA> {

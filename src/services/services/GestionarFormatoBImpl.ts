@@ -54,7 +54,7 @@ export  class GestionarFormatoBImpl implements IGestionarFormatoB{
         if(!this.verificarUsuario(usr))return null;
         const bId = await this.datos.recuperarIdB(id,usr);
         if(bId === undefined) return false;
-        this.instanciarFormato
+        this.instanciarFormato(id,usr);
         const res = await this.datos.enviarFormB(bId);
         return res;
     }
@@ -75,8 +75,10 @@ export  class GestionarFormatoBImpl implements IGestionarFormatoB{
     private async instanciarFormato(id:number, usr:number):Promise<void>
     {
         const idB = await this.datos.recuperarIdB(id, usr);
+        console.log(idB);
         if(idB === undefined) return;
         const res = await reporte.recuperarReporteB(idB,id,usr);
+        console.log(res.evaluador);
         const spl = res.evaluador.split(' ');
         const ev = spl.join('_');
         const filePath = path.join('pdf',`${res.tipo}`,`${ res.proceso.id}_${ev}.pdf`);
