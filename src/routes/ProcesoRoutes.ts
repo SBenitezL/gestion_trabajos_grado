@@ -11,9 +11,12 @@ class ProcesoRoutes{
         this.router.post('',procesoController.create);
         this.router.put('/:id', procesoController.update);
         this.router.delete('/:id', procesoController.delete);
+        this.router.get('/listB/',procesoController.listBForm);
         this.router.get('/:id',procesoController.listProcess);
         this.router.get('', procesoController.listProcesses);
-        this.router.patch('/formatosa/:id/:prc', procesoController.sendFA)
+        this.router.patch('/formatosa/:id/:prc', procesoController.sendFA);
+        
+
 
     }
 }

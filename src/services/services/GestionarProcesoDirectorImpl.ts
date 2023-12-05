@@ -23,6 +23,7 @@ class GestionarProcesoDirector implements IGestionarProcesoDirector
         this.formato = new GestionFormatoARepository();
         this.fMapper = new FormatoAMapper();
     }
+    
     async enviarFormatoA(id: number, prc:number): Promise<boolean> {
         const formatoA = await this.formato.consultarFormatoA(id);
         const dto = this.fMapper.entityToDTO(formatoA);
@@ -77,6 +78,10 @@ class GestionarProcesoDirector implements IGestionarProcesoDirector
     private verificarInvestigacion(proceso:ProcesoDTO)
     {
         return (proceso.tipo == "Trabajo de investigación" && proceso.estudiantes.length <=2 && proceso.ase == '');
+    }
+    async listFormB(): Promise<ProcesoListDTO[]> {
+        const res = await this.accesoPersistencia.listFormB();
+        return this.mapper.listEntityToDTO(res);
     }
 
 }

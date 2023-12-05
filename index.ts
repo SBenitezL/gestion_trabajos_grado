@@ -16,6 +16,7 @@ import comentarioRoutes from "./src/routes/comentarioRouter";
 import consejoRoutes from "./src/routes/ConsejoRoutes";
 import coordinacionRoutes from "./src/routes/CoordinacionRoutes";
 import formatoBRoutes from "./src/routes/FormatoBRoutes";
+import formatoCRoutes from "./src/routes/FormatoCRoutes";
 
 //TODO:Borrar
 import prueba from "./src/repositories/report/repositories/ReporteARepository";
@@ -52,6 +53,7 @@ class Servidor{
         this.app.use('/api/consejo', consejoRoutes);
         this.app.use('/api/coordinacion', coordinacionRoutes);
         this.app.use('/api/formatos/b', formatoBRoutes);
+        this.app.use('/api/formatos/c', formatoCRoutes);
     }
     //dr
     staticFiles():void{

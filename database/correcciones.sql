@@ -51,3 +51,6 @@ CREATE TABLE b_proceso (
     FOREIGN KEY (b_id) REFERENCES ti_b(b_id),
     FOREIGN KEY (usr_codigo) REFERENCES usuario(usr_codigo)
 );
+
+
+alter TABLE ti_c MODIFY COLUMN c_ID int(11) AUTO_INCREMENT;

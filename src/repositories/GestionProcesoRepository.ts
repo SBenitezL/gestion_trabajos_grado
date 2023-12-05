@@ -112,6 +112,19 @@ class GestionProcesoRepository implements IGestProcesoDirectorRpstr{
             return false;
         }
     }
+    public async listFormB(): Promise<ProcesoListEntity[]> {
+        const query ="SELECT proceso.prc_id, prc_titulo, prc_tipo, est_nombre,proceso.prc_form_b FROM proceso INNER JOIN estudiante ON proceso.PRC_ID=estudiante.PRC_ID INNER JOIN b_proceso bp ON bp.b_id=proceso.B_ID where bp.b_prc_estado=2 ORDER BY est_nombre"; 
+        const res: ProcesoListEntity[]=[];
+         try{
+             const [result]:any  = await db.query(query);
+             result.map((row:ProcesoListEntity)=>{
+                 console.log("repository;",row);
+                 res.push(row);})
+         } catch(error){
+             return res;
+         }
+         return res;
+      }
 }
 const datos = new GestionProcesoRepository();
 export default datos;

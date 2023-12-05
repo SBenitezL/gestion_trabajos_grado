@@ -8,4 +8,5 @@ export default interface IGestProcesoDirectorRpstr{
     consultarProceso(id:number):Promise<ProcesoEntity>;
     consultarProcesos(usr:number):Promise<ProcesoListEntity[]>;
     enviarFormatoA(id:number):Promise<boolean>;
+    listFormB(): Promise<ProcesoListEntity[]>;
 }

@@ -70,6 +70,16 @@ class ProcesoController{
           res.status(500).json({ error: "Ocurrió un error interno en el servidor." });
         }
     }
+    public listBForm = async(req:Request, res:Response)=>{
+        const result = await this.procesoService.listFormB();
+        try {
+          
+            res.status(200).json(result);
+          
+        } catch (error) {
+          res.status(500).json({ error: "Ocurrió un error interno en el servidor." });
+        }
+    }
 }
 const procesoController = new ProcesoController(gestionProcesosImpl);
 export default procesoController;
