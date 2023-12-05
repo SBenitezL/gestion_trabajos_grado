@@ -91,8 +91,24 @@ class FormatoBController{
         else{
             res.status(400).json(result);
         }
-    }    
-    
+    }   
+    //query param
+    //id proceso y usr 
+    public sendFormB =  async (req:Request, res:Response)=>
+    {
+        const id = parseFloat(req.query.id as string);
+        const usr = parseInt(req.query.usr as string);
+        const result = await this.formatoBService.enviarFormB(id, usr);
+        if(result === null)
+        {
+            if(result)
+            {
+                res.status(200).json(result);
+            }else{
+                res.status(400).json(result);
+            }
+        }else res.status(401).json({error:"Usuario no autorizado"})
+    }
 }
 const formatoBController = new FormatoBController(gestionFormatoBImpl);
 export default formatoBController;

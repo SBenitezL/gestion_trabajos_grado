@@ -7,12 +7,49 @@ import IFormatoAReporte from "../gateway/IFormatoAReporte";
 import IProcesoReporte from "../gateway/IProcesoReporte";
 import IReporteA from "../gateway/IReporteA";
 import db from "../../../database/Database";
+import IReporteB from "../gateway/IReporteB";
+import DatosReporteB from "../../../services/DTO/Report/DatosReporteB";
+import FormatoBEntity from "../../../models/FormatoBEntity";
 
 class ReporteARepository 
-implements IReporteA, IEstudianteReporte, IFormatoAReporte, IProcesoReporte
+implements IReporteA, IEstudianteReporte, IFormatoAReporte, IProcesoReporte, IReporteB
 {
     constructor()
     {
+    }
+    async recuperarReporteB(id: number, prc: number, usr:number): Promise<DatosReporteB> {
+        const estudiantes = await this.getEstudiantes(prc);
+        const proceso = await this.getProceso(prc);
+        let tipo;
+        if(proceso.tipo == "TRABAJO DE INVESTIGACIÓN")
+        {
+            tipo = "TI-B";
+        }else{
+            tipo = "PP-B";
+        }
+        const formato = await this.consultarFormatoB(id);
+        const evaluador = await this.consultarEvaluador(usr)
+        return new DatosReporteB(tipo,proceso,estudiantes,formato, evaluador);
+    }
+    private async consultarFormatoB(prcId: number): Promise<FormatoBEntity> {
+        const query = "select * from ti_b where b_id = ?";
+        try{
+            const [res]:FormatoBEntity[]|any = await db.query(query,[prcId]);
+            return res[0];
+
+        }catch{
+
+        }
+        return new FormatoBEntity(-3,1,1,1,1,1,1,1,1,new Date(),"",1,new Date());
+    }
+    private async consultarEvaluador(usr:number):Promise<string>{
+        const query = "select usr_nombre from usuarios where usr_codigo = ?";
+        try{
+            const [res]:string|any = db.query(query,[usr]);
+            if(typeof(res) == "string")
+                return res[0]
+            else return ""
+        }catch{return ""}
     }
     async recuperarReporte(id: number, prc:number): Promise<DatosReporteA> {
         const estudiantes = await this.getEstudiantes(prc);

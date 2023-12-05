@@ -3,6 +3,9 @@ import IGestionFormatoBRepository from "../../repositories/IGestionFormatoBRepos
 import GestionFormatoBRepositoryImpl from "../../repositories/GestionFormatoBRepository";
 import IGestionarFormatoB from "./IGestionarFormatoB";
 import FormatoBMapper from "../Maping/FormatoBMapper";
+import reporte from "../../repositories/report/repositories/ReporteARepository";
+import path from "path";
+import { createFormatoB } from "../makePDF/src/services/PDFServices";
 
 export  class GestionarFormatoBImpl implements IGestionarFormatoB{
 
@@ -13,6 +16,7 @@ export  class GestionarFormatoBImpl implements IGestionarFormatoB{
         this.mapper = new FormatoBMapper();
         this.datos = new GestionFormatoBRepositoryImpl();
     }
+    
     async crearFormatoB(id: number, formatoB: FormatoBDTO, usr:number): Promise<FormatoBDTO|null> {
         if(!this.verificarUsuario(usr))return null;
         if(!this.datos.verificarFormato(usr,id)){
@@ -46,6 +50,14 @@ export  class GestionarFormatoBImpl implements IGestionarFormatoB{
         return res;
 
     }
+    async enviarFormB(id: number, usr: number): Promise<boolean | null> {
+        if(!this.verificarUsuario(usr))return null;
+        const bId = await this.datos.recuperarIdB(id,usr);
+        if(bId === undefined) return false;
+        this.instanciarFormato
+        const res = await this.datos.enviarFormB(bId);
+        return res;
+    }
     async consultarFormatoB(prcId: number, usr:number): Promise<FormatoBDTO|null> {
         if(!this.verificarUsuario(usr))return null;
         const bId = await this.datos.recuperarIdB(prcId, usr);
@@ -58,8 +70,25 @@ export  class GestionarFormatoBImpl implements IGestionarFormatoB{
     }
     private async verificarUsuario(usr:number):Promise<boolean>
     {
-        return false;
+        return this.datos.verificarUsuario(usr);
     }
+    private async instanciarFormato(id:number, usr:number):Promise<void>
+    {
+        const idB = await this.datos.recuperarIdB(id, usr);
+        if(idB === undefined) return;
+        const res = await reporte.recuperarReporteB(idB,id,usr);
+        const spl = res.evaluador.split(' ');
+        const ev = spl.join('_');
+        const filePath = path.join('pdf',`${res.tipo}`,`${ res.proceso.id}_${ev}.pdf`);
+        await createFormatoB(filePath, res);
+        if(await this.datos.existeRuta(id))
+        {
+            await this.datos.actualizarRuta(id,filePath);
+        }else{
+            await this.datos.crearRuta(id,filePath);
+        }
+    }
+    
     
 }
 const gestionFormatoBImpl = new GestionarFormatoBImpl();
