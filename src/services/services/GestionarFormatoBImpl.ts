@@ -61,7 +61,7 @@ export  class GestionarFormatoBImpl implements IGestionarFormatoB{
         const res = await this.datos.consultarFormatoB(bId);
         return this.mapper.entityToDTO(res)
     }
-    async descargarFormatoB(id: number): Promise<string | null> {
+    async descargarFormatoB(id: number): Promise<string[] | null> {
         return await this.datos.descargarFormatoB(id);
     }
     private async verificarUsuario(usr:number):Promise<boolean>
