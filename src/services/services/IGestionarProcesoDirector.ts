@@ -31,4 +31,8 @@ export default interface IGestionarProcesoDirector{
      * @param {number} id Id del "formato a" a enviar.
      */
     enviarFormatoA(id:number, prc:number):Promise<boolean>;
+
+
+    listFormB(): Promise<ProcesoListDTO[]>;
+
 }

@@ -9,7 +9,7 @@ export default interface IGestionFormatoBRepository
     
     consultarFormatoB(prcId:number):Promise<FormatoBEntity>;
    
-    descargarFormatoB(id:number):Promise<string | null>;
+    descargarFormatoB(id:number):Promise<string[] | null>;
 
     verificarUsuario(usr:number):Promise<boolean>
 

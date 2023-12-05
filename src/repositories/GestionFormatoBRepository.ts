@@ -3,6 +3,7 @@ import IGestionFormatoBRepository from "./IGestionFormatoBRepository";
 import db from "../database/Database";
 
 export default class GestionFormatoBRepositoryImpl implements IGestionFormatoBRepository{
+   
 
 
     async enviarFormB(id: number): Promise<boolean> {
@@ -96,7 +97,7 @@ export default class GestionFormatoBRepositoryImpl implements IGestionFormatoBRe
         }
         return new FormatoBEntity(-3,1,1,1,1,1,1,1,1,new Date(),"",1,new Date());
     }
-    public async descargarFormatoB(id: number): Promise<string | null> {
+    public async descargarFormatoB(id: number): Promise<string[] | null> {
         const query = "SELECT ru.ARC_RUTA AS RUTA FROM ARCHIVOS ru INNER JOIN TI_B tb ON ru.B_ID = tb.B_ID INNER JOIN PROCESO pr ON pr.B_ID = tb.B_ID INNER JOIN ESTUDIANTE ES ON pr.PRC_ID = es.PRC_ID WHERE es.EST_CODIGO=?; ";
         
         try{
@@ -155,5 +156,8 @@ export default class GestionFormatoBRepositoryImpl implements IGestionFormatoBRe
             console.log("error actualizar ruta");
         }
     }
+   
+        
+    
     
 }

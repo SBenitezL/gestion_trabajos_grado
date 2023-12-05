@@ -74,19 +74,35 @@ class FormatoBController{
     }   
     public download = async (req:Request, res:Response)=>
     {
+        const num = parseInt(req.query.num as string);
         const {id} =  req.params
         const result = await this.formatoBService.descargarFormatoB(parseInt(id));
         
         if( result )
         {
-            console.log("controller",result);
-            const ruta=result;
-            res.download(ruta, (error) => {
-                if (error) {
-                    console.error('Error al descargar el archivo:', error);
-                    res.status(500).json({ error: 'Error al descargar el archivo' });
-                }
-            });
+            
+            if(num ==1 && result.length==1){
+                console.log("controller",result);
+                const ruta1=result[0];
+                res.download(ruta1, (error) => {
+                    if (error) {
+                        console.error('Error al descargar el archivo:', error);
+                        res.status(500).json({ error: 'Error al descargar el archivo' });
+                    }
+                });
+            }else if(num==2 && result.length==2){
+                const ruta2=result[1];
+                res.download(ruta2, (error) => {
+                    if (error) {
+                        console.error('Error al descargar el archivo:', error);
+                        res.status(500).json({ error: 'Error al descargar el archivo' });
+                    }
+                });
+            }else{
+                res.status(401).json({error:"No hay evaluador"});
+            }
+            
+           
         }
         else{
             res.status(400).json(result);

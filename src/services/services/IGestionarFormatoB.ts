@@ -23,10 +23,12 @@ export default interface IGestionarFormatoB
      * @param id 
      * 
      */
-    descargarFormatoB(id:number):Promise<string | null>;
+    descargarFormatoB(id:number):Promise<string[] | null>;
 
 
 
 
     enviarFormB(id:number, usr:number):Promise<boolean|null>;
+
+
 }
