@@ -21,7 +21,7 @@ export default class GestionFormatoCRepositoryImpl implements IGestionFormatoCRe
         {
             console.log("errorcito")
         }
-        formatoC.C_ID = -1;
+        formatoC.c_ID = -1;
         return formatoC;
         
         
@@ -96,6 +96,35 @@ export default class GestionFormatoCRepositoryImpl implements IGestionFormatoCRe
         }catch
         {   
             return false;
+        }
+    }
+    public async existeRuta(id:number):Promise<boolean>
+    {
+        const query = "select * from archivos where c_id = ?";
+        try{
+            const [res]:any = await db.query(query,[id]);
+            return res.length == 1;
+        }catch(error){
+            console.log(error)
+            return false;
+        }
+    }
+    public async crearRuta(id:number, ruta:string):Promise<boolean>
+    {
+        const query = "insert into archivos(c_id,arc_ruta,arc_recibido) values (?,?,?)"
+        try{
+            const [res]:any = await db.query(query,[id,ruta, new Date()]);
+            return res.affectedRows == 1
+        }catch{
+            return false;
+        }
+    }   
+    public async actualizarRuta(id:number, ruta:string):Promise<void>{
+        const query = "update archivos set arc_ruta = ?, arc_recibido = ? where c_id = ?";
+        try{
+            await db.query(query,[ruta, new Date(), id]);
+        }catch{
+            console.log("error actualizar ruta");
         }
     }
     

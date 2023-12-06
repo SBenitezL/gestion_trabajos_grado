@@ -115,7 +115,7 @@ class FormatoBController{
         const id = parseFloat(req.query.id as string);
         const usr = parseInt(req.query.usr as string);
         const result = await this.formatoBService.enviarFormB(id, usr);
-        if(result === null)
+        if(result != null)
         {
             if(result)
             {

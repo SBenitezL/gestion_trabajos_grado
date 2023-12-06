@@ -1,0 +1,4 @@
+¿La temática propuesta para el trabajo de grado en la modalidad trabajo de investigación es pertinente para las áreas de formación del estudiante del programa de ingeniería? Si X No __
+Observaciones/Sugerencias al título y objetivos de la propuesta:
+Se sugiere: mejorar la redacción en especial el verbo utilizado para definir el objetivo general. También se tiene un error de sintaxis (abiertos). En el objetivo específico 1 al hacer uso de paréntesis no hay finalización de la idea/objetivo. No es claro dónde se integra/implementa el modelo de reconocimiento facial pues se menciona solo la implementación de una estratégia de analítica. Ni es claro lo que contempla la solución propuesta mencionada en el objetivo 3
+19/06/2021

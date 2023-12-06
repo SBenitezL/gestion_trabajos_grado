@@ -1,7 +1,7 @@
 export default class FormatoCEntity
 {
     public constructor( 
-        public C_ID:number,
+        public c_ID:number,
         public C_DESARROLLO:string,
         public C_ESTRUCTURA:number,
         public C_CON_COMITE:number,

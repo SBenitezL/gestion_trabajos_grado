@@ -4,6 +4,7 @@ import path from "path";
 import { Content, isImageContent, isTextContent } from "./PDFContent";
 import DatosReporteA from "../../../DTO/Report/DatosReporteA";
 import DatosReporteB from "../../../DTO/Report/DatosReporteB";
+import DatosReporteC from "../../../DTO/Report/DatosReporteC";
 
 const currentPage = {
     marginLeft:85,
@@ -16,6 +17,7 @@ const currentPage = {
 }
 let datos:DatosReporteA;
 let datosB:DatosReporteB;
+let datosC:DatosReporteC;
 export default async function createPDFFA(filePath:string, datosA:DatosReporteA)
 {
     datos = datosA
@@ -27,7 +29,7 @@ async function createFirstPage(pdfDoc:PDFDocument)
 {
     const page = pdfDoc.addPage();
     await addEncabezadoText(page, pdfDoc);
-    let content = `TTITULO: ${datos.proceso.titulo}`
+    let content = `TITULO: ${datos.proceso.titulo}`
     await addPageContent(content,page,pdfDoc);
     let i = 1;
     for(let estudiante of datos.estudiante)
@@ -53,24 +55,31 @@ async function createFirstPage(pdfDoc:PDFDocument)
     content = `FECHA: ${datos.formato.recibido}`;
     await addPageContent(content, page, pdfDoc);
 }
-export async function createFormatoB(filePath:string, datosB:DatosReporteB) {
-    datosB = datosB
+export async function createFormatoB(filePath:string, frmB:DatosReporteB) {
+    datosB = frmB;
+    console.log(datosB.proceso)
     const pdfDoc = await PDFDocument.create();
     await llenarFormatoB(pdfDoc);
     await save(filePath,pdfDoc);
 }
+export async function createFormatoC(filePath:string, frmC:DatosReporteC){
+    datosC = frmC;
+    const pdfDoc = await PDFDocument.create();
+    await llenarFormatoC(pdfDoc);
+    await save(filePath,pdfDoc);
+}
 async function llenarFormatoB(pdfDoc:PDFDocument) {
     const page = pdfDoc.addPage();
-    await addEncabezadoText(page, pdfDoc);
-    let content = `TTITULO: ${datos.proceso.titulo}`
+    await addEncabezadoTextB(page, pdfDoc);
+    let content = `TITULO: ${datosB.proceso.titulo}`
     await addPageContent(content,page,pdfDoc);
     let i = 1;
-    for(let estudiante of datos.estudiante)
+    for(let estudiante of datosB.estudiante)
     {
         content = `ESTUDIANTE ${i}: ${estudiante.nombre} CODIGO: ${estudiante.codigo}`
         await addPageContent(content, page, pdfDoc);
     }
-    content = `DIRECTOR DEL TRABAJO: ${datos.proceso.director}`;
+    content = `DIRECTOR DEL TRABAJO: ${datosB.proceso.director}`;
     await addPageContent(content, page, pdfDoc);
     if(datosB.tipo == "PP-B"){
         content = `ASESOR DE LA ORGANIZACIÓN: ${datosB.proceso.asesor}`;
@@ -115,15 +124,64 @@ async function llenarFormatoB(pdfDoc:PDFDocument) {
     content = `G) CONCEPTO GENERAL (existe?) ${valor}`;
     await addPageContent(content, page, pdfDoc);
 
-    await addPageContent('OBSERVACIONES', page, pdfDoc);
+    await addPageContent('', page, pdfDoc);
+    await addPageContent('OBSERVACIONES:', page, pdfDoc);
     await addPageContent(datosB.formato.B_OBSERVACIONES, page, pdfDoc);
+    await addPageContent('', page, pdfDoc);
     let fecha = datosB.formato.B_REVISION;
     const dia = fecha.getDate().toString().padStart(2, '0');
     const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Nota: los meses van de 0 a 11
     const año = fecha.getFullYear();
     const fechaComoString: string = `${dia}/${mes}/${año}`;
     await addPageContent(`FECHA: ${fechaComoString}`, page, pdfDoc);
-    await addPageContent(`${datosB.evaluador}`, page, pdfDoc);
+    await addPageContent('', page, pdfDoc);
+    await addPageContent(`NOMBRE DEL EVALUADOR ${datosB.evaluador}`, page, pdfDoc);
+}
+async function llenarFormatoC(pdfDoc:PDFDocument) {
+    const page = pdfDoc.addPage();
+    await addEncabezadoTextC(page, pdfDoc);
+    let content = `TITULO: ${datosC.proceso.titulo}`
+    await addPageContent(content,page,pdfDoc);
+    let i = 1;
+    for(let estudiante of datosC.estudiante)
+    {
+        content = `ESTUDIANTE ${i}: ${estudiante.nombre} CODIGO: ${estudiante.codigo}`
+        await addPageContent(content, page, pdfDoc);
+    }
+    content = `DIRECTOR DEL TRABAJO: ${datosC.proceso.director}`;
+    await addPageContent(content, page, pdfDoc);
+    if(datosC.tipo == "PP-C"){
+        content = `ASESOR DE LA ORGANIZACIÓN: ${datosC.proceso.asesor}`;
+        await addPageContent(content, page, pdfDoc);
+    }
+    await addPageContent('', page, pdfDoc);
+
+    await addPageContent(`LINEA DE DESARROLLO: ${datosC.formato.C_DESARROLLO}`, page, pdfDoc);
+    await addPageContent(``, page, pdfDoc);
+    await addPageContent(`ELEMENTOS EVALUADOS: `, page, pdfDoc);
+    await addPageContent(``, page, pdfDoc);
+    let valor = "";
+    if(datosC.formato.C_ESTRUCTURA) valor = "Aprobado";
+    else valor = "Rechazado";
+    await addPageContent(`A) ESTRUCTURA (¿Consta de las partes pertinentes?) ${valor}`, page, pdfDoc);
+    if(datosC.formato.C_CON_COMITE) valor = "Aprobado";
+    else valor = "Rechazado";
+    await addPageContent(`B) CONCEPTO DEL COMITÉ DE PROGRAMA (¿Fue satisfactorio?)  ${valor}`, page, pdfDoc);
+    if(datosC.formato.C_CON_DEPTO) valor = "Aprobado";
+    else valor = "Rechazado";
+    await addPageContent(`C) CONCEPTO DEL DEPARTAMENTO (¿Fue satisfactorio?)  ${valor}`, page, pdfDoc);
+    await addPageContent(``, page, pdfDoc);
+    await addPageContent(`  EVALUADOR 1:  ${datosC.evaluador[0]}`, page, pdfDoc);
+    await addPageContent(`  EVALUADOR 2:  ${datosC.evaluador[1]}`, page, pdfDoc);
+    await addPageContent(``, page, pdfDoc);
+    await addPageContent(`OBSERVACIONES:`, page, pdfDoc);
+    await addPageContent(`${datosC.formato.C_OBSERVACIONES}`, page, pdfDoc);
+    let fecha = datosC.formato.C_REVISION;
+    const dia = fecha.getDate().toString().padStart(2, '0');
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Nota: los meses van de 0 a 11
+    const año = fecha.getFullYear();
+    const fechaComoString: string = `${dia}/${mes}/${año}`;
+    await addPageContent(`FECHA: ${fechaComoString}`, page, pdfDoc);
 }
 async function createSecondPage(pdfDoc:PDFDocument)
 {
@@ -183,6 +241,56 @@ async function addEncabezadoText(page:PDFPage, pdfDoc:PDFDocument)
     lineas.push('');
     lineas.push(`FORMATO ${datos.tipo} PRESENTACIÓN DE LA PROPUESTA DE TRABAJO`);
     lineas.push(`DE GRADO MODALIDAD ${datos.proceso.tipo} AL`);
+    lineas.push('COMITÉ DE PROGRAMA DEL ESTUDIANTE');
+    lineas.push('');
+    const imagePath = path.join(__dirname,'..','..','..','..','..','..','images','logo.png');
+    const imageBuffer = fs.readFileSync(imagePath);
+    await addPageContent(imageBuffer, page, pdfDoc);
+    const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+    const fontSize = 11;
+    const {height, width} = page.getSize();
+    currentPage.y = height- (currentPage.marginUp + fontSize);
+    let h = currentPage.y
+    for(let linea of lineas)
+    {
+        let lineWidth = timesRomanFont.widthOfTextAtSize(linea,fontSize);
+        page.drawText(linea,{font: timesRomanFont,size:fontSize,x: 30 + width/2 - lineWidth/2, y:h, color: rgb(0, 0, 0)})
+        h = h - fontSize;
+    }
+    currentPage.y = h;
+}
+async function addEncabezadoTextB(page:PDFPage, pdfDoc:PDFDocument)
+{
+    const lineas:string[] = ['Universidad del Cauca', 'Facultad de Ingeniería Electrónica y Telecomunicaciones',''];
+    lineas.push(`TRABAJO DE GRADO - MODALIDAD ${datosB.proceso.tipo}`);
+    lineas.push('');
+    lineas.push(`FORMATO ${datosB.tipo} PRESENTACIÓN DE LA PROPUESTA DE TRABAJO`);
+    lineas.push(`DE GRADO MODALIDAD ${datosB.proceso.tipo} AL`);
+    lineas.push('COMITÉ DE PROGRAMA DEL ESTUDIANTE');
+    lineas.push('');
+    const imagePath = path.join(__dirname,'..','..','..','..','..','..','images','logo.png');
+    const imageBuffer = fs.readFileSync(imagePath);
+    await addPageContent(imageBuffer, page, pdfDoc);
+    const timesRomanFont = await pdfDoc.embedFont(StandardFonts.TimesRoman);
+    const fontSize = 11;
+    const {height, width} = page.getSize();
+    currentPage.y = height- (currentPage.marginUp + fontSize);
+    let h = currentPage.y
+    for(let linea of lineas)
+    {
+        let lineWidth = timesRomanFont.widthOfTextAtSize(linea,fontSize);
+        page.drawText(linea,{font: timesRomanFont,size:fontSize,x: 30 + width/2 - lineWidth/2, y:h, color: rgb(0, 0, 0)})
+        h = h - fontSize;
+    }
+    currentPage.y = h;
+}
+async function addEncabezadoTextC(page:PDFPage, pdfDoc:PDFDocument)
+{
+    const lineas:string[] = ['Universidad del Cauca', 'Facultad de Ingeniería Electrónica y Telecomunicaciones',''];
+    lineas.push(`TRABAJO DE GRADO - MODALIDAD ${datosC.proceso.tipo}`);
+    lineas.push('');
+    lineas.push(`FORMATO ${datosC.tipo} PRESENTACIÓN DE LA PROPUESTA DE TRABAJO`);
+    lineas.push(`DE GRADO MODALIDAD ${datosC.proceso.tipo} AL`);
     lineas.push('COMITÉ DE PROGRAMA DEL ESTUDIANTE');
     lineas.push('');
     const imagePath = path.join(__dirname,'..','..','..','..','..','..','images','logo.png');
